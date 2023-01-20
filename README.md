@@ -2,8 +2,6 @@
 HY, tsoha k2023
 
 Sovelluksella voi pelata tietokilpailua eli vastata sovelluksen esittämiin kysymyksiin eri kysymysluokissa ja vaikeustasoissa.  
-Oikeista vastauksista saa pisteitä kysymystason mukaisesti.  
-Saadun pistemäärän perusteella kilpailijat järjestetään paremmuusjärjestykseen.    *(optio)*  
 
 ## Sovelluksen keskeiset toiminnot ja tiedot
 
@@ -54,7 +52,7 @@ Uutta peliä varten pelaaja voi valita:
 
 ### Tietokanta
 
-Tietokantataulut ja niiden väliset yhteydet on alustavasti suunniteltu seuraavasti: [Tietokantakaavio](https://github.com/a-bzzzz/tsoha-quiz/blob/main/documentation/db_structure.png)  
+Tietokantataulut ja niiden väliset yhteydet on alustavasti suunniteltu seuraavasti: [Tietokantakaavio](https://github.com/a-bzzzz/trivia/blob/main/documentation/db_structure.png)  
     
 ## Tilatieto ja muu info
 
