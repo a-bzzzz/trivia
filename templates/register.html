@@ -1,0 +1,22 @@
+{% block content %}
+
+<h2>Register - Rekisteröinti</h2>
+
+<form action="/register" method="POST">
+Username - Tunnus: <br><input type="text" name="username" minlength="1" maxlength="20">
+<br>
+<br>
+Password - Salasana: <br><input type="password" name="password1">
+<br>
+<br>
+Confirm passwork - Salasana uudestaan: <br><input type="password" name="password2">
+<br>
+<br>
+<input type="submit" value="Create - Luo tunnus">
+</form>
+
+<br>
+<br>
+<a href="/login">Return - Palaa takaisin</a>
+
+{% endblock %}
