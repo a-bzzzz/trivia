@@ -63,3 +63,48 @@ def create_game(user_id, category_id, level_id):
     session["game_visible"]     = game.visible
     session["game_created"] 	= game.created_at
     return game.id
+
+# Ask a question and handle the received answer  
+def play():
+    category_id = game_category()
+    level_id    = game_level()
+    visible     = "TRUE"
+    
+    # Get questions of selected category & level -> query returns list of selected questions with all info
+    sql = """SELECT id, question, category_id, level_id, visible 
+        FROM questions WHERE category_id=:category_id AND level_id=:level_id AND visible=:visible """
+    result = db.session.execute(text(sql), {"category_id":category_id, "level_id":level_id, "visible":visible})
+    questions = result.fetchall()
+    # TODO: Add randomness
+    question = questions[0]
+    session["question_id"] = question.id
+    session["question_text"] = question.question
+    session["question_category"] = question.category_id
+    session["question_level"] = question.level_id
+    session["question_visible"] = question.visible
+
+    # Get answer choices for the question -> query returns list of answer ids    
+    question_id = question.id
+    sql = """SELECT answer_id 
+        FROM questions_answers WHERE question_id=:question_id"""
+    result = db.session.execute(text(sql), {"question_id":question_id})
+    answer_ids = result.fetchall()
+    # TODO: Add randomness
+    answer_1 = get_answer(answer_ids[0][0])
+    answer_2 = get_answer(answer_ids[1][0])
+    answer_3 = get_answer(answer_ids[2][0])
+
+    session["answer_text_1"] = answer_1.answer
+    session["answer_text_2"] = answer_2.answer
+    session["answer_text_3"] = answer_3.answer
+    
+    right_answer = 0
+    session["answer_correct_1"] = answer_1.correct
+    if answer_1.correct: right_answer = 1
+    session["answer_correct_2"] = answer_2.correct
+    if answer_2.correct: right_answer = 2
+    session["answer_correct_3"] = answer_3.correct
+    if answer_3.correct: right_answer = 3
+
+    session["answer_right"] = right_answer
+    return right_answer
