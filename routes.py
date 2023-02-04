@@ -43,3 +43,25 @@ def register():
         if not users.register(username, password1):
             return render_template("error.html", message="Registration failed - Rekisteröinti ei onnistunut")
         return redirect("/")
+
+@app.route("/menu", methods=["GET", "POST"])
+def menu():
+    if request.method == "GET":
+        return render_template("menu.html", user_id=users.user_id(), user_name=users.user_name())
+
+    if request.method == "POST":
+        user_id = users.user_id()
+        category = request.form["cat"]
+        level = request.form["lev"]
+
+        if category not in ("1", "2", "3", "4", "5", "6"):
+            return render_template("error.html", message="Choose category - Valitse kategoria")
+        if level not in ("1", "2", "3"):
+            return render_template("error.html", message="Choose level - Valitse taso")
+
+        game_id = games.create_game(user_id, category, level)
+        if not game_id or game_id == 0:
+            return render_template("error.html", message="Game creation failed - Pelin luonti ei onnistunut")
+
+        right_answer = games.play()
+        return render_template("game.html")
