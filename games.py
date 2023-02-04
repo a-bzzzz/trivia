@@ -63,6 +63,36 @@ def create_game(user_id, category_id, level_id):
     session["game_visible"]     = game.visible
     session["game_created"] 	= game.created_at
     return game.id
+    
+def question_id():
+    return session.get("question_id", 0)
+
+def question_text():
+    return session.get("question_text", "")
+
+def question_category():
+    return session.get("question_category", 0)
+
+def question_level():
+    return session.get("question_level", 0)
+
+def question_visible():
+    return session.get("question_visible", False)
+
+def answer_right():
+    return session.get("answer_right", 0)
+
+def is_right(answer):
+    return answer == session.get("answer_right", 0)
+
+# Get answer information
+def get_answer(id):
+
+    sql = """SELECT id, answer, correct, visible
+        FROM answers WHERE id=:id"""
+    result = db.session.execute(text(sql), {"id":id})
+    answer = result.fetchone()
+    return answer
 
 # Ask a question and handle the received answer  
 def play():
