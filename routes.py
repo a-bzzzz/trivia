@@ -65,3 +65,18 @@ def menu():
 
         right_answer = games.play()
         return render_template("game.html")
+
+@app.route("/game", methods=["GET", "POST"])
+def game():
+    if request.method == "GET":
+        return render_template("game.html")
+
+    if request.method == "POST":
+        answered = int(request.form["answer"])
+        result_message = ""
+        if games.is_right(answered):
+            result_message = "Right answer! - Oikea vastaus!"
+        else:
+            result_message = "Wrong answer! - Väärä vastaus!"
+
+        return render_template("check.html", message=result_message)
