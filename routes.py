@@ -1,6 +1,6 @@
 from app import app
 from flask import render_template, request, redirect
-import users
+import users, games
 
 @app.route("/")
 def index():
