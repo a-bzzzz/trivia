@@ -1,0 +1,24 @@
+{% block content %}
+<h2>Home page - Kotisivu</h2>
+<hr>
+<br>
+<hr>
+<form action="/" method="POST">
+{% if session.user_id %}
+You have logged in with username - Olet kirjautunut sisään nimellä <b>{{ session.user_name }}</b> 
+<br>
+<br>
+Want to start a new game? - Haluatko aloittaa uuden pelin?<br>
+<a href="/menu">New game - Uusi peli</a>
+<br>
+<br>
+<a href="/logout">Log out - Kirjaudu ulos</a>
+
+{% else %}
+You have not logged in - Et ole kirjautunut sisään 
+<br>
+<br>
+<a href="/login">Log in - Kirjaudu</a
+{% endif %}
+
+{% endblock %}
