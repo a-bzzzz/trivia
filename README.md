@@ -74,6 +74,7 @@ Sovelluksesta on tehty pienin mahdollinen peli.
 - Syötteet viedään tietokantaan parametreilla (estää SQL-injektion)
 - Syötteet näytetään selaimen sivulla käyttämällä Jinja-sivupohjia (estää XSS-haavoittuvuuden)
 - Ympäristömuuttujat ovat käytössä (ei salasanoja GitHubissa)
+
 **HUOMAA**, että [schema.sql](https://github.com/a-bzzzz/trivia/blob/main/schema.sql) -tiedostosta löytyvät peliä varten tarvittavat roolien (roles), kategorioiden (categories), tasojen (levels) ja ensimmäisen kysymys-vastaus-setin (answers / questions / questions_answers) INSERT-komennot
 
 #### Puuttuvat toiminnot
