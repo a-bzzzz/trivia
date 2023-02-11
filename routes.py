@@ -1,5 +1,5 @@
 from app import app
-from flask import render_template, request, redirect
+from flask import render_template, request, redirect, session
 import users, games
 
 @app.route("/")
@@ -31,15 +31,10 @@ def register():
 
     if request.method == "POST":
         username = request.form["username"]
-        if len(username) < 3 or len(username) > 20:
-            return render_template("error.html", message="Username contains 3-20 characters - Tunnuksessa tulee olla 3-20 merkkiä")
-
         password1 = request.form["password1"]
         password2 = request.form["password2"]
         if password1 != password2:
             return render_template("error.html", message="Passwords differ - Salasanat eroavat")
-        if password1 == "":
-            return render_template("error.html", message="Enter password - Syötä salasana")
         if not users.register(username, password1):
             return render_template("error.html", message="Registration failed - Rekisteröinti ei onnistunut")
         return redirect("/")
@@ -47,36 +42,68 @@ def register():
 @app.route("/menu", methods=["GET", "POST"])
 def menu():
     if request.method == "GET":
-        return render_template("menu.html", user_id=users.user_id(), user_name=users.user_name())
-
+        message=""
+        return render_template("menu.html", user_id=users.user_id(), user_name=users.user_name(), message=message)
+         
     if request.method == "POST":
         user_id = users.user_id()
-        category = request.form["cat"]
-        level = request.form["lev"]
+        category = int(request.form["cat"])
+        level = int(request.form["lev"])
 
-        if category not in ("1", "2", "3", "4", "5", "6"):
-            return render_template("error.html", message="Choose category - Valitse kategoria")
-        if level not in ("1", "2", "3"):
-            return render_template("error.html", message="Choose level - Valitse taso")
+        session["category_id"]  = category
+        session["level_id"]     = level
 
-        game_id = games.create_game(user_id, category, level)
-        if not game_id or game_id == 0:
-            return render_template("error.html", message="Game creation failed - Pelin luonti ei onnistunut")
+        game_details = games.create_game(user_id, category, level)
+        if not game_details:
+            return render_template("error.html", message="No questions: Choose other category/level! - Ei kysymyksiä: Valitse toinen kategoria/taso!")            
 
-        right_answer = games.play()
+        game_id         = game_details[0]
+        question_list   = game_details[1]
+        
+        if game_id == 0:
+            no_game_message = f"Game creation failed - Pelin luonti ei onnistunut - Game id: {game_id}"
+            return render_template("error.html", message=no_game_message)
+
+        question_amount = games.play()
+        game_on = True
+
+        quit_message= ""
+        if question_amount < 1:
+            game_on = False
+            quit_message = "No more questions, choose new game category/level- Ei lisää kysymyksiä, valitse uusi pelikategoria/-taso"
+            return render_template("check.html", message=result_message, question_amount=question_amount, game_on=game_on, q_message=quit_message)
         return render_template("game.html")
 
 @app.route("/game", methods=["GET", "POST"])
 def game():
     if request.method == "GET":
+        games.play()
         return render_template("game.html")
 
     if request.method == "POST":
         answered = int(request.form["answer"])
         result_message = ""
-        if games.is_right(answered):
+        right = games.is_right(answered)
+        if right:
             result_message = "Right answer! - Oikea vastaus!"
         else:
             result_message = "Wrong answer! - Väärä vastaus!"
+            
+        game_on = games.continue_game(right)
+        question_amount = games.question_amount()
+        quit_message= ""
+        if not game_on:
+            quit_message = "No more questions, choose new game category/level- Ei lisää kysymyksiä, valitse uusi pelikategoria/-taso"
+            return render_template("check.html", message=result_message, question_amount=question_amount, game_on=game_on, q_message=quit_message)
+            
 
-        return render_template("check.html", message=result_message)
+@app.route("/check", methods=["GET", "POST"])
+def check():
+    if request.method == "GET":
+        return render_template("check.html")
+            
+    if request.method == "POST":
+        games.empty_session_questions()
+        games.empty_session_answers()
+        return redirect("/")
+
