@@ -1,16 +1,15 @@
+<!DOCTYPE html>
 {% extends "layout.html" %}
 {% block content %}
 
 <h2>Login page - Kirjautumissivu</h2>
 
 <form action="/login" method="POST">
-<b>Username - käyttäjätunnus:</b> <br>
-<input type="text" name="username" minlength="3" maxlength="20"><br>
-3-20 merkkiä<br>
+Username - käyttäjätunnus: <br><input type="text" name="username" minlength="3" maxlength="20" required="required">
 <br>
-<b>Password - Salasana:</b> <br>
-<input type="password" name="password" minlength="3" maxlength="20"><br>
-3-20 merkkiä<br>
+<br>
+Password - Salasana: <br><input type="password" name="password" minlength="3" maxlength="20" required="required">
+<br>
 <br>
 <input type="submit" value="Log in - Kirjaudu">
 </form>
@@ -21,6 +20,8 @@
 If you don't have user credentials - Jos sinulla ei ole käyttäjätunnusta:
 <br><input type="submit" value="Register - Luo käyttäjätili">
 </form>
+<br>
+<br>
 <br>
 <br>
 <form action="/logout" method="GET">
