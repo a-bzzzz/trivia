@@ -224,7 +224,7 @@ def set_game_attr(user_id, category_id, level_id):
 
 # Creates new game with user id, category id and level id 
 # -> returns game id (by calling first "get_game_id" function)
-def create_game(user_id, category_id, level_id):
+def create_game(user, category, level):
 
     # Get the right question set (of chosen category and level) to the game
     questions = get_questions(category, level)
