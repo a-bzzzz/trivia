@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 {% extends "layout.html" %}
 {% block content %}
 
@@ -20,6 +21,7 @@ Game session number - Pelikertoja:      {{ session.game_sessions }}<br>
 Answers             - Vastauksia:       {{ session.game_answers }}<br>
 Points              - Pisteitä:         {{ session.game_points }}<br>
 <br>
+<br>
 Question - Kysymys:<br>
 ================<br>
 <br>
@@ -28,20 +30,18 @@ Question - Kysymys:<br>
 Your answer - Vastauksesi:<br>
 =====================<br>
 <form action="/game" method="POST"><br>
-<input type="radio" name="answer" value="1"> 1 - {{ session.answer_text_1 }}<br>
+<input type="radio" name="answer" value="1" required="required"> 1 - {{ session.answer_text_1 }}<br>
 <input type="radio" name="answer" value="2"> 2 - {{ session.answer_text_2 }}<br>
 <input type="radio" name="answer" value="3"> 3 - {{ session.answer_text_3 }}<br>
 <br>
-<input type="hidden" name="correct" value="1">
+<input type="hidden" name="correct" value="1" required="required">
 <input type="hidden" name="correct" value="2">
 <input type="hidden" name="correct" value="3">
-
 <input type="submit" value="Answer-Vastaa">
 </form>
-
 <br>
 <form action="/check" method="GET">
 <br>
-<a href="/">Back-Takaisin</a>
+<a href="/menu">Back - Takaisin</a>
 
 {% endblock %}
