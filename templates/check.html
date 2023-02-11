@@ -1,10 +1,27 @@
+<!DOCTYPE html>
 {% extends "layout.html" %}
 {% block content %}
 
-Checking your answer - Vastauksesi tarkistus: <b>{{ message }}</b>
+<h2>Answer check - Vastauksen tarkistus</h2>
 
+Your answer - Vastauksesi: {{ message }}
 <br>
 <br>
-<a href="/game">Return - Palaa takaisin</a>
-
+Amount of questions - Kysymysmäärä: {{ question_amount }}
+<br>
+{% if question_amount < 1 %}
+<form action="/menu" method="GET">
+{{ q_message }}<br>
+<input type="submit" value="New game - Uusi peli">
+</form>
+<br>
+<br>
+{% else %}
+<form action="/game" method="GET">
+<input type="submit" value="New question - Uusi kysymys">
+</form>
+<br>
+<br>
+<a href="/menu">Back - Takaisin</a>
+{% endif %}
 {% endblock %}
