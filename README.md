@@ -88,7 +88,7 @@ Sovelluksesta on tehty pienin mahdollinen peli.
 - Syötteet näytetään selaimen sivulla käyttämällä Jinja-sivupohjia (estää XSS-haavoittuvuuden)
 - Ympäristömuuttujat ovat käytössä (ei salasanoja GitHubissa)
 
-**HUOMAA**, että peliä varten tarvittavat roolien (roles), kategorioiden (categories), tasojen (levels) sekä (alustavan) 16 kysymys-vastaus-setin (answers / questions / questions_answers) INSERT-komennot löytyvät ylempää kohdasta Sovelluksen rakenne - Tietokanta - Vakioattribuutit linkkien takaa löytyvistä tiedostoista.
+**HUOMAA**, että peliä varten tarvittavat roolien (roles), kategorioiden (categories), tasojen (levels) sekä (alustavan) 16 kysymys-vastaus-setin (answers / questions / questions_answers) INSERT-komennot löytyvät ylempää kohdasta [Sovelluksen rakenne - Tietokanta - Vakioattribuutit](https://github.com/a-bzzzz/trivia/blob/main/README.md#vakioattribuutit) linkkien takaa löytyvistä tiedostoista.
 
 #### Puuttuvat toiminnot
 - Ei voi jatkaa aiemmin luotua peliä
