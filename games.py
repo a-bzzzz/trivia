@@ -6,9 +6,10 @@ from sqlalchemy.sql import text
 from random import shuffle
 
 game_id         = 0
+game_level      = 0
 question_list   = []
 question_id     = 0
-sessions        = 1
+sessions        = 0
 answers         = 0
 points          = 0
 
@@ -161,9 +162,7 @@ def empty_session_answers():
 # Get the following question to game from the question list 
 # -> returns question id and length of question list in tuple     
 def get_new_question():
-    global game_id
-    global question_list
-    global question_id
+    global game_id, question_list, question_id
 
     # Choose first question from the list,
     # and drop the fetched question from question list, if list is not empty
@@ -191,10 +190,8 @@ def get_new_question():
 
 # Setup the game info to database and game session variables    
 def set_game_attr(user_id, category_id, level_id):
-    global sessions
-    global answers
-    global points
-    global game_id
+    global sessions, answers, points, game_id
+    
     try:     	
         sql = """INSERT INTO games (user_id, category_id, level_id) 
         VALUES (:user_id, :category_id, :level_id)
@@ -221,11 +218,24 @@ def set_game_attr(user_id, category_id, level_id):
         return game.id
     except:
         return 0
+        
+# Set session counters to default values
+def clear_stats():
+    global game_id, game_level, question_list, question_id, sessions, answers, points
+    game_id         = 0
+    game_level      = 0
+    question_list   = []
+    question_id     = 0
+    sessions        = 0
+    answers         = 0
+    points          = 0
 
 # Creates new game with user id, category id and level id 
 # -> returns game id (by calling first "get_game_id" function)
 def create_game(user, category, level):
-    global sessions
+    global game_level, sessions
+    clear_stats()
+    game_level = level
     
     # Get the right question set (of chosen category and level) to the game
     questions = get_questions(category, level)
@@ -252,21 +262,16 @@ def play():
 
 # Gather game statistics
 def continue_game(right):
-    global answers
-    global points
-    global question_id
+    global game_level, answers, points, question_id
     answers += 1
     # Add answer count and points, if right answer
-    if right: points += 1
+    if right: points += int(game_level)
     
     session["game_points"]  = points
     session["game_answers"] = answers
     
 def set_game_stats():
-    global sessions
-    global answers
-    global points
-    global game_id
+    global sessions, answers, points, game_id
     session_count = sessions
     answers_count = answers
     id = game_id
