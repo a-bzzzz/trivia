@@ -52,7 +52,16 @@ Uutta peliä varten pelaaja voi valita:
 
 ### Tietokanta
 
-Tietokantataulut ja niiden väliset yhteydet: [Tietokantakaavio](https://github.com/a-bzzzz/trivia/blob/main/documentation/db_structure.png)  
+#### Tietokannan rakenne
+Tietokantataulut ja niiden väliset yhteydet: [Tietokantakaavio](https://github.com/a-bzzzz/trivia/blob/main/documentation/db_structure.png)
+
+#### Vakioattribuutit
+Tietokannan käyttöä varten tarvittavat INSERT-kommennot löytyvät näistä tiedostoista:
+* Tietokantataulujen luominen: 					                        [schema.sql](https://github.com/a-bzzzz/trivia/blob/main/schema.sql)
+* Käyttäjäroolien lisäys: 					                            [roles.sql](https://github.com/a-bzzzz/trivia/blob/main/roles.sql)
+* Kysymysluokkien (kategorioiden) lisäys: 			                [categories.sql](https://github.com/a-bzzzz/trivia/blob/main/categories.sql)
+* Pelin vaikeustasojen lisäys: 					                        [levels.sql](https://github.com/a-bzzzz/trivia/blob/main/levels.sql)
+* Muutaman kysymys-vastaussetin lisäys (suoraan tietokantaan): 	[questions.sql](https://github.com/a-bzzzz/trivia/blob/main/questions.sql)
     
 ## Tilatieto ja muu info
 
@@ -64,26 +73,26 @@ Sovelluksesta on tehty pienin mahdollinen peli.
 - Käyttäjä voi rekisteröityä eli luoda peruskäyttäjän tunnukset
 - Sovellukseen voi kirjautua, jos on käyttäjätunnukset -> käyttäjän tiedot tallentuvat tietokantaan
 - Voi aloittaa uuden pelin -> uuden pelin tiedot tallentuvat tietokantaan
-- Voi valita vain pelikategorian 1 ja tason 1, muilla valinnoilla peli päätyy virhetilanteeseen
-- Pelissä on siis vasta yksi kysymys (kategoriassa 1, tasolla 1)
-- Peli näyttää käyttäjän tunnuksen (nimen), valitun kategorian ja tason
+- Voi valita pelikategorian ja tason, jolle on lisätty kysymyksiä ja vastauksia - muilla valinnoilla peli päätyy tilailmoitukseen
+- Peliin voi lisätä tietokannan kautta 16 kysymystä vastauksineen (ei aivan kaikista kategoria-taso-yhdistelmistä, mutta kannattaa käyttää kokeilemiseen kategoriaa 6 - satunnainen aihe)
+- Peli näyttää käyttäjän tunnuksen (nimen), pelinumeron, valitun kategorian ja vaikeustason, pelikerran, vastausmäärän ja pisteet
 - Voi siirtyä kysymysosioon ja valita jonkin kolmesta vastausvaihtoehdoista
 - Sovellus antaa palautetta siitä, onko vastaus oikein vai väärin
-- Näkymistä voi (enimmäkseen) palata takaisin päin johonkin aiempaan vaiheeseen
+- Oikeasta vastauksesta saa pelitason mukaisen määrän pisteitä, jotka lisätään pelin pistesaldoon
+- Jos kyseiseen peliin on vastaamattomia kysymyksiä, voi valita uuden kysymyksen - muuten voi aloittaa uuden pelin
+- Samassa pelissä ei voi vastata useammin samaan kysymykseen
+- Näkymistä voi palata takaisin päin johonkin aiempaan vaiheeseen
 - Sovelluksesta voi kirjautua ulos
+- Pelin tiedot kirjautuvat tietokannan tauluhin games ja games_questions
 - Syötteet viedään tietokantaan parametreilla (estää SQL-injektion)
 - Syötteet näytetään selaimen sivulla käyttämällä Jinja-sivupohjia (estää XSS-haavoittuvuuden)
 - Ympäristömuuttujat ovat käytössä (ei salasanoja GitHubissa)
 
-**HUOMAA**, että [schema.sql](https://github.com/a-bzzzz/trivia/blob/main/schema.sql) -tiedostosta löytyvät peliä varten tarvittavat roolien (roles), kategorioiden (categories), tasojen (levels) ja ensimmäisen kysymys-vastaus-setin (answers / questions / questions_answers) INSERT-komennot
+**HUOMAA**, että peliä varten tarvittavat roolien (roles), kategorioiden (categories), tasojen (levels) sekä (alustavan) 16 kysymys-vastaus-setin (answers / questions / questions_answers) INSERT-komennot löytyvät ylempää kohdasta Sovelluksen rakenne - Tietokanta - Vakioattribuutit linkkien takaa löytyvistä tiedostoista.
 
 #### Puuttuvat toiminnot
 - Ei voi jatkaa aiemmin luotua peliä
 - Ei voi poistaa olemassa olevaa peliä
-- Ei voi valita kategorioita 2-6 eikä tasoja 2-3 (toki mahdollista sitten, kun peliin on tallennettu lisää kysymyksiä ja vastauksia eri kategorioihin ja eri tasoille)
-- Ei voi valita uutta kysymystä -> peli ei huomioi, mihin kysymyksiin on jo vastattu
-- Ei saa pistettä oikeasta vastauksesta -> ei voi seurata pelin tulossaldoa
-- Kaikkia virhetilanteita ei ole vielä otettu kiinni
 - Sovelluksesta ei voi muuttaa tai poistaa käyttäjän tietoja
 - Sovelluksesta ei voi muuttaa tai poistaa pelin tietoja, vastauskategoroita tai -luokkia
 - Sovelluksesta ei voi lisätä, muuttaa tai poistaa kysymyksiä ja vastauksia
@@ -91,7 +100,7 @@ Sovelluksesta on tehty pienin mahdollinen peli.
 - Käyttäjän syötteen oikeellisuutta ei ole tarkistettu kaikissa tapauksissa
 - CSRF-token on lisäämättä
 - Käytettävyyteen ja saavutettavuuteen liittyviä seikkoja ei ole tarkistettu
-- Ulkoasun suunnittelu aivan alkuvaiheessa, CSS-tiedostosta on luotu pohja, valmista ulkoasukirjastoa ei ole käytössä
+- Ulkoasun suunnittelu on aivan alkuvaiheessa, CSS-tiedostosta on luotu pohja, valmista ulkoasukirjastoa ei ole käytössä
 - Optiot - *(optio)* - eivät ole käytössä
   
 **HUOMAA**, että *(optio)* -merkinnällä merkityt ominaisuudet eivät välttämättä ehdi valmistua peliin tämän kurssin aikana, mutta niitä voi lisätä peliin jatkossa mahdollisuuksien mukaan.
