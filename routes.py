@@ -16,7 +16,7 @@ def login():
         password = request.form["password"]
 
         if not users.login(username, password):
-            return render_template("error.html", message="Väärä tunnus tai salasana")
+            return render_template("error.html", message="Wrong username or password - Väärä tunnus tai salasana")
         return redirect("/")
 
 @app.route("/logout")
@@ -60,6 +60,8 @@ def menu():
         game_id         = game_details[0]
         question_list   = game_details[1]
         
+        session["game_sessions"]    = games.game_sessions()
+        
         if game_id == 0:
             no_game_message = f"Game creation failed - Pelin luonti ei onnistunut - Game id: {game_id}"
             return render_template("error.html", message=no_game_message)
@@ -90,6 +92,12 @@ def game():
             result_message = "Wrong answer! - Väärä vastaus!"
             
         game_on = games.continue_game(right)
+        gid = games.set_game_stats()
+        if gid == 0:
+            message="Unsuccessful data storage to database - Pelitiedot eivät tallentuneet tietokantaan"
+        else:
+            message=f"Game no {gid} details stored to database - Pelin nro {gid} tiedot tallennettu tietokantaan"      
+    
         question_amount = games.question_amount()
         quit_message= ""
         if not game_on:
