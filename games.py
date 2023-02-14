@@ -225,7 +225,8 @@ def set_game_attr(user_id, category_id, level_id):
 # Creates new game with user id, category id and level id 
 # -> returns game id (by calling first "get_game_id" function)
 def create_game(user, category, level):
-
+    global sessions
+    
     # Get the right question set (of chosen category and level) to the game
     questions = get_questions(category, level)
     
@@ -233,12 +234,11 @@ def create_game(user, category, level):
         return False
         
     gid = set_game_attr(user, category, level)
+    sessions += 1
     return gid, list(questions)    
     
 # Ask a question and handle the received answer  
 def play():
-    global sessions
-    sessions += 1
     q_details       = get_new_question()
     if not q_details:
         return False
@@ -261,3 +261,23 @@ def continue_game(right):
     
     session["game_points"]  = points
     session["game_answers"] = answers
+    
+def set_game_stats():
+    global sessions
+    global answers
+    global points
+    global game_id
+    session_count = sessions
+    answers_count = answers
+    id = game_id
+
+    try:     	
+        sql = """UPDATE games SET points=:points, answers_count=:answers_count, session_count=:session_count 
+            WHERE games.id=:id RETURNING games.id"""
+        result = db.session.execute(text(sql), {"id":id, "points":points, "answers_count":answers_count, "session_count":session_count})
+        returned_id = result.fetchone()[0]
+        db.session.commit()
+
+        return returned_id
+    except:
+        return 0
