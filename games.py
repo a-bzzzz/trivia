@@ -6,6 +6,7 @@ from sqlalchemy.sql import text
 from random import shuffle
 
 game_id         = 0
+game_category   = 0
 game_level      = 0
 question_list   = []
 question_id     = 0
@@ -49,6 +50,49 @@ def game_visible():
 def game_created():
     return session.get("game_created", None)
     
+# Get game id, points, answer amount and session amount of all games of one player by user id -> returns a list
+def get_usergames(user_id):
+    sql 	= """SELECT id, points, answers_count, session_count FROM games WHERE user_id=:user_id"""
+    result 	= db.session.execute(text(sql), {"user_id":user_id})
+    usergames 	= result.fetchall()
+    return usergames
+
+# Get game details by game id
+def get_game(id):
+    global game_id, game_category, game_level, sessions, answers, points
+    visible = "TRUE"
+
+    sql 	= """SELECT id, user_id, points, answers_count, session_count, category_id, level_id, visible, created_at 
+                    FROM games WHERE id=:id AND visible=:visible"""
+    result 	= db.session.execute(text(sql), {"id":id, "visible":visible})
+    game 	= result.fetchone()
+
+    session["game_id"] 		    = game.id
+    session["game_user"] 		= game.user_id
+    session["game_points"] 		= game.points
+    session["game_answers"] 	= game.answers_count
+    session["game_sessions"]	= game.session_count
+    session["game_category"] 	= game.category_id
+    session["game_level"] 		= game.level_id
+    session["game_visible"]     = game.visible
+    session["game_created"] 	= game.created_at
+
+    game_id         = game.id
+    game_category   = game.category_id
+    game_level      = game.level_id
+    sessions        = game.session_count
+    answers         = game.answers_count
+    points          = game.points
+
+    # Get the right question set (of chosen category and level) to the game
+    questions = get_questions(game_category, game_level)
+
+    if len(questions) < 1:
+        return False
+
+    sessions += 1
+    return game.id, list(questions)
+
 def question_id():
     global question_id
     return question_id
@@ -286,3 +330,25 @@ def set_game_stats():
         return returned_id
     except:
         return 0
+        
+def game_order(game: tuple):
+    return game[0]
+
+def list_games(user_games):
+    games = [g for g in user_games]
+    return sorted(games, key=game_order)
+
+# Get the created games of the player, if any, by user id    
+def get_user_games(user_id):
+    visible = "TRUE"
+
+    sql = """SELECT id, points, category_id, level_id 
+        FROM games WHERE user_id=:user_id AND visible=:visible"""
+    result = db.session.execute(text(sql), {"user_id":user_id, "visible":visible})
+    user_games = result.fetchall()
+
+    if len(user_games) < 1:
+        return False
+    else:
+        return list_games(user_games)     
+
