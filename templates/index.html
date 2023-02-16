@@ -3,6 +3,14 @@
 {% block content %}
 <h2>Home page - Kotisivu</h2>
 <hr>
+Number of players - Pelaajien määrä: {{ count }}
+<br>
+<br>
+<!-- Pelaajatunnukset:
+<br>
+{% for user in users %}
+{{ user.username }}
+{% endfor %} -->
 <br>
 <hr>
 <form action="/" method="POST">
@@ -13,14 +21,20 @@ You have logged in with username - Olet kirjautunut sisään nimellä <b>{{ sess
 Want to start a new game? - Haluatko aloittaa uuden pelin?<br>
 <a href="/menu">New game - Uusi peli</a>
 <br>
+{% if session.user_id != 0 %}
+<br>
+Want to continue previous game? - Haluatko jatkaa edellistä peliä?<br>
+<a href="/search">Search game - Hae peli</a><br>
+{% endif %}
+<br>
 <br>
 <a href="/logout">Log out - Kirjaudu ulos</a>
-
 {% else %}
 You have not logged in - Et ole kirjautunut sisään 
 <br>
 <br>
-<a href="/login">Log in - Kirjaudu</a
+<a href="/login">Log in - Kirjaudu</a>
+<br>
+<br>
 {% endif %}
-
 {% endblock %}
