@@ -1,7 +1,5 @@
-from app import app
 from db import db
-from flask import session, render_template
-# import ???
+from flask import session
 from sqlalchemy.sql import text
 from random import shuffle
 
@@ -49,12 +47,12 @@ def game_visible():
 # Date and time when the game has been created
 def game_created():
     return session.get("game_created", None)
-    
+
 # Get game id, points, answer amount and session amount of all games of one player by user id -> returns a list
 def get_usergames(user_id):
-    sql 	= """SELECT id, points, answers_count, session_count FROM games WHERE user_id=:user_id"""
-    result 	= db.session.execute(text(sql), {"user_id":user_id})
-    usergames 	= result.fetchall()
+    sql 	    = """SELECT id, points, answers_count, session_count FROM games WHERE user_id=:user_id"""
+    result 	    = db.session.execute(text(sql), {"user_id":user_id})
+    usergames   = result.fetchall()
     return usergames
 
 # Get game details by game id
@@ -67,13 +65,13 @@ def get_game(id):
     result 	= db.session.execute(text(sql), {"id":id, "visible":visible})
     game 	= result.fetchone()
 
-    session["game_id"] 		    = game.id
-    session["game_user"] 		= game.user_id
-    session["game_points"] 		= game.points
+    session["game_id"] 		= game.id
+    session["game_user"] 	= game.user_id
+    session["game_points"] 	= game.points
     session["game_answers"] 	= game.answers_count
     session["game_sessions"]	= game.session_count
     session["game_category"] 	= game.category_id
-    session["game_level"] 		= game.level_id
+    session["game_level"] 	= game.level_id
     session["game_visible"]     = game.visible
     session["game_created"] 	= game.created_at
 
@@ -108,7 +106,7 @@ def question_level():
 
 def question_visible():
     return session.get("question_visible", False)
-    
+
 def question_amount():
     global question_list
     return len(question_list)
@@ -117,16 +115,16 @@ def answer_right():
     return session.get("answer_right", 0)
 
 def is_right(answer):
-    return answer == session.get("answer_right", 0)
+    return answer == answer_right()
 
 # Get answer information
 def get_answer(id):
-    sql = """SELECT id, answer, correct, visible
-        FROM answers WHERE id=:id"""
+
+    sql = """SELECT id, answer, correct, visible FROM answers WHERE id=:id"""
     result = db.session.execute(text(sql), {"id":id})
     answer = result.fetchone()
     return answer
-    
+
 # Get questions of selected category & level -> query returns list of selected questions with all info
 def get_questions(category_id, level_id):
     global question_list
@@ -134,19 +132,25 @@ def get_questions(category_id, level_id):
     question_list   = []
     visible         = "TRUE"
 
-    sql = """SELECT id, question, category_id, level_id, visible 
-        FROM questions WHERE category_id=:category_id AND level_id=:level_id AND visible=:visible """
-    result = db.session.execute(text(sql), {"category_id":category_id, "level_id":level_id, "visible":visible})
-    question_list = list(result.fetchall())
-    shuffle(question_list)
+    if int(category_id) == 6:
+        sql = """SELECT id, question, category_id, level_id, visible 
+            FROM questions WHERE level_id=:level_id AND visible=:visible """
+        result = db.session.execute(text(sql), {"level_id":level_id, "visible":visible})
+        question_list = list(result.fetchall())
+    else:
+        sql = """SELECT id, question, category_id, level_id, visible 
+            FROM questions WHERE category_id=:category_id AND level_id=:level_id AND visible=:visible """
+        result = db.session.execute(text(sql), {"category_id":category_id, "level_id":level_id, "visible":visible})
+        question_list = list(result.fetchall())
 
+    shuffle(question_list)
     return question_list
 
 # Get answer alternatives (right and wrong) by question id -> returns the right answer 
 # and stores all answers to session variables
 def get_answers(question_id):
 
-    sql = """SELECT answer_id 
+    sql = """SELECT answer_id
         FROM questions_answers WHERE question_id=:question_id"""
     result = db.session.execute(text(sql), {"question_id":question_id})
     answer_ids = result.fetchall()
@@ -160,7 +164,7 @@ def get_answers(question_id):
     session["answer_text_1"] = answer_1.answer
     session["answer_text_2"] = answer_2.answer
     session["answer_text_3"] = answer_3.answer
-    
+
     right_answer = 0
     session["answer_correct_1"] = answer_1.correct
     if answer_1.correct: right_answer = 1
@@ -173,7 +177,7 @@ def get_answers(question_id):
 
     return right_answer
 
-# Delete session variables related to current question    
+# Delete session variables related to current question
 def empty_session_questions():
     if question_text() != "":
         del session["question_text"]
@@ -203,8 +207,8 @@ def empty_session_answers():
     if answer_right() != "":
         del session["answer_right"]
 
-# Get the following question to game from the question list 
-# -> returns question id and length of question list in tuple     
+# Get the following question to game from the question list
+# -> returns question id and length of question list in tuple
 def get_new_question():
     global game_id, question_list, question_id
 
@@ -223,24 +227,24 @@ def get_new_question():
 
     question_id = question[0]
 
-    try:     	
+    try:
         sql = """INSERT INTO games_questions (game_id, question_id) VALUES (:game_id, :question_id)"""
-        db.session.execute(text(sql), {"game_id":game_id, "question_id":question_id})       
+        db.session.execute(text(sql), {"game_id":game_id, "question_id":question_id})
         db.session.commit()
     except:
         return False
 
     return (question.id, len(question_list))
 
-# Setup the game info to database and game session variables    
+# Setup the game info to database and game session variables
 def set_game_attr(user_id, category_id, level_id):
     global sessions, answers, points, game_id
-    
-    try:     	
+
+    try:
         sql = """INSERT INTO games (user_id, category_id, level_id) 
         VALUES (:user_id, :category_id, :level_id)
         RETURNING id, user_id, points, answers_count, session_count, category_id, level_id, visible, created_at"""
-        result = db.session.execute(text(sql), {"user_id":user_id, "category_id":category_id, "level_id":level_id})       
+        result = db.session.execute(text(sql), {"user_id":user_id, "category_id":category_id, "level_id":level_id})
         game = result.fetchone()
         db.session.commit()
 
@@ -262,11 +266,12 @@ def set_game_attr(user_id, category_id, level_id):
         return game.id
     except:
         return 0
-        
+
 # Set session counters to default values
 def clear_stats():
-    global game_id, game_level, question_list, question_id, sessions, answers, points
+    global game_id, game_category, game_level, question_list, question_id, sessions, answers, points
     game_id         = 0
+    game_category   = 0
     game_level      = 0
     question_list   = []
     question_id     = 0
@@ -274,24 +279,24 @@ def clear_stats():
     answers         = 0
     points          = 0
 
-# Creates new game with user id, category id and level id 
+# Creates new game with user id, category id and level id
 # -> returns game id (by calling first "get_game_id" function)
 def create_game(user, category, level):
     global game_level, sessions
     clear_stats()
     game_level = level
-    
+
     # Get the right question set (of chosen category and level) to the game
     questions = get_questions(category, level)
-    
+
     if len(questions) < 1:
         return False
-        
+
     gid = set_game_attr(user, category, level)
     sessions += 1
-    return gid, list(questions)    
-    
-# Ask a question and handle the received answer  
+    return gid, list(questions)
+
+# Ask a question and handle the received answer
 def play():
     q_details       = get_new_question()
     if not q_details:
@@ -310,17 +315,17 @@ def continue_game(right):
     answers += 1
     # Add answer count and points, if right answer
     if right: points += int(game_level)
-    
+
     session["game_points"]  = points
     session["game_answers"] = answers
-    
+
 def set_game_stats():
     global sessions, answers, points, game_id
     session_count = sessions
     answers_count = answers
     id = game_id
 
-    try:     	
+    try:
         sql = """UPDATE games SET points=:points, answers_count=:answers_count, session_count=:session_count 
             WHERE games.id=:id RETURNING games.id"""
         result = db.session.execute(text(sql), {"id":id, "points":points, "answers_count":answers_count, "session_count":session_count})
@@ -330,7 +335,7 @@ def set_game_stats():
         return returned_id
     except:
         return 0
-        
+
 def game_order(game: tuple):
     return game[0]
 
@@ -338,11 +343,11 @@ def list_games(user_games):
     games = [g for g in user_games]
     return sorted(games, key=game_order)
 
-# Get the created games of the player, if any, by user id    
+# Get the created games of the player, if any, by user id
 def get_user_games(user_id):
     visible = "TRUE"
 
-    sql = """SELECT id, points, category_id, level_id 
+    sql = """SELECT id, points, category_id, level_id
         FROM games WHERE user_id=:user_id AND visible=:visible"""
     result = db.session.execute(text(sql), {"user_id":user_id, "visible":visible})
     user_games = result.fetchall()
@@ -350,5 +355,4 @@ def get_user_games(user_id):
     if len(user_games) < 1:
         return False
     else:
-        return list_games(user_games)     
-
+        return list_games(user_games)
