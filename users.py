@@ -13,7 +13,7 @@ def login(username, password):
         if user.role_id == 1 or user.role_id == 2 or user.role_id == 3:
             if not check_password_hash(user.password, password):
                 return False
-        session["user_id"] 	= user.id
+        session["user_id"] 	    = user.id
         session["user_name"] 	= user.username
         session["user_role"] 	= user.role_id
         return True
@@ -67,7 +67,7 @@ def get_usernames():
     return result.fetchall()
 
 def add_admin():
-    admin 		= "admin"
+    admin 		    = "admin"
     admin_password 	= "SalaSana12"
     admin_role		= 1
     hash_value 		= generate_password_hash(admin_password)
