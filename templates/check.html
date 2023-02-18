@@ -2,9 +2,10 @@
 {% extends "layout.html" %}
 {% block content %}
 
-<h2>Answer check - Vastauksen tarkistus</h2>
+<h2>Answer Check - Vastauksen tarkistus</h2>
 
-Your answer - Vastauksesi: {{ message }}
+<hr>
+Your answer - Vastauksesi: {{ result_message }}
 <br>
 <br>
 Amount of questions - Kysymysmäärä: {{ question_amount }}
@@ -24,4 +25,7 @@ Amount of questions - Kysymysmäärä: {{ question_amount }}
 <br>
 <a href="/menu">Back - Takaisin</a>
 {% endif %}
+<br>
+<br>
+Info: {{ message }}
 {% endblock %}
