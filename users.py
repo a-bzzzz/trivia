@@ -68,7 +68,7 @@ def get_usernames():
 
 def add_admin():
     admin 		    = "admin"
-    admin_password 	= "SalaSana12"
+    admin_password 	= "salasana"
     admin_role		= 1
     hash_value 		= generate_password_hash(admin_password)
     sql = """INSERT INTO users (username, password, role_id) 
