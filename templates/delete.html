@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+{% extends "layout.html" %}
+{% block content %}
+
+<h2>Deletion - Poisto</h2>
+
+<hr>
+WARNING: Confirm deletion - VAROITUS: Vahvista poistaminen<br>
+Game no - Pelinro: {{ gid }}<br>
+<br>
+<br>
+<form action="/delete" method="POST">
+<input type="hidden" name="gid" value= {{ gid }}>
+<input type="submit" value="Delete - Poista">
+</form>
+<br>
+<br>
+<a href="/">Back - Takaisin</a>
+<br>
+<br>
+Info: {{ message }}
+{% endblock %}
