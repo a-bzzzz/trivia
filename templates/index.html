@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 {% extends "layout.html" %}
 {% block content %}
-<h2>Home page - Kotisivu</h2>
+
+<h2>Home Page - Kotisivu</h2>
+
 <hr>
-Number of players - Pelaajien määrä: {{ count }}
+Number of players - Pelaajamäärä: {{ count }}
 <br>
 <br>
 <!-- Pelaajatunnukset:
@@ -15,26 +17,29 @@ Number of players - Pelaajien määrä: {{ count }}
 <hr>
 <form action="/" method="POST">
 {% if session.user_id %}
-You have logged in with username - Olet kirjautunut sisään nimellä <b>{{ session.user_name }}</b> 
+Logged in player - Kirjautunut pelaaja: <b>{{ session.user_name }}</b>
 <br>
 <br>
-Want to start a new game? - Haluatko aloittaa uuden pelin?<br>
+Start new game - Aloita uusi peli:<br>
 <a href="/menu">New game - Uusi peli</a>
 <br>
 {% if session.user_id != 0 %}
 <br>
-Want to continue previous game? - Haluatko jatkaa edellistä peliä?<br>
+Search previous game - Hae aiempi peli:<br>
 <a href="/search">Search game - Hae peli</a><br>
-{% endif %}
+<br>
+Remove game - Poista peli:<br>
+<a href="/search_remove">Search removable game - Hae poistettava peli</a><br>
 <br>
 <br>
 <a href="/logout">Log out - Kirjaudu ulos</a>
 {% else %}
-You have not logged in - Et ole kirjautunut sisään 
+You have not logged in - Et ole kirjautunut sisään
 <br>
 <br>
 <a href="/login">Log in - Kirjaudu</a>
 <br>
 <br>
+Info: {{ message }}
 {% endif %}
 {% endblock %}
