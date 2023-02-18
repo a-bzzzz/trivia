@@ -77,7 +77,7 @@ Sovelluksesta on tehty pieni peli.
 - Peliin voi lisätä tietokannan kautta 16 kysymystä vastauksineen (ei aivan kaikista kategoria-taso-yhdistelmistä, mutta kannattaa käyttää kokeilemiseen kategoriaa 6 - satunnainen aihe)
 - Voi hakea aiemmin luodut pelit listana, valita niistä yhden ja jatkaa sen pelaamista
 - Voi listata aiemmat pelinsä myös pelin poistamista varten
-- - käytännössä peli poistetaan näkyvistä (visible = False), eikä se tule näkyviin hauissa, eli peli ei poistu tietokannasta
+  - Käytännössä peli poistetaan näkyvistä (visible = False), eikä se tule näkyviin hauissa, eli peli ei poistu tietokannasta
 - Peli näyttää käyttäjän tunnuksen (nimen), pelinumeron, valitun kategorian ja vaikeustason, pelikerran, vastausmäärän ja pisteet
 - Voi siirtyä kysymysosioon ja valita jonkin kolmesta vastausvaihtoehdoista
 - Sovellus antaa palautetta siitä, onko vastaus oikein vai väärin
