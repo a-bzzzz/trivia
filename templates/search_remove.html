@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+{% extends "layout.html" %}
+{% block content %}
+
+<h2>Game Search: Remove - Pelihaku: Poisto</h2>
+
+<hr>
+{% if session.user_id %}
+Logged in player - Kirjautunut pelaaja: <b>{{ session.user_name }}</b><br>
+<br>
+<a href="/logout">Log out - Kirjaudu ulos</a>
+{% else %}
+You have not logged in - Et ole kirjautunut sisään: <a href="/login">Log in - Kirjaudu sisään</a><br>
+{% endif %}
+<br><br><br>
+<b>Game list - Pelilista:</b><br>
+<br>
+{% for game in gamelist %}
+Pelinro: {{ game[0] }} Kategoria: {{ game[2] }} Taso: {{ game[3] }} Pisteitä: {{ game[1] }}<br>
+{% endfor %}
+<br>
+<br>
+Choose game number - Valitse pelinumero:  
+<form action="/search_remove" method="POST">
+<select name="gid" required>
+{% for game in gamelist %}
+<option value={{ game[0] }}> {{ game[0] }}</option><br>
+{% endfor %}
+</select>
+<br>
+<br>
+Remove game - Poista peli:<br>
+<input type="submit" value="Delete - Poista">
+</form> 
+<br>
+<br>
+<a href="/">Back - Takaisin</a>
+{% endblock %}
