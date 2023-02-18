@@ -57,7 +57,7 @@ def menu():
 
         game_details = games.create_game(user_id, category, level)
         if not game_details:
-            return render_template("error.html", message="No questions: Choose other category/level! - Ei kysymyksiä: Valitse toinen kategoria/taso!")            
+            return render_template("error.html", message="No questions: Choose other category/level! - Ei kysymyksiä: Valitse toinen kategoria/taso!")
 
         game_id         	= game_details[0]
         question_list   	= game_details[1]
@@ -126,14 +126,14 @@ def search():
             return render_template("search.html", gamelist=gamelist)
 
     if request.method == "POST":
-        game_id         = int(request.form["gid"])
-        game_details    = games.get_game(game_id)
+        game_id                     = int(request.form["gid"])
+        game_details                = games.get_game(game_id)
 
         if not game_details:
-            return render_template("error.html", message="No questions: Choose other category/level! - Ei kysymyksiä: Valitse toinen kategoria/taso!")            
+            return render_template("error.html", message="No questions: Choose other category/level! - Ei kysymyksiä: Valitse toinen kategoria/taso!")
 
-        game_id         = game_details[0]
-        question_list   = game_details[1]
+        game_id                     = game_details[0]
+        question_list               = game_details[1]
 
         session["game_sessions"]    = games.game_sessions()
 
@@ -141,12 +141,44 @@ def search():
             no_game_message = f"Game search failed - Pelin haku ei onnistunut - Game id: {game_id}"
             return render_template("error.html", message=no_game_message)
 
-        question_amount = games.play()
-        game_on 	= True
+        question_amount             = games.play()
+        game_on                     = True
 
-        quit_message	= ""
+        quit_message= ""
         if question_amount < 1:
-            game_on     = False
-            quit_message= "No more questions, choose new game category/level- Ei lisää kysymyksiä, valitse uusi pelikategoria/-taso"
+            game_on = False
+            quit_message = "No more questions, choose new game category/level- Ei lisää kysymyksiä, valitse uusi pelikategoria/-taso"
             return render_template("check.html", question_amount=question_amount, game_on=game_on, q_message=quit_message)
         return render_template("game.html", questions=question_list)
+
+@app.route("/search_remove", methods=["GET", "POST"])
+def search_remove():
+    if request.method == "GET":
+        user_id             = users.user_id()
+        gamelist            = games.get_user_games(user_id)
+        if not gamelist:
+            return render_template("error.html", message="No prior games: Create new game! - Ei aiempia pelejä: Luo uusi peli!")
+        else:
+            return render_template("search_remove.html", gamelist=gamelist)
+
+    if request.method == "POST":
+        game_id             = int(request.form["gid"])
+        game_details        = games.get_game(game_id)
+        game_id             = game_details[0]
+
+        if game_id == 0:
+            no_game_message = f"Game search failed - Pelin haku ei onnistunut - Game id: {game_id}"
+            return render_template("error.html", message=no_game_message)
+        gid                 = game_id
+        message = f"Trying to remove game no {gid} - Poistamassa peliä nro {gid}"
+        return render_template("delete.html", gid=game_id, message=message)
+
+@app.route("/delete", method=["POST"])
+def delete():
+    if request.method == "POST":
+        gid     = int(request.form["gid"])
+        deleted = games.remove_game(gid)
+        if not deleted:
+            return render_template("error.html", message="Deletion failed - Poistaminen epäonnistui")
+        message = f"Game no {gid} deleted - Peli nro {gid} poistettu"
+        return render_template("delete.html", gid=gid, message=message)
