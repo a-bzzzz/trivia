@@ -2,10 +2,11 @@
 {% extends "layout.html" %}
 {% block content %}
 
-<h2>Main menu - Päävalikko</h2>
+<h2>Game Menu - Pelivalikko</h2>
 
+<hr>
 {% if session.user_id %}
-You have logged in with name - Olet kirjautunut sisään nimellä <b>{{ session.user_name }}</b><br>
+Logged in player - Kirjautunut pelaaja: <b>{{ session.user_name }}</b><br>
 <br>
 <a href="/logout">Log out - Kirjaudu ulos</a>
 {% else %}
@@ -18,20 +19,20 @@ You have not logged in - Et ole kirjautunut sisään: <a href="/login">Log in - 
 Choose <b>category</b> - Valitse <b>kategoria</b>:<br>
 <br>
 <input type="radio" name="cat" value=1 required="required"> 1 - science/geography - tiede/maantiede<br>
-<input type="radio" name="cat" value=2> 2 - history/herstory          - historia<br>
-<input type="radio" name="cat" value=3> 3 - sports/leisure/food       - urheilu/vapaa-aika/ruoka<br>
-<input type="radio" name="cat" value=4> 4 - music/art/literature      - musiikki/taide/kirjallisuus<br>
-<input type="radio" name="cat" value=5> 5 - movies/TV/entertainment   - elokuvat/TV/viihde<br>
-<input type="radio" name="cat" value=6> 6 - random topic              - satunnainen aihe<br>
+<input type="radio" name="cat" value=2> 2 - History/herstory          - Historia<br>
+<input type="radio" name="cat" value=3> 3 - Sports/leisure/food       - Urheilu/vapaa-aika/ruoka<br>
+<input type="radio" name="cat" value=4> 4 - Music/art/literature      - Musiikki/taide/kirjallisuus<br>
+<input type="radio" name="cat" value=5> 5 - Movies/TV/entertainment   - Elokuvat/TV/viihde<br>
+<input type="radio" name="cat" value=6> 6 - Random topic              - Satunnainen aihe<br>
 <br>
 <br>
 Choose <b>difficulty level</b> - Valitse <b>vaikeustaso</b>:<br>
 <br>
-<input type="radio" name="lev" value=1 required="required"> 1 - easy - helppo<br>
-<input type="radio" name="lev" value=2> 2 - moderate  - keskitaso<br>
-<input type="radio" name="lev" value=3> 3 - difficult - vaikea<br>
+<input type="radio" name="lev" value=1 required="required"> 1 - Easy - Helppo<br>
+<input type="radio" name="lev" value=2> 2 - Moderate  - Keskitaso<br>
+<input type="radio" name="lev" value=3> 3 - Difficult - Vaikea<br>
 <br>
-<input type="submit" value="Play-Pelaa">
+<input type="submit" value="Play - Pelaa">
 </form>
 <br>
 <br>
