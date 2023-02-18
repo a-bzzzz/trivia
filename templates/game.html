@@ -2,8 +2,9 @@
 {% extends "layout.html" %}
 {% block content %}
 
-<h2>Game page - Pelisivu</h2>
+<h2>Game Page - Pelisivu</h2>
 
+<hr>
 {% if session.user_id %}
 You have logged in with name - Olet kirjautunut sisään nimellä <b>{{ session.user_name }}</b><br>
 <br>
@@ -11,7 +12,6 @@ You have logged in with name - Olet kirjautunut sisään nimellä <b>{{ session.
 {% else %}
 You have not logged in - Et ole kirjautunut sisään: <a href="/login">Log in - Kirjaudu sisään</a>
 {% endif %}
-
 <br>
 <br>
 Game id number      - Pelinumero:       {{ session.game_id }}<br>
@@ -43,5 +43,7 @@ Your answer - Vastauksesi:<br>
 <form action="/check" method="GET">
 <br>
 <a href="/menu">Back - Takaisin</a>
-
+<br>
+<br>
+Info: {{ message }}
 {% endblock %}
