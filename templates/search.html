@@ -2,10 +2,11 @@
 {% extends "layout.html" %}
 {% block content %}
 
-<h2>Game search - Pelihaku</h2>
+<h2>Game Search - Pelihaku</h2>
 
+<hr>
 {% if session.user_id %}
-You have logged in with name - Olet kirjautunut sisään nimellä <b>{{ session.user_name }}</b><br>
+Logged in player - Kirjautunut pelaaja: <b>{{ session.user_name }}</b><br>
 <br>
 <a href="/logout">Log out - Kirjaudu ulos</a>
 {% else %}
@@ -21,15 +22,19 @@ Pelinro: {{ game[0] }} Kategoria: {{ game[2] }} Taso: {{ game[3] }} Pisteitä: {
 <br>
 Choose game number - Valitse pelinumero:  
 <form action="/search" method="POST">
-<select name="gid">
+<select name="gid" required>
 {% for game in gamelist %}
-<option value={{ game[0] }} selected> {{ game[0] }}<br>
+<option value={{ game[0] }}> {{ game[0] }}</option><br>
 {% endfor %}
 </select>
+<br>
+<input type="hidden" name="game_id" value={{ gid }}>
+<br>
+<br>
+Start game - Aloita peli:<br>
 <input type="submit" value="Start - Aloita">
 </form>
 <br>
 <br>
 <a href="/">Back - Takaisin</a>
-
 {% endblock %}
