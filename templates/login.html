@@ -2,8 +2,9 @@
 {% extends "layout.html" %}
 {% block content %}
 
-<h2>Login page - Kirjautumissivu</h2>
+<h2>Login Page - Kirjautumissivu</h2>
 
+<hr>
 <form action="/login" method="POST">
 Username - käyttäjätunnus: <br><input type="text" name="username" minlength="3" maxlength="20" required="required">
 <br>
@@ -15,9 +16,8 @@ Password - Salasana: <br><input type="password" name="password" minlength="3" ma
 </form>
 <br>
 <br>
-
 <form action="/register" method="GET">
-If you don't have user credentials - Jos sinulla ei ole käyttäjätunnusta:
+Create user credentials - Luo kirjautumistiedot:
 <br><input type="submit" value="Register - Luo käyttäjätili">
 </form>
 <br>
