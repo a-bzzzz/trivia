@@ -89,7 +89,7 @@ Sovelluksesta on tehty pieni peli.
 - Pelin tiedot kirjautuvat tietokannan tauluhin games ja games_questions
 - Syötteet viedään tietokantaan parametreilla (estää SQL-injektion)
 - Syötteet näytetään selaimen sivulla käyttämällä Jinja-sivupohjia (estää XSS-haavoittuvuuden)
-- Ympäristömuuttujat ovat käytössä (ei salasanoja GitHubissa)
+- Ympäristömuuttujat ovat käytössä (ei aitoja salasanoja GitHubissa, pl. admin-käyttäjän luomista varten on ns. aloitussalasana, joka tulisi vaihtaa varsinaiseen salasanaan)
 
 **HUOMAA**, että peliä varten tarvittavat roolien (roles), kategorioiden (categories), tasojen (levels) sekä (alustavan) 16 kysymys-vastaus-setin (answers / questions / questions_answers) INSERT-komennot löytyvät ylempää kohdasta [Sovelluksen rakenne - Tietokanta - Vakioattribuutit](https://github.com/a-bzzzz/trivia/blob/main/README.md#vakioattribuutit) linkkien takaa löytyvistä tiedostoista.
 
