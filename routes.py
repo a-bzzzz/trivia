@@ -51,6 +51,7 @@ def menu():
         user_id 		= users.user_id()
         category 		= int(request.form["cat"])
         level 			= int(request.form["lev"])
+        users.check_csrf()
 
         session["category_id"]	= category
         session["level_id"]	= level
@@ -86,6 +87,7 @@ def game():
 
     if request.method == "POST":
         answered 	= int(request.form["answer"])
+        users.check_csrf()
         result_message	= ""
         right 		= games.is_right(answered)
         if right:
@@ -127,6 +129,7 @@ def search():
 
     if request.method == "POST":
         game_id                     = int(request.form["gid"])
+        users.check_csrf()
         game_details                = games.get_game(game_id)
 
         if not game_details:
@@ -155,6 +158,7 @@ def search():
 def search_remove():
     if request.method == "GET":
         user_id             = users.user_id()
+        users.check_csrf()
         gamelist            = games.get_user_games(user_id)
         if not gamelist:
             return render_template("error.html", message="No prior games: Create new game! - Ei aiempia pelejä: Luo uusi peli!")
@@ -177,6 +181,7 @@ def search_remove():
 def delete():
     if request.method == "POST":
         gid     = int(request.form["gid"])
+        users.check_csrf()
         deleted = games.remove_game(gid)
         if not deleted:
             return render_template("error.html", message="Deletion failed - Poistaminen epäonnistui")
