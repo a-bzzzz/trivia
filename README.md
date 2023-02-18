@@ -76,6 +76,8 @@ Sovelluksesta on tehty pieni peli.
 - Voi valita pelikategorian ja tason, jolle on lisätty kysymyksiä ja vastauksia - muilla valinnoilla peli päätyy tilailmoitukseen
 - Peliin voi lisätä tietokannan kautta 16 kysymystä vastauksineen (ei aivan kaikista kategoria-taso-yhdistelmistä, mutta kannattaa käyttää kokeilemiseen kategoriaa 6 - satunnainen aihe)
 - Voi hakea aiemmin luodut pelit listana, valita niistä yhden ja jatkaa sen pelaamista
+- Voi listata aiemmat pelinsä myös pelin poistamista varten
+- - käytännössä peli poistetaan näkyvistä (visible = False), eikä se tule näkyviin hauissa, eli peli ei poistu tietokannasta
 - Peli näyttää käyttäjän tunnuksen (nimen), pelinumeron, valitun kategorian ja vaikeustason, pelikerran, vastausmäärän ja pisteet
 - Voi siirtyä kysymysosioon ja valita jonkin kolmesta vastausvaihtoehdoista
 - Sovellus antaa palautetta siitä, onko vastaus oikein vai väärin
@@ -92,7 +94,6 @@ Sovelluksesta on tehty pieni peli.
 **HUOMAA**, että peliä varten tarvittavat roolien (roles), kategorioiden (categories), tasojen (levels) sekä (alustavan) 16 kysymys-vastaus-setin (answers / questions / questions_answers) INSERT-komennot löytyvät ylempää kohdasta [Sovelluksen rakenne - Tietokanta - Vakioattribuutit](https://github.com/a-bzzzz/trivia/blob/main/README.md#vakioattribuutit) linkkien takaa löytyvistä tiedostoista.
 
 #### Puuttuvat toiminnot
-- Ei voi poistaa olemassa olevaa peliä
 - Sovelluksesta ei voi muuttaa tai poistaa käyttäjän tietoja
 - Sovelluksesta ei voi muuttaa tai poistaa pelin tietoja, vastauskategoroita tai -luokkia
 - Sovelluksesta ei voi lisätä, muuttaa tai poistaa kysymyksiä ja vastauksia
