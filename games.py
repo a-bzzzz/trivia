@@ -248,7 +248,7 @@ def set_game_attr(user_id, category_id, level_id):
         game = result.fetchone()
         db.session.commit()
 
-        session["game_id"] 		= game.id
+        session["game_id"] 		    = game.id
         session["game_user"] 		= game.user_id
         session["game_points"] 		= game.points
         session["game_answers"] 	= game.answers_count
@@ -258,7 +258,7 @@ def set_game_attr(user_id, category_id, level_id):
         session["game_visible"] 	= game.visible
         session["game_created"] 	= game.created_at
 
-	game_id     = game.id
+        game_id     = game.id
         sessions    = game.session_count
         answers     = game.answers_count
         points      = game.points
