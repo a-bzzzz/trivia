@@ -173,7 +173,7 @@ def search_remove():
         message = f"Trying to remove game no {gid} - Poistamassa peliä nro {gid}"
         return render_template("delete.html", gid=game_id, message=message)
 
-@app.route("/delete", method=["POST"])
+@app.route("/delete", methods=["POST"])
 def delete():
     if request.method == "POST":
         gid     = int(request.form["gid"])
