@@ -60,13 +60,13 @@ def get_game(id):
     global game_id, game_category, game_level, sessions, answers, points
     visible = "TRUE"
 
-    sql 	= """SELECT id, user_id, points, answers_count, session_count, category_id, level_id, visible, created_at 
+    sql 	= """SELECT id, user_id, points, answers_count, session_count, category_id, level_id, visible, created_at
                     FROM games WHERE id=:id AND visible=:visible"""
     result 	= db.session.execute(text(sql), {"id":id, "visible":visible})
     game 	= result.fetchone()
 
     session["game_id"] 		= game.id
-    session["game_user"] 	= game.user_id
+    session["game_user"]	= game.user_id
     session["game_points"] 	= game.points
     session["game_answers"] 	= game.answers_count
     session["game_sessions"]	= game.session_count
@@ -133,12 +133,12 @@ def get_questions(category_id, level_id):
     visible         = "TRUE"
 
     if int(category_id) == 6:
-        sql = """SELECT id, question, category_id, level_id, visible 
+        sql = """SELECT id, question, category_id, level_id, visible
             FROM questions WHERE level_id=:level_id AND visible=:visible """
         result = db.session.execute(text(sql), {"level_id":level_id, "visible":visible})
         question_list = list(result.fetchall())
     else:
-        sql = """SELECT id, question, category_id, level_id, visible 
+        sql = """SELECT id, question, category_id, level_id, visible
             FROM questions WHERE category_id=:category_id AND level_id=:level_id AND visible=:visible """
         result = db.session.execute(text(sql), {"category_id":category_id, "level_id":level_id, "visible":visible})
         question_list = list(result.fetchall())
@@ -146,7 +146,7 @@ def get_questions(category_id, level_id):
     shuffle(question_list)
     return question_list
 
-# Get answer alternatives (right and wrong) by question id -> returns the right answer 
+# Get answer alternatives (right and wrong) by question id -> returns the right answer
 # and stores all answers to session variables
 def get_answers(question_id):
 
@@ -241,7 +241,7 @@ def set_game_attr(user_id, category_id, level_id):
     global sessions, answers, points, game_id
 
     try:
-        sql = """INSERT INTO games (user_id, category_id, level_id) 
+        sql = """INSERT INTO games (user_id, category_id, level_id)
         VALUES (:user_id, :category_id, :level_id)
         RETURNING id, user_id, points, answers_count, session_count, category_id, level_id, visible, created_at"""
         result = db.session.execute(text(sql), {"user_id":user_id, "category_id":category_id, "level_id":level_id})
@@ -255,14 +255,13 @@ def set_game_attr(user_id, category_id, level_id):
         session["game_sessions"]	= game.session_count
         session["game_category"] 	= game.category_id
         session["game_level"] 		= game.level_id
-        session["game_visible"]     	= game.visible
+        session["game_visible"] 	= game.visible
         session["game_created"] 	= game.created_at
 
+	game_id     = game.id
         sessions    = game.session_count
         answers     = game.answers_count
         points      = game.points
-
-        game_id = game.id
         return game.id
     except:
         return 0
@@ -326,7 +325,7 @@ def set_game_stats():
     id = game_id
 
     try:
-        sql = """UPDATE games SET points=:points, answers_count=:answers_count, session_count=:session_count 
+        sql = """UPDATE games SET points=:points, answers_count=:answers_count, session_count=:session_count
             WHERE games.id=:id RETURNING games.id"""
         result = db.session.execute(text(sql), {"id":id, "points":points, "answers_count":answers_count, "session_count":session_count})
         returned_id = result.fetchone()[0]
@@ -356,3 +355,14 @@ def get_user_games(user_id):
         return False
     else:
         return list_games(user_games)
+
+# Game removal: Set game visible to False, not actual db deletion
+def remove_game(id):
+    visible = "FALSE"
+    try:
+        sql = """UPDATE games SET visible=:visible WHERE games.id=:id"""
+        db.session.execute(text(sql), {"id":id, "visible":visible})
+        db.session.commit()
+        return True
+    except:
+        return False
