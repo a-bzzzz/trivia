@@ -17,7 +17,7 @@ Number of players - Pelaajamäärä: {{ count }}
 <hr>
 <form action="/" method="POST">
 {% if session.user_id %}
-Logged in player - Kirjautunut pelaaja: <b>{{ session.user_name }}</b>
+Logged in player - Kirjautunut pelaaja: <b>{{ session.user_name }}</b> 
 <br>
 <br>
 Start new game - Aloita uusi peli:<br>
@@ -30,6 +30,7 @@ Search previous game - Hae aiempi peli:<br>
 <br>
 Remove game - Poista peli:<br>
 <a href="/search_remove">Search removable game - Hae poistettava peli</a><br>
+<!–– {% endif %} ––>
 <br>
 <br>
 <a href="/logout">Log out - Kirjaudu ulos</a>
