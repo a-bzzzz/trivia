@@ -65,7 +65,7 @@ Tietokannan käyttöä varten tarvittavat INSERT-kommennot löytyvät näistä t
     
 ## Tilatieto ja muu info
 
-### 2. palautuksen jälkeen
+### 3. palautus
 
 Sovelluksesta on tehty pieni peli.
 
@@ -89,6 +89,7 @@ Sovelluksesta on tehty pieni peli.
 - Pelin tiedot kirjautuvat tietokannan tauluhin games ja games_questions
 - Syötteet viedään tietokantaan parametreilla (estää SQL-injektion)
 - Syötteet näytetään selaimen sivulla käyttämällä Jinja-sivupohjia (estää XSS-haavoittuvuuden)
+- CSRF-token luodaan ohjelmassa ja se tarkistetaan soveltuvissa kohdissa
 - Ympäristömuuttujat ovat käytössä (ei aitoja salasanoja GitHubissa, pl. admin-käyttäjän luomista varten on ns. aloitussalasana, joka tulisi vaihtaa varsinaiseen salasanaan)
 
 **HUOMAA**, että peliä varten tarvittavat roolien (roles), kategorioiden (categories), tasojen (levels) sekä (alustavan) 16 kysymys-vastaus-setin (answers / questions / questions_answers) INSERT-komennot löytyvät ylempää kohdasta [Sovelluksen rakenne - Tietokanta - Vakioattribuutit](https://github.com/a-bzzzz/trivia/blob/main/README.md#vakioattribuutit) linkkien takaa löytyvistä tiedostoista.
@@ -97,9 +98,8 @@ Sovelluksesta on tehty pieni peli.
 - Sovelluksesta ei voi muuttaa tai poistaa käyttäjän tietoja
 - Sovelluksesta ei voi muuttaa tai poistaa pelin tietoja, vastauskategoroita tai -luokkia
 - Sovelluksesta ei voi lisätä, muuttaa tai poistaa kysymyksiä ja vastauksia
-- Käyttäjän oikeuksia eri sivuille ei ole määritelty
+- Käyttäjän oikeuksia eri sivuille ei ole määritelty (koska käytössä on vasta rooli "peruskäyttäjä")
 - Käyttäjän syötteen oikeellisuutta ei ole tarkistettu kaikissa tapauksissa
-- CSRF-token on lisäämättä
 - Käytettävyyteen ja saavutettavuuteen liittyviä seikkoja ei ole tarkistettu
 - Ulkoasun suunnittelu on aivan alkuvaiheessa, CSS-tiedostosta on luotu pohja, valmista ulkoasukirjastoa ei ole käytössä
 - Optiot - *(optio)* - eivät ole käytössä
