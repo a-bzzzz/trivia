@@ -41,6 +41,32 @@ def register():
             return render_template("error.html", message="Registration failed - Rekisteröinti ei onnistunut")
         return redirect("/")
 
+@app.route("/change_password", methods=["GET", "POST"])
+def change_password():
+    if request.method == "GET":
+        return render_template("change_password.html")
+
+    if request.method == "POST":
+        username = request.form["username"]
+        old_password = request.form["password1"]
+        new_password = request.form["password2"]
+        users.check_csrf()
+        if not users.is_admin():
+            if old_password == new_password:
+                return render_template("error.html", message="Give different password! - Anna eri salasana!")
+        password_match = users.check_password(username, old_password)
+        if users.is_admin():
+            password_match = True
+        user_match = username == users.user_name()
+        if not (password_match and user_match):
+            if not users.is_admin():
+                return render_template("error.html", message="Unauthorized password change - Ei oikeutta vaihtaa tätä salasanaa")
+        change_ok = users.change_password(username, old_password, new_password)
+        if not change_ok:
+            return render_template("error.html", message="Unsuccessfull password change - Salasanan vaihto ei onnistunut")
+        message = f"Password changed for user {username} - Salasana vaihdettu käyttäjälle {username}"
+        return render_template("change_password.html", message=message)
+
 @app.route("/menu", methods=["GET", "POST"])
 def menu():
     if request.method == "GET":
