@@ -12,6 +12,7 @@ Game no - Pelinro: {{ gid }}<br>
 <form action="/delete" method="POST">
 <input type="hidden" name="gid" value= {{ gid }}>
 <input type="submit" value="Delete - Poista">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
 <br>
 <br>

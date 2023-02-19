@@ -38,6 +38,7 @@ Your answer - Vastauksesi:<br>
 <input type="hidden" name="correct" value="2">
 <input type="hidden" name="correct" value="3">
 <input type="submit" value="Answer-Vastaa">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
 <br>
 <form action="/check" method="GET">

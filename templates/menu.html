@@ -33,6 +33,7 @@ Choose <b>difficulty level</b> - Valitse <b>vaikeustaso</b>:<br>
 <input type="radio" name="lev" value=3> 3 - Difficult - Vaikea<br>
 <br>
 <input type="submit" value="Play - Pelaa">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
 <br>
 <br>
