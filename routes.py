@@ -5,6 +5,8 @@ import users, games
 @app.route("/")
 def index():
     usernames = users.get_usernames()
+    if ('admin',) not in usernames:
+      users.add_admin()
     return render_template("index.html", count=len(usernames), users=usernames)
 
 @app.route("/login", methods=["GET", "POST"])
