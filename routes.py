@@ -158,7 +158,6 @@ def search():
 def search_remove():
     if request.method == "GET":
         user_id             = users.user_id()
-        users.check_csrf()
         gamelist            = games.get_user_games(user_id)
         if not gamelist:
             return render_template("error.html", message="No prior games: Create new game! - Ei aiempia pelejä: Luo uusi peli!")
@@ -167,6 +166,7 @@ def search_remove():
 
     if request.method == "POST":
         game_id             = int(request.form["gid"])
+        users.check_csrf()
         game_details        = games.get_game(game_id)
         game_id             = game_details[0]
 
