@@ -67,7 +67,7 @@ Tietokannan käyttöä varten tarvittavat INSERT-kommennot löytyvät näistä t
 
 ### 3. palautus
 
-Sovelluksesta on tehty pieni peli.
+Sovelluksesta on tehty peli perustoiminnoilla. Admin-käyttäjän toimintoja (pl. salasanavaihto) sekä statistiikkaa puuttuu (mutta mahdollisuuksien mukaan vielä tulossa).
 
 #### Käytössä olevat toiminnot
 - Käyttäjä voi rekisteröityä eli luoda peruskäyttäjän tunnukset
@@ -86,6 +86,9 @@ Sovelluksesta on tehty pieni peli.
 - Samassa pelissä ei voi vastata useammin samaan kysymykseen
 - Näkymistä voi palata takaisin päin johonkin aiempaan vaiheeseen
 - Sovelluksesta voi kirjautua ulos
+- Käyttäjä voi vaihtaa oman salasanansa
+- Admin käyttäjä voi vaihtaa kaikkien käyttäjien salasanan
+  - Adminin ei tarvitse tietää oikeaa salasanaa vaihtamiseen, vaan voi kirjoittaa ensimmäiseen salasanakenttään mitä tahansa, uusi salasana määräytyy toisen salasanakentänä perusteella
 - Pelin tiedot kirjautuvat tietokannan tauluhin games ja games_questions
 - Syötteet viedään tietokantaan parametreilla (estää SQL-injektion)
 - Syötteet näytetään selaimen sivulla käyttämällä Jinja-sivupohjia (estää XSS-haavoittuvuuden)
@@ -95,13 +98,14 @@ Sovelluksesta on tehty pieni peli.
 **HUOMAA**, että peliä varten tarvittavat roolien (roles), kategorioiden (categories), tasojen (levels) sekä (alustavan) 16 kysymys-vastaus-setin (answers / questions / questions_answers) INSERT-komennot löytyvät ylempää kohdasta [Sovelluksen rakenne - Tietokanta - Vakioattribuutit](https://github.com/a-bzzzz/trivia/blob/main/README.md#vakioattribuutit) linkkien takaa löytyvistä tiedostoista.
 
 #### Puuttuvat toiminnot
-- Sovelluksesta ei voi muuttaa tai poistaa käyttäjän tietoja
-- Sovelluksesta ei voi muuttaa tai poistaa pelin tietoja, vastauskategoroita tai -luokkia
-- Sovelluksesta ei voi lisätä, muuttaa tai poistaa kysymyksiä ja vastauksia
-- Käyttäjän oikeuksia eri sivuille ei ole määritelty (koska käytössä on vasta rooli "peruskäyttäjä")
-- Käyttäjän syötteen oikeellisuutta ei ole tarkistettu kaikissa tapauksissa
+- Sovelluksesta ei voi muuttaa tai poistaa käyttäjän tietoja, paitsi salasanaa    *(optio)*
+- Sovelluksesta ei voi muuttaa tai poistaa pelin tietoja, vastauskategoroita tai -luokkia    *(optio)*
+- Sovelluksesta ei voi lisätä, muuttaa tai poistaa kysymyksiä ja vastauksia (tämä ominaisuus on tarkoitus vielä lisätä ennen loppupalautusta)
+- Pelaaja ei näe vielä statistiikkaa liittyen kaikkien pelaajien pelitilanteeseen (ranking)  *(optio)* , ja oman pistesaldon tarkistamiseen tarvitaan vielä lisätoiminto (kysymys-vastaus-sivulla omat pisteet ja muu omaan peliin liittyvä tilasto kyllä näkyy)
+- Käyttäjän oikeuksien määrittely eri sivuille on alkuvaiheessa (koska käytössä on vasta rooli "peruskäyttäjä", mutta salasanan vaihdossa on jo huomioitu adminille laajemmat oikeudet)
+- Käyttäjän syötteen oikeellisuutta ei mahdollisesti ole tarkistettu tarkkaan ihan kaikissa tapauksissa
 - Käytettävyyteen ja saavutettavuuteen liittyviä seikkoja ei ole tarkistettu
 - Ulkoasun suunnittelu on aivan alkuvaiheessa, CSS-tiedostosta on luotu pohja, valmista ulkoasukirjastoa ei ole käytössä
 - Optiot - *(optio)* - eivät ole käytössä
   
-**HUOMAA**, että *(optio)* -merkinnällä merkityt ominaisuudet eivät välttämättä ehdi valmistua peliin tämän kurssin aikana, mutta niitä voi lisätä peliin jatkossa mahdollisuuksien mukaan.
+**HUOMAA**, että *(optio)* -merkinnällä merkityt ominaisuudet eivät välttämättä ehdi valmistua peliin tämän kurssin aikana, mutta niitä toimintoja voi halutessaan itse lisätä peliin mukaan.
