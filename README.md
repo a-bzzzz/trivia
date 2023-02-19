@@ -86,22 +86,22 @@ Sovelluksesta on tehty peli perustoiminnoilla. Admin-käyttäjän toimintoja (pl
 - Sovellus antaa palautetta siitä, onko vastaus oikein vai väärin
 - Oikeasta vastauksesta saa pelitason mukaisen määrän pisteitä, jotka lisätään pelin pistesaldoon
 - Jos kyseiseen peliin on vastaamattomia kysymyksiä, voi valita uuden kysymyksen - muuten voi aloittaa uuden pelin
-- Samassa pelissä ei voi vastata useammin samaan kysymykseen
+- Samassa pelissä (samalla pelikerralla) ei voi vastata useammin samaan kysymykseen
 - Näkymistä voi palata takaisin päin johonkin aiempaan vaiheeseen
 - Sovelluksesta voi kirjautua ulos
 - Käyttäjä voi vaihtaa oman salasanansa
 - Admin käyttäjä voi vaihtaa kaikkien käyttäjien salasanan
-  - Adminin ei tarvitse tietää oikeaa salasanaa vaihtamiseen, vaan voi kirjoittaa ensimmäiseen salasanakenttään mitä tahansa, uusi salasana määräytyy toisen salasanakentänä perusteella
+  - Adminin ei tarvitse tietää oikeaa salasanaa vaihtamiseen, vaan voi kirjoittaa ensimmäiseen salasanakenttään mitä tahansa, uusi salasana määräytyy toisen salasanakentän perusteella
 - Pelin tiedot kirjautuvat tietokannan tauluhin games ja games_questions
 - Syötteet viedään tietokantaan parametreilla (estää SQL-injektion)
 - Syötteet näytetään selaimen sivulla käyttämällä Jinja-sivupohjia (estää XSS-haavoittuvuuden)
 - CSRF-token luodaan ohjelmassa ja se tarkistetaan soveltuvissa kohdissa
-- Ympäristömuuttujat ovat käytössä (ei aitoja salasanoja GitHubissa, pl. admin-käyttäjän luomista varten on ns. aloitussalasana, joka tulisi vaihtaa varsinaiseen salasanaan)
+- Ympäristömuuttujat ovat käytössä (ei aitoja salasanoja GitHubissa, paitsi että admin-käyttäjän luomista varten on ns. aloitussalasana, joka tulisi vaihtaa varsinaiseen salasanaan)
 
 **HUOMAA**, että peliä varten tarvittavat roolien (roles), kategorioiden (categories), tasojen (levels) sekä (alustavan) 16 kysymys-vastaus-setin (answers / questions / questions_answers) INSERT-komennot löytyvät ylempää kohdasta [Sovelluksen rakenne - Tietokanta - Vakioattribuutit](https://github.com/a-bzzzz/trivia/blob/main/README.md#vakioattribuutit) linkkien takaa löytyvistä tiedostoista.
 
 #### Puuttuvat toiminnot
-- Sovelluksesta ei voi muuttaa tai poistaa käyttäjän tietoja, paitsi salasanaa    *(optio)*
+- Sovelluksesta ei voi muuttaa tai poistaa muita käyttäjän tietoja kuin salasanan    *(optio)*
 - Sovelluksesta ei voi muuttaa tai poistaa pelin tietoja, vastauskategoroita tai -luokkia    *(optio)*
 - Sovelluksesta ei voi lisätä, muuttaa tai poistaa kysymyksiä ja vastauksia (tämä ominaisuus on tarkoitus vielä lisätä ennen loppupalautusta)
 - Pelaaja ei näe vielä statistiikkaa liittyen kaikkien pelaajien pelitilanteeseen (ranking)  *(optio)* , ja oman pistesaldon tarkistamiseen tarvitaan vielä lisätoiminto (kysymys-vastaus-sivulla omat pisteet ja muu omaan peliin liittyvä tilasto kyllä näkyy)
