@@ -1,8 +1,9 @@
 from db import db
-from flask import session
+from flask import session, request, abort
 from werkzeug.security import check_password_hash, generate_password_hash
 from sqlalchemy.sql import text
 import os
+from os import abort
 
 def login(username, password):
     sql = """SELECT id, username, password, role_id FROM users WHERE username=:username"""
