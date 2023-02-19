@@ -72,7 +72,7 @@ Sovelluksesta on tehty peli perustoiminnoilla. Admin-käyttäjän toimintoja (pl
 #### Käytössä olevat toiminnot
 - Käyttäjä voi rekisteröityä eli luoda peruskäyttäjän tunnukset
 - Sovellus luo tietokantaan automaattisesti hallinnoijan eli admin-käyttäjän, jos ei ole vielä luotu
-  - Admin käyttäjän käyttäjä tunnus on *admin* ja (aloitus)salasana on *salasana*
+  - Admin-käyttäjän käyttäjätunnus on *admin* ja (aloitus)salasana on *salasana*
   - **Muista vaihtaa admin-käyttäjän salasana omaksi salasanaksesi!**
 - Sovellukseen voi kirjautua, jos on käyttäjätunnukset -> käyttäjän tiedot tallentuvat tietokantaan
 - Voi aloittaa uuden pelin -> uuden pelin tiedot tallentuvat tietokantaan
