@@ -90,8 +90,10 @@ Sovelluksesta on tehty peli perustoiminnoilla. Admin-käyttäjän toimintoja (pl
 - Näkymistä voi palata takaisin päin johonkin aiempaan vaiheeseen
 - Sovelluksesta voi kirjautua ulos
 - Käyttäjä voi vaihtaa oman salasanansa
-- Admin käyttäjä voi vaihtaa kaikkien käyttäjien salasanan
+- Admin-käyttäjä voi vaihtaa kaikkien käyttäjien salasanan
   - Adminin ei tarvitse tietää oikeaa salasanaa vaihtamiseen, vaan voi kirjoittaa ensimmäiseen salasanakenttään mitä tahansa, uusi salasana määräytyy toisen salasanakentän perusteella
+- Admin-käyttäjä voi lisätä uusi kysymyksiä sekä niihin vastausvaihtoehtoja (3, joista yksi on oikea vastaus) suoraan sovelluksesta
+  - Lisäykset päivittyvät tietokantatauluihin questions, answers ja questions_answers (aputaulu, joka linkittää kysymykseen sen vastausvaihtoehdot)
 - Pelin tiedot kirjautuvat tietokannan tauluhin games ja games_questions
 - Syötteet viedään tietokantaan parametreilla (estää SQL-injektion)
 - Syötteet näytetään selaimen sivulla käyttämällä Jinja-sivupohjia (estää XSS-haavoittuvuuden)
@@ -103,7 +105,7 @@ Sovelluksesta on tehty peli perustoiminnoilla. Admin-käyttäjän toimintoja (pl
 #### Puuttuvat toiminnot
 - Sovelluksesta ei voi muuttaa tai poistaa muita käyttäjän tietoja kuin salasanan    *(optio)*
 - Sovelluksesta ei voi muuttaa tai poistaa pelin tietoja, vastauskategoroita tai -luokkia    *(optio)*
-- Sovelluksesta ei voi lisätä, muuttaa tai poistaa kysymyksiä ja vastauksia (tämä ominaisuus on tarkoitus vielä lisätä ennen loppupalautusta)
+- Sovelluksesta ei voi muuttaa tai poistaa kysymyksiä ja vastauksia    *(optio)*
 - Pelaaja ei näe vielä statistiikkaa liittyen kaikkien pelaajien pelitilanteeseen (ranking)  *(optio)* , ja oman pistesaldon tarkistamiseen tarvitaan vielä lisätoiminto (kysymys-vastaus-sivulla omat pisteet ja muu omaan peliin liittyvä tilasto kyllä näkyy)
 - Käyttäjän oikeuksien määrittely eri sivuille on alkuvaiheessa (koska käytössä on vasta rooli "peruskäyttäjä", mutta salasanan vaihdossa on jo huomioitu adminille laajemmat oikeudet)
 - Käyttäjän syötteen oikeellisuutta ei mahdollisesti ole tarkistettu tarkkaan ihan kaikissa tapauksissa
