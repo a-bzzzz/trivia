@@ -5,6 +5,32 @@ from sqlalchemy.sql import text
 import os
 from os import abort
 
+def user_id():
+    return session.get("user_id", 0)
+
+def user_name():
+    return session.get("user_name", None)
+
+def user_password():
+    return session.get("user_password", None)
+
+def user_role():
+    return session.get("user_role", 0)
+
+def user_visible():
+    return session.get("user_visible", None)
+
+def user_created():
+    return session.get("user_created", None)
+
+def is_admin():
+    return user_id() == 1
+
+def get_usernames():
+    sql = """SELECT username FROM users"""
+    result = db.session.execute(text(sql))
+    return result.fetchall()
+
 def login(username, password):
     sql = """SELECT id, username, password, role_id FROM users WHERE username=:username"""
     result = db.session.execute(text(sql), {"username":username})
@@ -46,32 +72,6 @@ def logout():
     if user_created() != None:
         del session["user_created"]
 
-def user_id():
-    return session.get("user_id", 0)
-
-def user_name():
-    return session.get("user_name", None)
-
-def user_password():
-    return session.get("user_password", None)
-
-def user_role():
-    return session.get("user_role", 0)
-
-def user_visible():
-    return session.get("user_visible", None)
-
-def user_created():
-    return session.get("user_created", None)
-
-def is_admin():
-    return user_id() == 1
-
-def get_usernames():
-    sql = """SELECT username FROM users"""
-    result = db.session.execute(text(sql))
-    return result.fetchall()
-
 def check_password(username, password):
     sql = """SELECT id, username, password, role_id FROM users WHERE username=:username"""
     result = db.session.execute(text(sql), {"username":username})
@@ -95,7 +95,7 @@ def change_password(username, old_password, new_password):
         return error
 
 def add_admin():
-    admin 		= "admin"
+    admin 		    = "admin"
     admin_password 	= "salasana"
     admin_role		= 1
     hash_value 		= generate_password_hash(admin_password)
