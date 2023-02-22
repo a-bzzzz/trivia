@@ -2,7 +2,7 @@
 {% extends "layout.html" %}
 {% block content %}
 
-<h2>Home Page - Kotisivu</h2>
+<h2>Start Page - Aloitussivu</h2>
 
 <hr>
 Number of players - Pelaajamäärä: {{ count }}
@@ -35,10 +35,20 @@ Change user details - Muuta käyttäjätietoja:<br>
 --------------------------------------------------------<br>
 <br>
 <a href="/change_password">Change password - Vaihda salasana</a><br>
-{% endif %} 
+<br>
+<br>
+{% if session.user_role == 1 %}
+Admin user functions - Hallinnoijan toiminnot:<br>
+---------------------------------------------------------<br>
+<br>
+<a href="/add_questions_answers">Add questions and answers - Lisää kysymyksiä ja vastauksia</a><br>
+{% endif %}
+{% endif %}
+<br>
 <br>
 <br>
 <a href="/logout">Log out - Kirjaudu ulos</a>
+
 {% else %}
 You have not logged in - Et ole kirjautunut sisään
 <br>
@@ -46,6 +56,7 @@ You have not logged in - Et ole kirjautunut sisään
 <a href="/login">Log in - Kirjaudu</a>
 <br>
 <br>
-Info: {{ message }}
+<hr>
+<b>Info:</p> {{ message }}
 {% endif %}
 {% endblock %}
