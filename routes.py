@@ -1,6 +1,6 @@
 from app import app
 from flask import render_template, request, redirect, session
-import users, games
+import users, games, questions_answers
 
 @app.route("/")
 def index():
@@ -65,7 +65,7 @@ def change_password():
                 return render_template("error.html", message="Unauthorized password change - Ei oikeutta vaihtaa tätä salasanaa")
         change_ok = users.change_password(username, old_password, new_password)
         if not change_ok:
-            return render_template("error.html", message="Unsuccessfull password change - Salasanan vaihto ei onnistunut")
+            return render_template("error.html", message="Password change failed - Salasanan vaihto ei onnistunut")
         message = f"Password changed for user {username} - Salasana vaihdettu käyttäjälle {username}"
         return render_template("change_password.html", message=message)
 
@@ -117,7 +117,7 @@ def game():
         answered 	= int(request.form["answer"])
         users.check_csrf()
         result_message	= ""
-        right 		= games.is_right(answered)
+        right 		= questions_answers.is_right(answered)
         if right:
             result_message = "Right answer! - Oikea vastaus!"
         else:
@@ -126,10 +126,10 @@ def game():
         game_on	= games.continue_game(right)
         gid 	= games.set_game_stats()
         if gid == 0:
-            message	= "Unsuccessful data storage to database - Pelitiedot eivät tallentuneet tietokantaan"
+            message	= "Data storage to database failed - Pelitiedot eivät tallentuneet tietokantaan"
         else:
             message	= f"Game no {gid} details stored to database - Pelin nro {gid} tiedot tallennettu tietokantaan"
-        question_amount = games.question_amount()
+        question_amount = questions_answers.question_amount()
         quit_message    = ""
         if not game_on:
             quit_message = "No more questions, choose new game category/level- Ei lisää kysymyksiä, valitse uusi pelikategoria/-taso"
@@ -141,8 +141,8 @@ def check():
         return render_template("check.html")
 
     if request.method == "POST":
-        games.empty_session_questions()
-        games.empty_session_answers()
+        questions_answers.empty_session_questions()
+        questions_answers.empty_session_answers()
         return redirect("/")
 
 @app.route("/search", methods=["GET", "POST"])
@@ -215,3 +215,36 @@ def delete():
             return render_template("error.html", message="Deletion failed - Poistaminen epäonnistui")
         message = f"Game no {gid} deleted - Peli nro {gid} poistettu"
         return render_template("delete.html", gid=gid, message=message)
+
+@app.route("/add_questions_answers", methods=["GET", "POST"])
+def add_questions_answers():
+
+    if request.method == "GET":
+        return render_template("add_questions_answers.html")
+
+    if request.method == "POST":
+
+        category                    = int(request.form["cat"])
+        level                       = int(request.form["lev"])
+        users.check_csrf()
+
+        session["category_id"]      = category
+        session["level_id"]         = level
+
+        question                    = request.form["question"]
+        answer1                     = request.form["answer1"]
+        answer2                     = request.form["answer2"]
+        answer3                     = request.form["answer3"] # the RIGHT answer
+
+        qid = questions_answers.add_question(category, level, question)
+        if qid == 0:
+            return render_template("error.html", message="Adding question failed - Kysymyksen lisäys epäonnistui")
+        answer_ids = questions_answers.add_answers(answer1, answer2, answer3)
+        if len(answer_ids) < 1:
+            return render_template("error.html", message="Adding answers failed - Vastausten lisäys epäonnistui")        
+        add_ok = questions_answers.add_qa(qid, answer_ids)
+        if not add_ok:
+            message = "Adding question-answers failed - Kysymys-vastaus-lisäys epäonnistui"
+            return render_template("error.html", message=message)
+        add_message = f"ADDED: question {qid}, answers {answer_ids[0]}, {answer_ids[1]}, {answer_ids[2]}"
+        return render_template("add_questions_answers.html", message=add_message)
