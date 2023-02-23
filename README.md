@@ -103,7 +103,7 @@ Sovelluksesta on tehty peli perustoiminnoilla. Admin-käyttäjän toimintoja (pl
 **HUOMAA**, että peliä varten tarvittavat roolien (roles), kategorioiden (categories), tasojen (levels) sekä (alustavan) 16 kysymys-vastaus-setin (answers / questions / questions_answers) INSERT-komennot löytyvät ylempää kohdasta [Sovelluksen rakenne - Tietokanta - Vakioattribuutit](https://github.com/a-bzzzz/trivia/blob/main/README.md#vakioattribuutit) linkkien takaa löytyvistä tiedostoista.
 
 #### Puuttuvat toiminnot
-- Sovelluksesta ei voi muuttaa tai poistaa muita käyttäjän tietoja    *(optio)*  (pl. salasanan voi vaihtaa)
+- Sovelluksesta ei voi muuttaa tai poistaa käyttäjän tietoja    *(optio)*  (pl. salasanan voi vaihtaa)
 - Sovelluksesta ei voi muuttaa tai poistaa yksittäisen pelin tietoja, vastauskategoroita tai -luokkia    *(optio)*  (pl. käyttäjä voi poistaa oman pelinsä näkyvyyden, mutta ei voi poistaa tietokannasta)
 - Sovelluksesta ei voi muuttaa tai poistaa kysymyksiä ja vastauksia    *(optio)*
 - Pelaaja ei näe vielä statistiikkaa liittyen kaikkien pelaajien pelitilanteeseen (ranking)  *(optio)* , ja oman pistesaldon tarkistamiseen tarvitaan vielä lisätoiminto (kysymys-vastaus-sivulla omat pisteet ja muu omaan peliin liittyvä tilasto kyllä näkyy)
