@@ -107,10 +107,13 @@ Sovelluksesta on tehty peli perustoiminnoilla. Admin-käyttäjän toimintoja (pl
 - Sovelluksesta ei voi muuttaa tai poistaa yksittäisen pelin tietoja, vastauskategoroita tai -luokkia    *(optio)*  (pl. käyttäjä voi poistaa oman pelinsä näkyvyyden, mutta ei voi poistaa tietokannasta)
 - Sovelluksesta ei voi muuttaa tai poistaa kysymyksiä ja vastauksia    *(optio)*
 - Pelaaja ei näe vielä statistiikkaa liittyen kaikkien pelaajien pelitilanteeseen (ranking)  *(optio)* , ja oman pistesaldon tarkistamiseen tarvitaan vielä lisätoiminto (kysymys-vastaus-sivulla omat pisteet ja muu omaan peliin liittyvä tilasto kyllä näkyy)
-- Käyttäjän oikeuksien määrittely eri sivuille on alkuvaiheessa (koska käytössä on vasta rooli "peruskäyttäjä", mutta salasanan vaihdossa on jo huomioitu adminille laajemmat oikeudet)
+- Käyttäjän oikeuksien määrittelyä ei ole tehty kaikille sivuille (kenties ei ole tarpeenkaan)
+  - Salasanan vaihdossa on jo huomioitu adminille laajemmat oikeudet
+  - Admin-käyttäjä pääsee kysymysten ja vastausten lisäyssivulle, mutta muilla ei ole sinne pääsyä
 - Käyttäjän syötteen oikeellisuutta ei mahdollisesti ole tarkistettu tarkkaan ihan kaikissa tapauksissa
 - Käytettävyyteen ja saavutettavuuteen liittyviä seikkoja ei ole tarkistettu
-- Ulkoasun suunnittelu on aivan alkuvaiheessa, CSS-tiedostosta on luotu pohja, valmista ulkoasukirjastoa ei ole käytössä
+- Ulkoasun yhtenäistä tyyliä on määritelty vasta lyhyesti, mutta mietitty jo alustavasti lomakkeita luotaessa
+  - CSS-tiedostosta on luotu pohja, lyhyt layout.html -tiedosto on luotu, valmista ulkoasukirjastoa ei ole käytössä
 - Optiot - *(optio)* - eivät ole käytössä
   
 **HUOMAA**, että *(optio)* -merkinnällä merkityt ominaisuudet eivät välttämättä ehdi valmistua peliin tämän kurssin aikana, mutta niitä toimintoja voi halutessaan itse lisätä peliin mukaan.
