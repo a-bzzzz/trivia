@@ -4,6 +4,10 @@ from sqlalchemy.sql import text
 from db import db
 import questions_answers
 
+"""
+Handle games
+"""
+
 game_id         = 0
 game_category   = 0
 game_level      = 0
