@@ -1,4 +1,4 @@
-# fly.toml file generated for tsoha-trivia on 2023-02-24T23:12:17+02:00
+# fly.toml file generated for tsoha-trivia on 2023-02-25T01:27:11+02:00
 
 app = "tsoha-trivia"
 kill_signal = "SIGINT"
