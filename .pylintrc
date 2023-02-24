@@ -1,0 +1,17 @@
+[MESSAGES CONTROL]
+
+disable=missing-module-docstring,
+        missing-function-docstring,
+        import-error,
+        cyclic-import,
+        C0413,
+        W0611,
+        W0718,
+        W0622,
+        C0103,
+        R1721,
+        W0602,
+        E0102,
+        W0603,
+        W0621,
+        R1710
