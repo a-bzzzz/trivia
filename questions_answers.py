@@ -3,6 +3,10 @@ from sqlalchemy.sql import text
 from flask import session
 from db import db
 
+"""
+Handle questions and answers
+"""
+
 question_list   = []
 question_id     = 0
 
@@ -166,6 +170,7 @@ def get_new_question(game_id):
 
     return (question.id, len(question_list))
 
+# Insert a question to questions db table with question id, level id and question text
 def add_question(category_id, level_id, question):
 
     try:
@@ -180,6 +185,9 @@ def add_question(category_id, level_id, question):
     except Exception:
         return 0
 
+# Insert all answer alternatives to answers db table
+# 1st and 2nd with default correct value (False)
+# 3rd, the RIGHT answer, with correct value True
 def add_answers(answer1, answer2, answer3):
 
     try:
@@ -210,6 +218,7 @@ def add_answers(answer1, answer2, answer3):
     except Exception:
         return []
 
+# Insert one question-answer pair to questions_answers db table
 def insert_qa(question_id, answer_id):
     try:
         sql = """INSERT INTO questions_answers (question_id, answer_id)
@@ -220,6 +229,7 @@ def insert_qa(question_id, answer_id):
     except Exception:
         return 0
 
+# Handle all answer alternatives for combining them with the related question
 def add_qa(qid, answer_ids):
     ok = 0
     for answer_id in answer_ids:
