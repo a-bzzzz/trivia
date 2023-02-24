@@ -4,6 +4,10 @@ import users
 import games
 import questions_answers
 
+"""
+Handle game navigation
+"""
+
 @app.route("/")
 def index():
     usernames = users.get_usernames()
