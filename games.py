@@ -1,8 +1,8 @@
-from db import db
-from flask import session
-import questions_answers
-from sqlalchemy.sql import text
 from random import shuffle
+from flask import session
+from sqlalchemy.sql import text
+from db import db
+import questions_answers
 
 game_id         = 0
 game_category   = 0
@@ -47,9 +47,11 @@ def game_visible():
 def game_created():
     return session.get("game_created", None)
 
-# Get game id, points, answer amount and session amount of all games of one player by user id -> returns a list
+# Get game id, points, answer amount and session amount
+# of all games of one player by user id -> returns a list
 def get_usergames(user_id):
-    sql 	    = """SELECT id, points, answers_count, session_count FROM games WHERE user_id=:user_id"""
+    sql 	    = """SELECT id, points, answers_count, session_count
+                    FROM games WHERE user_id=:user_id"""
     result 	    = db.session.execute(text(sql), {"user_id":user_id})
     usergames   = result.fetchall()
     return usergames
@@ -59,7 +61,8 @@ def get_game(id):
     global game_id, game_category, game_level, sessions, answers, points
     visible = "TRUE"
 
-    sql 	= """SELECT id, user_id, points, answers_count, session_count, category_id, level_id, visible, created_at
+    sql 	= """SELECT id, user_id, points, answers_count, session_count,
+                    category_id, level_id, visible, created_at
                     FROM games WHERE id=:id AND visible=:visible"""
     result 	= db.session.execute(text(sql), {"id":id, "visible":visible})
     game 	= result.fetchone()
@@ -96,9 +99,11 @@ def set_game_attr(user_id, category_id, level_id):
 
     try:
         sql = """INSERT INTO games (user_id, category_id, level_id)
-        VALUES (:user_id, :category_id, :level_id)
-        RETURNING id, user_id, points, answers_count, session_count, category_id, level_id, visible, created_at"""
-        result = db.session.execute(text(sql), {"user_id":user_id, "category_id":category_id, "level_id":level_id})
+                VALUES (:user_id, :category_id, :level_id)
+                RETURNING id, user_id, points, answers_count, session_count, 
+                category_id, level_id, visible, created_at"""
+        result = db.session.execute(text(sql),
+                {"user_id":user_id, "category_id":category_id, "level_id":level_id})
         game = result.fetchone()
         db.session.commit()
 
@@ -117,7 +122,7 @@ def set_game_attr(user_id, category_id, level_id):
         answers     = game.answers_count
         points      = game.points
         return game.id
-    except:
+    except Exception:
         return 0
 
 # Set session counters to default values
@@ -168,7 +173,8 @@ def continue_game(right):
     global game_level, answers, points
     answers += 1
     # Add answer count and points, if right answer
-    if right: points += int(game_level)
+    if right:
+        points += int(game_level)
 
     session["game_points"]  = points
     session["game_answers"] = answers
@@ -180,14 +186,16 @@ def set_game_stats():
     id = game_id
 
     try:
-        sql = """UPDATE games SET points=:points, answers_count=:answers_count, session_count=:session_count
-            WHERE games.id=:id RETURNING games.id"""
-        result = db.session.execute(text(sql), {"id":id, "points":points, "answers_count":answers_count, "session_count":session_count})
+        sql = """UPDATE games SET points=:points,
+                answers_count=:answers_count, session_count=:session_count
+                WHERE games.id=:id RETURNING games.id"""
+        result = db.session.execute(text(sql), {"id":id, "points":points,
+                "answers_count":answers_count, "session_count":session_count})
         returned_id = result.fetchone()[0]
         db.session.commit()
 
         return returned_id
-    except:
+    except Exception:
         return 0
 
 def game_order(game: tuple):
@@ -208,8 +216,7 @@ def get_user_games(user_id):
 
     if len(user_games) < 1:
         return False
-    else:
-        return list_games(user_games)
+    return list_games(user_games)
 
 # Game removal: Set game visible to False, not actual db deletion
 def remove_game(id):
@@ -219,5 +226,5 @@ def remove_game(id):
         db.session.execute(text(sql), {"id":id, "visible":visible})
         db.session.commit()
         return True
-    except:
+    except Exception:
         return False

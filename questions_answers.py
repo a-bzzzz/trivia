@@ -1,7 +1,7 @@
-from db import db
-from flask import session
-from sqlalchemy.sql import text
 from random import shuffle
+from sqlalchemy.sql import text
+from flask import session
+from db import db
 
 question_list   = []
 question_id     = 0
@@ -48,7 +48,8 @@ def get_answer(id):
     answer = result.fetchone()
     return answer
 
-# Get questions of selected category & level -> query returns list of selected questions with all info
+# Get questions of selected category & level
+# -> query returns list of selected questions with all info
 def get_questions(category_id, level_id):
     global question_list
     empty_session_questions()
@@ -57,13 +58,15 @@ def get_questions(category_id, level_id):
 
     if int(category_id) == 6:
         sql = """SELECT id, question, category_id, level_id, visible
-            FROM questions WHERE level_id=:level_id AND visible=:visible """
+                FROM questions WHERE level_id=:level_id AND visible=:visible """
         result = db.session.execute(text(sql), {"level_id":level_id, "visible":visible})
         question_list = list(result.fetchall())
     else:
         sql = """SELECT id, question, category_id, level_id, visible
-            FROM questions WHERE category_id=:category_id AND level_id=:level_id AND visible=:visible """
-        result = db.session.execute(text(sql), {"category_id":category_id, "level_id":level_id, "visible":visible})
+                FROM questions WHERE category_id=:category_id 
+                AND level_id=:level_id AND visible=:visible """
+        result = db.session.execute(text(sql),
+                    {"category_id":category_id, "level_id":level_id, "visible":visible})
         question_list = list(result.fetchall())
 
     shuffle(question_list)
@@ -90,11 +93,14 @@ def get_answers(question_id):
 
     right_answer = 0
     session["answer_correct_1"] = answer_1.correct
-    if answer_1.correct: right_answer = 1
+    if answer_1.correct:
+        right_answer = 1
     session["answer_correct_2"] = answer_2.correct
-    if answer_2.correct: right_answer = 2
+    if answer_2.correct:
+        right_answer = 2
     session["answer_correct_3"] = answer_3.correct
-    if answer_3.correct: right_answer = 3
+    if answer_3.correct:
+        right_answer = 3
 
     session["answer_right"] = right_answer
 
@@ -108,7 +114,7 @@ def empty_session_questions():
         del session["question_category"]
     if question_level() in (1, 2, 3):
         del session["question_level"]
-    if question_visible() == True:
+    if question_visible() is True:
         del session["question_visible"]
 
 # Delete session variables related to current answers
@@ -137,7 +143,7 @@ def get_new_question(game_id):
 
     # Choose first question from the list,
     # and drop the fetched question from question list, if list is not empty
-    if len(question_list) < 1 or question_list == None:
+    if len(question_list) < 1 or question_list is None:
         return False
     question = question_list[0]
     question_list = question_list[1:len(question_list)]
@@ -151,10 +157,11 @@ def get_new_question(game_id):
     question_id = question[0]
 
     try:
-        sql = """INSERT INTO games_questions (game_id, question_id) VALUES (:game_id, :question_id)"""
+        sql = """INSERT INTO games_questions (game_id, question_id)
+                VALUES (:game_id, :question_id)"""
         db.session.execute(text(sql), {"game_id":game_id, "question_id":question_id})
         db.session.commit()
-    except:
+    except Exception:
         return False
 
     return (question.id, len(question_list))
@@ -165,11 +172,12 @@ def add_question(category_id, level_id, question):
         sql = """INSERT INTO questions (question, category_id, level_id)
         VALUES (:question, :category_id, :level_id)
         RETURNING id"""
-        result = db.session.execute(text(sql), {"id":id, "question":question, "category_id":category_id, "level_id":level_id})       
+        result = db.session.execute(text(sql), {"id":id, "question":question,
+                    "category_id":category_id, "level_id":level_id})     
         question = result.fetchone()
         db.session.commit()
         return question.id
-    except:
+    except Exception:
         return 0
 
 def add_answers(answer1, answer2, answer3):
@@ -199,22 +207,23 @@ def add_answers(answer1, answer2, answer3):
         id3 = answer_3.id
 
         return [id1, id2, id3]
-    except:
+    except Exception:
         return []
 
 def insert_qa(question_id, answer_id):
     try:
-        sql = """INSERT INTO questions_answers (question_id, answer_id) VALUES (:question_id, :answer_id)"""
+        sql = """INSERT INTO questions_answers (question_id, answer_id)
+                VALUES (:question_id, :answer_id)"""
         db.session.execute(text(sql), {"question_id":question_id, "answer_id":answer_id})
         db.session.commit()
         return 1
-    except:
+    except Exception:
         return 0
 
-def add_qa(question_id, answer_ids):
+def add_qa(qid, answer_ids):
     ok = 0
     for answer_id in answer_ids:
-        add = insert_qa(question_id, answer_id)
+        add = insert_qa(qid, answer_id)
         ok += add
     if ok < 3:
         return False

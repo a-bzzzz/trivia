@@ -1,12 +1,14 @@
-from app import app
 from flask import render_template, request, redirect, session
-import users, games, questions_answers
+from app import app
+import users
+import games
+import questions_answers
 
 @app.route("/")
 def index():
     usernames = users.get_usernames()
     if ('admin',) not in usernames:
-      users.add_admin()
+        users.add_admin()
     return render_template("index.html", count=len(usernames), users=usernames)
 
 @app.route("/login", methods=["GET", "POST"])
@@ -19,7 +21,8 @@ def login():
         password = request.form["password"]
 
         if not users.login(username, password):
-            return render_template("error.html", message="Wrong username or password - Väärä tunnus tai salasana")
+            message = "Wrong username or password - Väärä tunnus tai salasana"
+            return render_template("error.html", message=message)
         return redirect("/")
 
 @app.route("/logout")
@@ -40,7 +43,8 @@ def register():
         if password1 != password2:
             return render_template("error.html", message="Passwords differ - Salasanat eroavat")
         if not users.register(username, password1):
-            return render_template("error.html", message="Registration failed - Rekisteröinti ei onnistunut")
+            message="Registration failed - Rekisteröinti ei onnistunut"
+            return render_template("error.html", message=message)
         return redirect("/")
 
 @app.route("/change_password", methods=["GET", "POST"])
@@ -55,17 +59,20 @@ def change_password():
         users.check_csrf()
         if not users.is_admin():
             if old_password == new_password:
-                return render_template("error.html", message="Give different password! - Anna eri salasana!")
+                message="Give different password! - Anna eri salasana!"
+                return render_template("error.html", message=message)
         password_match = users.check_password(username, old_password)
         if users.is_admin():
             password_match = True
         user_match = username == users.user_name()
         if not (password_match and user_match):
             if not users.is_admin():
-                return render_template("error.html", message="Unauthorized password change - Ei oikeutta vaihtaa tätä salasanaa")
+                message="Unauthorized password change - Ei oikeutta vaihtaa tätä salasanaa"
+                return render_template("error.html", message=message)
         change_ok = users.change_password(username, old_password, new_password)
         if not change_ok:
-            return render_template("error.html", message="Password change failed - Salasanan vaihto ei onnistunut")
+            message="Password change failed - Salasanan vaihto ei onnistunut"
+            return render_template("error.html", message=message)
         message = f"Password changed for user {username} - Salasana vaihdettu käyttäjälle {username}"
         return render_template("change_password.html", message=message)
 
@@ -86,7 +93,8 @@ def menu():
 
         game_details = games.create_game(user_id, category, level)
         if not game_details:
-            return render_template("error.html", message="No questions: Choose other category/level! - Ei kysymyksiä: Valitse toinen kategoria/taso!")
+            message="No questions: Choose other category/level! - Ei kysymyksiä: Valitse toinen kategoria/taso!"
+            return render_template("error.html", message=message)
 
         game_id         	= game_details[0]
         question_list   	= game_details[1]
@@ -103,7 +111,7 @@ def menu():
         quit_message= ""
         if question_amount < 1:
             game_on         = False
-            quit_message    = "No more questions, choose new game category/level- Ei lisää kysymyksiä, valitse uusi pelikategoria/-taso"
+            quit_message    = "No more questions, choose new game category/level - Ei lisää kysymyksiä, valitse uusi kategoria/taso"
             return render_template("check.html", question_amount=question_amount, game_on=game_on, q_message=quit_message)
         return render_template("game.html", questions=question_list)
 
@@ -123,7 +131,7 @@ def game():
         else:
             result_message = "Wrong answer! - Väärä vastaus!"
 
-        game_on	= games.continue_game(right)
+        games.continue_game(right)
         gid 	= games.set_game_stats()
         if gid == 0:
             message	= "Data storage to database failed - Pelitiedot eivät tallentuneet tietokantaan"
@@ -131,9 +139,9 @@ def game():
             message	= f"Game no {gid} details stored to database - Pelin nro {gid} tiedot tallennettu tietokantaan"
         question_amount = questions_answers.question_amount()
         quit_message    = ""
-        if not game_on:
+        if question_amount < 1:
             quit_message = "No more questions, choose new game category/level- Ei lisää kysymyksiä, valitse uusi pelikategoria/-taso"
-            return render_template("check.html", result_message=result_message, message=message, question_amount=question_amount, game_on=game_on, q_message=quit_message)
+        return render_template("check.html", result_message=result_message, message=message, question_amount=question_amount, q_message=quit_message)
 
 @app.route("/check", methods=["GET", "POST"])
 def check():
@@ -151,9 +159,9 @@ def search():
         user_id = users.user_id()
         gamelist = games.get_user_games(user_id)
         if not gamelist:
-            return render_template("error.html", message="No prior games: Create new game! - Ei aiempia pelejä: Luo uusi peli!")
-        else:
-            return render_template("search.html", gamelist=gamelist)
+            message="No prior games: Create new game! - Ei aiempia pelejä: Luo uusi peli!"
+            return render_template("error.html", message=message)
+        return render_template("search.html", gamelist=gamelist)
 
     if request.method == "POST":
         game_id                     = int(request.form["gid"])
@@ -161,7 +169,8 @@ def search():
         game_details                = games.get_game(game_id)
 
         if not game_details:
-            return render_template("error.html", message="No questions: Choose other category/level! - Ei kysymyksiä: Valitse toinen kategoria/taso!")
+            message="No questions: Choose other category/level! - Ei kysymyksiä: Valitse toinen kategoria/taso!"
+            return render_template("error.html", message=message)
 
         game_id                     = game_details[0]
         question_list               = game_details[1]
@@ -188,9 +197,9 @@ def search_remove():
         user_id             = users.user_id()
         gamelist            = games.get_user_games(user_id)
         if not gamelist:
-            return render_template("error.html", message="No prior games: Create new game! - Ei aiempia pelejä: Luo uusi peli!")
-        else:
-            return render_template("search_remove.html", gamelist=gamelist)
+            message="No prior games: Create new game! - Ei aiempia pelejä: Luo uusi peli!"
+            return render_template("error.html", message=message)
+        return render_template("search_remove.html", gamelist=gamelist)
 
     if request.method == "POST":
         game_id             = int(request.form["gid"])
@@ -212,7 +221,8 @@ def delete():
         users.check_csrf()
         deleted = games.remove_game(gid)
         if not deleted:
-            return render_template("error.html", message="Deletion failed - Poistaminen epäonnistui")
+            message="Deletion failed - Poistaminen epäonnistui"
+            return render_template("error.html", message=message)
         message = f"Game no {gid} deleted - Peli nro {gid} poistettu"
         return render_template("delete.html", gid=gid, message=message)
 
@@ -238,10 +248,12 @@ def add_questions_answers():
 
         qid = questions_answers.add_question(category, level, question)
         if qid == 0:
-            return render_template("error.html", message="Adding question failed - Kysymyksen lisäys epäonnistui")
+            message="Adding question failed - Kysymyksen lisäys epäonnistui"
+            return render_template("error.html", message=message)
         answer_ids = questions_answers.add_answers(answer1, answer2, answer3)
         if len(answer_ids) < 1:
-            return render_template("error.html", message="Adding answers failed - Vastausten lisäys epäonnistui")        
+            message="Adding answers failed - Vastausten lisäys epäonnistui"
+            return render_template("error.html", message=message)
         add_ok = questions_answers.add_qa(qid, answer_ids)
         if not add_ok:
             message = "Adding question-answers failed - Kysymys-vastaus-lisäys epäonnistui"
