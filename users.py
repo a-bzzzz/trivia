@@ -4,6 +4,10 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from sqlalchemy.sql import text
 from db import db
 
+"""
+Handle users
+"""
+
 def user_id():
     return session.get("user_id", 0)
 
