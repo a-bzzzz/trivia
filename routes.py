@@ -63,8 +63,8 @@ def change_password():
         users.check_csrf()
 
         if username not in users.get_usernames():
-                message="Wrong username - Väärä käyttäjätunnus"
-                return render_template("error.html", message=message)         
+            message="Wrong username - Väärä käyttäjätunnus"
+            return render_template("error.html", message=message)         
         if not users.is_admin():
             user_match = users.check_username(username)
             password_match = users.check_password(username, old_password)
