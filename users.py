@@ -34,6 +34,9 @@ def get_usernames():
     result = db.session.execute(text(sql))
     return result.fetchall()
 
+def check_username(username):
+    return username == user_name()
+
 def login(username, password):
     sql = """SELECT id, username, password, role_id FROM users WHERE username=:username"""
     result = db.session.execute(text(sql), {"username":username})
@@ -82,10 +85,7 @@ def check_password(username, password):
         return False
     return True
 
-def change_password(username, old_password, new_password):
-    if not is_admin():
-        if old_password == user_password():
-            return False
+def change_password(username, new_password):
     password = generate_password_hash(new_password)
 
     try:

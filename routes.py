@@ -61,19 +61,18 @@ def change_password():
         old_password = request.form["password1"]
         new_password = request.form["password2"]
         users.check_csrf()
+
         if not users.is_admin():
+            user_match = users.check_username(username)
+            password_match = users.check_password(username, old_password)
+            if not (password_match and user_match):
+                message="Unauthorized password change - Ei oikeutta vaihtaa tätä salasanaa"
+                return render_template("error.html", message=message)
             if old_password == new_password:
                 message="Give different password! - Anna eri salasana!"
                 return render_template("error.html", message=message)
-        password_match = users.check_password(username, old_password)
-        if users.is_admin():
-            password_match = True
-        user_match = username == users.user_name()
-        if not (password_match and user_match):
-            if not users.is_admin():
-                message="Unauthorized password change - Ei oikeutta vaihtaa tätä salasanaa"
-                return render_template("error.html", message=message)
-        change_ok = users.change_password(username, old_password, new_password)
+
+        change_ok = users.change_password(username, new_password)
         if not change_ok:
             message="Password change failed - Salasanan vaihto ei onnistunut"
             return render_template("error.html", message=message)
