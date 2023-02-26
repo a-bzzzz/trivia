@@ -37,6 +37,12 @@ def get_usernames():
 def check_username(username):
     return username == user_name()
 
+def name_in_users(name):
+    users =  [u[0] for u in sorted(get_usernames())]
+    if name not in users:
+        return False
+    return True
+
 def login(username, password):
     sql = """SELECT id, username, password, role_id FROM users WHERE username=:username"""
     result = db.session.execute(text(sql), {"username":username})

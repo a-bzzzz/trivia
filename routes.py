@@ -10,8 +10,8 @@ Handle game navigation
 
 @app.route("/")
 def index():
-    usernames = users.get_usernames()
-    if ('admin',) not in usernames:
+    usernames = sorted(users.get_usernames())
+    if not users.name_in_users('admin'):
         users.add_admin()
     return render_template("index.html", count=len(usernames), users=usernames)
 
@@ -62,9 +62,7 @@ def change_password():
         new_password = request.form["password2"]
         users.check_csrf()
 
-        usernames = users.get_usernames()
-        name_to_check = f"('{username}',)"
-        if name_to_check not in usernames:
+        if not users.name_in_users(username):
             message="Wrong username - Väärä käyttäjätunnus"
             return render_template("error.html", message=message)         
         if not users.is_admin():
