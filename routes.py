@@ -54,7 +54,8 @@ def register():
 @app.route("/change_password", methods=["GET", "POST"])
 def change_password():
     if request.method == "GET":
-        return render_template("change_password.html")
+        message = ""
+        return render_template("change_password.html", message=message)
 
     if request.method == "POST":
         username = request.form["username"]
