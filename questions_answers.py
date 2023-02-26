@@ -177,7 +177,7 @@ def add_question(category_id, level_id, question):
         sql = """INSERT INTO questions (question, category_id, level_id)
         VALUES (:question, :category_id, :level_id)
         RETURNING id"""
-        result = db.session.execute(text(sql), {"id":id, "question":question,
+        result = db.session.execute(text(sql), {"question":question,
                     "category_id":category_id, "level_id":level_id})     
         question = result.fetchone()
         db.session.commit()
@@ -194,14 +194,14 @@ def add_answers(answer1, answer2, answer3):
         # 1st wrong answer
         answer = answer1
         sql = """INSERT INTO answers (answer) VALUES (:answer) RETURNING id"""
-        result = db.session.execute(text(sql), {"id":id, "answer":answer})
+        result = db.session.execute(text(sql), {"answer":answer})
         answer_1 = result.fetchone()
         db.session.commit()
         id1 = answer_1.id
         # 2nd wrong answer
         answer = answer2
         sql = """INSERT INTO answers (answer) VALUES (:answer) RETURNING id"""
-        result = db.session.execute(text(sql), {"id":id, "answer":answer})
+        result = db.session.execute(text(sql), {"answer":answer})
         answer_2 = result.fetchone()
         db.session.commit()
         id2 = answer_2.id
@@ -209,7 +209,7 @@ def add_answers(answer1, answer2, answer3):
         answer = answer3
         correct = "TRUE"
         sql = """INSERT INTO answers (answer, correct) VALUES (:answer, :correct) RETURNING id"""
-        result = db.session.execute(text(sql), {"id":id, "answer":answer, "correct":correct})
+        result = db.session.execute(text(sql), {"answer":answer, "correct":correct})
         answer_3 = result.fetchone()
         db.session.commit()
         id3 = answer_3.id
