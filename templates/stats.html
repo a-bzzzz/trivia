@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+{% extends "layout.html" %}
+{% block content %}
+
+<h2>Game Statistics - Pelitilastot</h2>
+
+<hr>
+{% if session.user_id %}
+<h6>Logged in player - Kirjautunut pelaaja <output>{{ session.user_name }}</output></h6>
+<a href="/logout">Log out - Kirjaudu ulos</a>
+{% else %}
+You have not logged in - Et ole kirjautunut sisään: <a href="/login">Log in - Kirjaudu sisään</a>
+{% endif %}
+<hr>
+{% if not owngames %}
+<h4>You have no own games - Sinulla ei ole omia pelejä</h4>
+{% else %}
+<h4>Your best games - Omat parhaat pelisi <output>{{ user_name }}</output></h4>
+<table class="table table-success table-striped">
+<tr><td>Rank</td> <td>Game #</td> <td>Category</td> <td>Level</td> <td>Sessions</td> <td>Answers</td><td>Points</td></tr>
+{% for game in owngames %}
+<tr><td><b>{{ game[0] }}</b></td> <td><b>{{ game[1] }}</b></td> <td>{{ game[2] }}</td> <td>{{ game[3] }}</td> <td>{{ game[4] }}</td> <td>{{ game[5] }}</td> <td><font color="#dc3545">{{ game[6] }}</font></td></tr>
+{% endfor %}
+</table>
+{% endif %}
+<h4>Top Ranking - Parhaat pelisuoritukset</h4>
+<table class="table table-success table-striped">
+<tr><td>Rank</td> <td>Player</td> <td>Game #</td> <td>Category</td> <td>Level</td> <td>Sessions</td> <td>Answers</td> <td>Points</td></tr>
+{% for game in allgames %}
+<tr><td><b>{{ game[0] }}</b></td> <td><b>{{ game[1] }}</b></td> <td>{{ game[2] }}</td> <td>{{ game[3] }}</td> 
+<td>{{ game[4] }}</td> <td>{{ game[5] }}</td> <td>{{ game[6] }}</td> <td><font color="#dc3545">{{ game[7] }}</font></td></tr>
+{% endfor %}
+</table>
+<h4>Your best ranking - Paras pelisijoituksesi # <output>{{ rank }}</output></h4>
+<br>
+<a href="/menu">Back - Takaisin</a>
+<br>
+<br>
+<hr>
+<label>Info:</label><alert class="alert alert-info">{{ info }}</alert>
+{% endblock %}
