@@ -104,7 +104,7 @@ def set_game_attr(user_id, category_id, level_id):
     try:
         sql = """INSERT INTO games (user_id, category_id, level_id)
                 VALUES (:user_id, :category_id, :level_id)
-                RETURNING id, user_id, points, answers_count, session_count, 
+                RETURNING id, user_id, points, answers_count, session_count,
                 category_id, level_id, visible, created_at"""
         result = db.session.execute(text(sql),
                 {"user_id":user_id, "category_id":category_id, "level_id":level_id})
@@ -232,3 +232,42 @@ def remove_game(id):
         return True
     except Exception:
         return False
+
+# Get the best games of a player, if any, by user id, max 25 games
+def get_user_best_games(user_id, rows):
+    visible = "TRUE"
+
+    sql = """SELECT ROW_NUMBER() OVER (ORDER BY points DESC, level_id DESC, session_count)
+        as row_id, id, category_id, level_id, session_count, answers_count, points
+        FROM games WHERE user_id=:user_id AND visible=:visible AND points>0
+        ORDER BY points DESC, level_id DESC, session_count LIMIT :rows"""
+    result = db.session.execute(text(sql), {"user_id":user_id, "visible":visible, "rows":rows})
+    user_best_games = result.fetchall()
+
+    if len(user_best_games) < 1:
+        return False
+    return user_best_games
+
+# Get the best games of all players, if any, max 25 games
+def get_best_games(rows):
+    visible = "TRUE"
+
+    sql = """SELECT ROW_NUMBER() OVER (ORDER BY G.points DESC, G.level_id DESC, G.session_count)
+        as row_id, U.username, G.id, G.category_id, G.level_id, G.session_count,
+        G.answers_count, G.points
+        FROM games as G, users as U WHERE G.user_id=U.id AND G.visible='True' AND G.points>0
+        ORDER BY G.points DESC, G.level_id DESC, G.session_count , G.answers_count LIMIT :rows"""
+    result = db.session.execute(text(sql), {"visible":visible, "rows":rows})
+    best_games = result.fetchall()
+
+    if len(best_games) < 1:
+        return None
+    return best_games
+
+# Get the ranking of a player's best game (if any)
+def get_user_rank(user_name):
+    best_list = get_best_games(500)
+    for game in best_list:
+        if game[1] == user_name:
+            return game[0]
+    return 0
