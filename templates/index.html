@@ -5,58 +5,45 @@
 <h2>Start Page - Aloitussivu</h2>
 
 <hr>
-Number of players - Pelaajamäärä: {{ count }}
-<br>
-<br>
-Pelaajatunnukset:
-<br>
-{% for user in users %}
-{{ user.username }}
-{% endfor %}
+<h6>Number of players - Pelaajamäärä <output>{{ count }}</output></h6>
+<h6>Player names - Pelaajatunnukset</h6> <output>
+    {% for user in users %}
+    {{ user.username }}
+    {% endfor %}
+</output>
 <br>
 <hr>
 <form action="/" method="POST">
 {% if session.user_id %}
-Logged in player - Kirjautunut pelaaja: <b>{{ session.user_name }}</b> 
-<br>
-<br>
-Start new game - Aloita uusi peli:<br>
-<a href="/menu">New game - Uusi peli</a>
-<br>
-{% if session.user_id != 0 %}
-<br>
-Search previous game - Hae aiempi peli:<br>
-<a href="/search">Search game - Hae peli</a><br>
-<br>
-Remove game - Poista peli:<br>
-<a href="/search_remove">Search removable game - Hae poistettava peli</a><br>
-<br><br>
-Change user details - Muuta käyttäjätietoja:<br>
---------------------------------------------------------<br>
-<br>
-<a href="/change_password">Change password - Vaihda salasana</a><br>
-<br>
-<br>
-{% if session.user_role == 1 %}
-Admin user functions - Hallinnoijan toiminnot:<br>
----------------------------------------------------------<br>
-<br>
-<a href="/add_questions_answers">Add questions and answers - Lisää kysymyksiä ja vastauksia</a><br>
-{% endif %}
-{% endif %}
-<br>
-<br>
-<br>
-<a href="/logout">Log out - Kirjaudu ulos</a>
-
+    <h6>Logged in player - Kirjautunut pelaaja <output>{{ session.user_name }}</output></h6>
+    <a href="/logout">Log out - Kirjaudu ulos</a>
+    <hr>
+    <h5>Game functions - Pelitoiminnot</h5>
+    <a href="/menu">Start new game - Aloita uusi peli</a></label>
+    <br>
+    {% if session.user_id != 0 %}
+        <br>
+        <a href="/search">Search previous game - Hae aiempi peli</a><br>
+        <br>
+        <a href="/search_remove">Search and remove game - Hae ja poista peli</a><br>
+        <br>
+        <a href="/stats">Get game statistics - Hae pelitilastot</a><br>
+        <br>
+        <h5>Change user details - Muuta käyttäjätietoja</h5>
+        <a href="/change_password">Change password - Vaihda salasana</a><br>
+        <br>
+        {% if session.user_role == 1 %}
+            <h5>Admin user functions - Hallinnoijan toiminnot</h5>
+            <a href="/add_questions_answers">Add questions and answers - Lisää kysymyksiä ja vastauksia</a><br>
+        {% endif %}
+    {% endif %}
 {% else %}
-You have not logged in - Et ole kirjautunut sisään
-<br>
-<br>
-<a href="/login">Log in - Kirjaudu</a>
-<br>
+    You have not logged in - Et ole kirjautunut sisään
+    <br>
+    <br>
+    <a href="/login">Log in - Kirjaudu</a>
+{% endif %}
 <br>
 <hr>
-<b>Info:</p> {{ message }}
-{% endif %}
+<label>Info:</label><alert class="alert alert-info">{{ info }}</alert>
 {% endblock %}
