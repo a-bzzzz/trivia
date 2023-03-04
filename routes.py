@@ -160,7 +160,7 @@ def game():
         quit_message    = ""
         if question_amount < 1:
             choice += " & " + INF1
-            quit_message = "No more questions, choose new game category/level - Ei lisää kysymyksiä, valitse uusi pelikategoria/-taso"
+            quit_message = "No more questions: Choose new game or Check game results- Ei lisää kysymyksiä: Valitse uusi peli tai Tarkista pelin tulos"
         return render_template("check.html", type=choice, result_message=result_message,
             info=message, question_amount=question_amount, q_message=quit_message)
 
@@ -283,6 +283,13 @@ def add_questions_answers():
             return render_template("error.html", type=ERR2, message=message)
         add_message = f"ADDED: question {qid}, answers {a_ids[0]}, {a_ids[1]}, {a_ids[2]}"
         return render_template("add_questions_answers.html", info=add_message)
+    
+@app.route("/game_info", methods=["GET"])
+def game_info():
+
+    if request.method == "GET":
+        message=""
+        return render_template("game_info.html", info=message)
 
 @app.route("/stats", methods=["GET"])
 def stats():
