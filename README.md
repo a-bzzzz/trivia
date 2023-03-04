@@ -12,30 +12,50 @@ Vierailija voi kokeilla pelin käyttämistä ilman käyttäjätunnusta ja salasa
 Vierailijan peleistä ei tallennu pisteitä tai mitään pelaaja- tai tilastotietoja.  
 
 #### Peruskäyttäjä (lyhyemmin: käyttäjä)
-Käyttäjä voi luoda käyttäjätunnuksen ja salasanan, ns. pääsytiedot.   
+Käyttäjä voi luoda käyttäjätunnuksen ja salasanan, ns. pääsytiedot. Tämä on ns. perustaso, jonka jokainen käyttäjä voi saavuttaa rekisteröitymällä.
 Käyttäjä voi kirjautua sisään sovellukseen voimassa olevalla käyttäjätunnuksella ja salasanalla.  
 
 #### Ylläpitäjä (admin)
-Peruskäyttäjän oikeuksien lisäksi ylläpitäjä voi lisätä peliin uusia kysymyksiä ja vastausvaihtoehtoja. Admin-käyttäjä pääsee vaihtamaan kaikkien käyttäjien salasanoja ilman, että tarvitsee tietää voimassaolevaa salasanaa.
+Peruskäyttäjän oikeuksien lisäksi ylläpitäjä voi lisätä peliin uusia kysymyksiä ja vastauksia. 
+Admin-käyttäjä pääsee vaihtamaan kaikkien käyttäjien salasanoja.
 Admin voisi mahdollisesti myös muokata (lisätä/poistaa/muuttaa) käyttäjätietoja, sekä pelin tietoja, kuten kysymyksiä ja luokkia.     *(optio)* 
+Peliin luodaan (julkaistavaan sovellukseen on luotu) ensimmäisellä pelikerralla admin-käyttäjä, jolle
+...
+käyttäjätunnus: **admin** 
+salasana      : **salasana**
+...
+**Muista vaihtaa admin-käyttäjän salasana omaksi salasanaksesi!**
 
 #### Superuser *(optio)*
 Superkäyttäjä voisi saada peruskäyttäjän oikeuksien lisäksi joitakin erityisoikeuksia pelin kehittelyssä, mutta ei oikeuksia toisten käyttäjien tietojen käsittelyyn, kuten admin-user. Esim. kun peruskäyttäjä saa kerättyä tietyn määrän pelipisteitä, hänen käyttäjätasonsa nousee superuser-tasolle. Silloin hän saisi mahdollisuuden lisätä peliin uusia kysymyksiä ja vastauksia, sekä ansaita lisää pisteitä, jos ne lisäykset kehittävät peliä.
 
-### Pelaajatoiminnot (peruskäyttäjä)
+### Pelitoiminnot (peruskäyttäjä)
 
 Pelaamista, tai peliensä hallintaa, varten käyttäjä voi valita seuraavat vaihtoehdot:  
 * Aloita **uusi peli** (ainoa vaihtoehto ensimmäisessä pelissä)  
   - pelaajan tulostilasto alkaa nollasta  
 * **Jatka** aiemmin aloitettua peliä  
   - uudet pisteet lisätään aiempiin pisteisiin  
-* **Poista** olemassa oleva peli  
+* **Poista** olemassa oleva peli
+* **Hae** omia aiempia pelejä joko pelaamista tai poistamista varten
+* **Tarkista** pelin kysymysten loputtua päättyneen pelin piste- ja muut tiedot
+* **Hae pelitilasto**, jossa näkyy omat parhaat pelit, kaikki parhaat pelit (ranking/tuloslista) sekä oman parhaan pelin sijoitus kaikkien pelien joukossa (pl. pelit, joiden pistesaldo on nolla, tai mahdollisesti pelin jossain pelin kehitysvaiheessa jopa negatiivinen)  
 
 Vastauksen jälkeen pelaaja saa palautetta siitä, oliko vastaus oikein vai väärin.   
 Pelaaja kerää pisteitä oikeilla vastauksilla vaikeustason mukaan.   
 Pelaaja voi seurata omaa tulossaldoa pelin aikana.  
-Pelaaja näkee tuloslistalta (ranking) pistemääränsä verrattuna muiden pelaajien pisteisiin, eli sijoituksen pelissä.    *(optio)*  
-Pelaaja voi lopettaa pelaamisen ja kirjautua ulos sovelluksesta.   
+Pelaaja voi lopettaa pelaamisen ja kirjautua ulos sovelluksesta.
+
+### Käyttäjätietojen hallinnointi
+
+Peruskäyttäjä voi vaihtaa oman salasanansa.
+
+Admin-käyttäjä voi vaihtaa kaikkien käyttäjien salasanan, ilman että tarvitsee tietää voimassaolevaa salasanaa (admin voi kirjoittaa 1. salasanakenttään mitä tahansa, uusi salasana määräytyy 2. salasanakentän mukaan).
+
+### Pelitietojen hallinnointi
+
+Admin-käyttäjä voi lisätä peliin uusia kysymyksiä ja vastausvaihtoehtoja.
+Admin-käyttäjälle voisi lisätä muitakin pelin muokkaus- ja kehitysmahdollisuuksia (esim. lisätä ja poistaa kategorioita).
 
 ### Kysymysluokat ja pelitasot
 
@@ -74,19 +94,18 @@ Tietokannan käyttöä varten tarvittavat INSERT-kommennot löytyvät näistä t
     
 ## Tilatieto ja muu info
 
-### 3. palautus
+### Kohti loppupalautusta
 
-Sovelluksesta on tehty peli perustoiminnoilla. Admin-käyttäjän toimintoja (pl. salasanavaihto) sekä statistiikkaa puuttuu (mutta mahdollisuuksien mukaan vielä tulossa).
+Peliin on lisätty perustoiminnot sekä muutama optioksi aiottu ominaisuus.
+Pelin toimintojen sekä koodin laadun lisäksi myös ulkoasua on päivitetty. 
 
 #### Käytössä olevat toiminnot
 - Käyttäjä voi rekisteröityä eli luoda peruskäyttäjän tunnukset
-- Sovellus luo tietokantaan automaattisesti hallinnoijan eli admin-käyttäjän, jos ei ole vielä luotu
-  - Admin-käyttäjän käyttäjätunnus on *admin* ja (aloitus)salasana on *salasana*
-  - **Muista vaihtaa admin-käyttäjän salasana omaksi salasanaksesi!**
+- Sovellus luo tietokantaan automaattisesti hallinnoijan eli admin-käyttäjän
 - Sovellukseen voi kirjautua, jos on käyttäjätunnukset -> käyttäjän tiedot tallentuvat tietokantaan
 - Voi aloittaa uuden pelin -> uuden pelin tiedot tallentuvat tietokantaan
 - Voi valita pelikategorian ja tason, jolle on lisätty kysymyksiä ja vastauksia - muilla valinnoilla peli päätyy tilailmoitukseen
-- Peliin voi lisätä tietokannan kautta 16 kysymystä vastauksineen (ei aivan kaikista kategoria-taso-yhdistelmistä, mutta kannattaa käyttää kokeilemiseen kategoriaa 6 - satunnainen aihe)
+- Peliin voi lisätä tietokannan kautta 16 valmiiksi annettua kysymystä vastauksineen (ei aivan kaikista kategoria-taso-yhdistelmistä, mutta kannattaa käyttää kokeilemiseen kategoriaa 6 - satunnainen aihe)
 - Voi hakea aiemmin luodut pelit listana, valita niistä yhden ja jatkaa sen pelaamista
 - Voi listata aiemmat pelinsä myös pelin poistamista varten
   - Käytännössä peli poistetaan näkyvistä (visible = False), eikä se tule näkyviin hauissa, eli peli ei poistu tietokannasta
@@ -96,33 +115,33 @@ Sovelluksesta on tehty peli perustoiminnoilla. Admin-käyttäjän toimintoja (pl
 - Oikeasta vastauksesta saa pelitason mukaisen määrän pisteitä, jotka lisätään pelin pistesaldoon
 - Jos kyseiseen peliin on vastaamattomia kysymyksiä, voi valita uuden kysymyksen - muuten voi aloittaa uuden pelin
 - Samassa pelissä (samalla pelikerralla) ei voi vastata useammin samaan kysymykseen
-- Näkymistä voi palata takaisin päin johonkin aiempaan vaiheeseen
+- Näkymistä voi palata takaisin päin johonkin aiempaan vaiheeseen, tai joissakin tapauksissa aloitussivulle
+- Pelaaja näkee kysymys-vastaus-sivulla omat pisteensä sekä muun omaan peliin liittyvän tilaston
+- Pelaaja näkee statistiikkaa liittyen omiin parhaimpiin peleihinsä
+- Pelaaja näkee statistiikkaa liittyen kaikkien pelaajien pelitilanteeseen (ranking/pelitilasto)
 - Sovelluksesta voi kirjautua ulos
 - Käyttäjä voi vaihtaa oman salasanansa
-- Admin-käyttäjä voi vaihtaa kaikkien käyttäjien salasanan
-  - Adminin ei tarvitse tietää oikeaa salasanaa vaihtamiseen, vaan voi kirjoittaa ensimmäiseen salasanakenttään mitä tahansa, uusi salasana määräytyy toisen salasanakentän perusteella
-- Admin-käyttäjä voi lisätä uusi kysymyksiä sekä niihin vastausvaihtoehtoja (3, joista yksi on oikea vastaus) suoraan sovelluksesta
+- Käyttäjän oikeuksia on määritelty tasojen peruskäyttäjä ja admin mukaisesti
+  - Salasanan vaihdossa on jo huomioitu adminille laajemmat oikeudet
+  - Admin-käyttäjä pääsee kysymysten ja vastausten lisäyssivulle, mutta muilla ei ole sinne pääsyä
+  - Admin-käyttäjä voi lisätä uusi kysymyksiä sekä niihin vastausvaihtoehtoja (3, joista yksi on oikea vastaus) suoraan sovelluksesta
   - Lisäykset päivittyvät tietokantatauluihin questions, answers ja questions_answers (aputaulu, joka linkittää kysymykseen sen vastausvaihtoehdot)
+  - Admin-käyttäjä voi vaihtaa kaikkien käyttäjien salasanan
+  - Adminin ei tarvitse tietää oikeaa salasanaa vaihtamiseen, vaan voi kirjoittaa ensimmäiseen salasanakenttään mitä tahansa, uusi salasana määräytyy toisen salasanakentän perusteella
 - Pelin tiedot kirjautuvat tietokannan tauluhin games ja games_questions
 - Syötteet viedään tietokantaan parametreilla (estää SQL-injektion)
 - Syötteet näytetään selaimen sivulla käyttämällä Jinja-sivupohjia (estää XSS-haavoittuvuuden)
 - CSRF-token luodaan ohjelmassa ja se tarkistetaan soveltuvissa kohdissa
 - Ympäristömuuttujat ovat käytössä (ei aitoja salasanoja GitHubissa, paitsi että admin-käyttäjän luomista varten on ns. aloitussalasana, joka tulisi vaihtaa varsinaiseen salasanaan)
 
-**HUOMAA**, että peliä varten tarvittavat roolien (roles), kategorioiden (categories), tasojen (levels) sekä (alustavan) 16 kysymys-vastaus-setin (answers / questions / questions_answers) INSERT-komennot löytyvät ylempää kohdasta [Sovelluksen rakenne - Tietokanta - Vakioattribuutit](https://github.com/a-bzzzz/trivia/blob/main/README.md#vakioattribuutit) linkkien takaa löytyvistä tiedostoista.
+**HUOMAA**: Peliä varten tarvittavat roolien (roles), kategorioiden (categories), tasojen (levels) sekä (alustavan) 16 kysymys-vastaus-setin (answers / questions / questions_answers) INSERT-komennot löytyvät ylempää kohdasta [Sovelluksen rakenne - Tietokanta - Vakioattribuutit](https://github.com/a-bzzzz/trivia/blob/main/README.md#vakioattribuutit) linkkien takaa löytyvistä tiedostoista.
 
-#### Puuttuvat toiminnot
-- Sovelluksesta ei voi muuttaa tai poistaa käyttäjän tietoja    *(optio)*  (pl. salasanan voi vaihtaa)
-- Sovelluksesta ei voi muuttaa tai poistaa yksittäisen pelin tietoja, vastauskategoroita tai -luokkia    *(optio)*  (pl. käyttäjä voi poistaa oman pelinsä näkyvyyden, mutta ei voi poistaa tietokannasta)
-- Sovelluksesta ei voi muuttaa tai poistaa kysymyksiä ja vastauksia    *(optio)*
-- Pelaaja ei näe vielä statistiikkaa liittyen kaikkien pelaajien pelitilanteeseen (ranking)  *(optio)* , ja oman pistesaldon tarkistamiseen tarvitaan vielä lisätoiminto (kysymys-vastaus-sivulla omat pisteet ja muu omaan peliin liittyvä tilasto kyllä näkyy)
-- Käyttäjän oikeuksien määrittelyä ei ole tehty kaikille sivuille (kenties ei ole tarpeenkaan)
-  - Salasanan vaihdossa on jo huomioitu adminille laajemmat oikeudet
-  - Admin-käyttäjä pääsee kysymysten ja vastausten lisäyssivulle, mutta muilla ei ole sinne pääsyä
-- Käyttäjän syötteen oikeellisuutta ei mahdollisesti ole tarkistettu tarkkaan ihan kaikissa tapauksissa
-- Käytettävyyteen ja saavutettavuuteen liittyviä seikkoja ei ole tarkistettu
+#### Puuttuvat toiminnot *(optio)*
+- Sovelluksesta ei voi muuttaa tai poistaa käyttäjän tietoja (pl. salasanan voi vaihtaa)
+- Sovelluksesta ei voi muuttaa tai poistaa yksittäisen pelin tietoja, vastauskategoroita tai -luokkia (pl. käyttäjä voi poistaa oman pelinsä näkyvyyden, mutta ei voi poistaa tietokannasta)
+- Sovelluksesta ei voi muuttaa tai poistaa kysymyksiä ja vastauksia
+- Saavutettavuuteen liittyviä seikkoja ei ole päästy tarkistamaan soveltuvan työkalun puuttuessa
 - Ulkoasun yhtenäistä tyyliä on määritelty vasta lyhyesti, mutta mietitty jo alustavasti lomakkeita luotaessa
   - CSS-tiedostosta on luotu pohja, lyhyt layout.html -tiedosto on luotu, valmista ulkoasukirjastoa ei ole käytössä
-- Optiot - *(optio)* - eivät ole käytössä
   
-**HUOMAA**, että *(optio)* -merkinnällä merkityt ominaisuudet eivät välttämättä ehdi valmistua peliin tämän kurssin aikana, mutta niitä toimintoja voi halutessaan itse lisätä peliin mukaan.
+**MUISTUTUS**: *(optio)* -merkintä tarkoittaa sitä, että ne ominaisuudet eivät valmistu (valmistuneet) peliin ko. kurssin aikana, mutta niitä toimintoja voi halutessaan itse lisätä peliin mukaan - tai muuten jatkokehittää peliä omien mieltymysten mukaan.
