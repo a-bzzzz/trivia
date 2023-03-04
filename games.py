@@ -237,7 +237,8 @@ def remove_game(id):
 def get_user_best_games(user_id, rows):
     visible = "TRUE"
 
-    sql = """SELECT ROW_NUMBER() OVER (ORDER BY points DESC, level_id DESC, session_count, answers_count)
+    sql = """SELECT ROW_NUMBER() OVER (ORDER BY points DESC, level_id DESC,
+        session_count, answers_count)
         as row_id, id, category_id, level_id, session_count, answers_count, points
         FROM games WHERE user_id=:user_id AND visible=:visible AND points>0
         ORDER BY points DESC, level_id DESC, session_count, answers_count LIMIT :rows"""
@@ -252,7 +253,8 @@ def get_user_best_games(user_id, rows):
 def get_best_games(rows):
     visible = "TRUE"
 
-    sql = """SELECT ROW_NUMBER() OVER (ORDER BY G.points DESC, G.level_id DESC, G.session_count, G.answers_count)
+    sql = """SELECT ROW_NUMBER() OVER (ORDER BY G.points DESC, G.level_id DESC,
+        G.session_count, G.answers_count)
         as row_id, U.username, G.id, G.category_id, G.level_id, G.session_count,
         G.answers_count, G.points
         FROM games as G, users as U WHERE G.user_id=U.id AND G.visible='True' AND G.points>0
