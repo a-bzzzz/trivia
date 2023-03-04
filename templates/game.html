@@ -21,10 +21,10 @@ You have not logged in - Et ole kirjautunut sisään: <a href="/login">Log in - 
 <tr><td>Answers             - Vastauksia</td>       <td><b>{{ session.game_answers }}</b></td></tr>
 <tr><td>Points              - Pisteitä</td>         <td><b><font color="#dc3545">{{ session.game_points }}</font></b></td></tr>
 </table>
-
+<br>
 <h4>Question - Kysymys</h4>
-<output><b>{{ session.question_text }}</b></output>
-
+<output><b>{{ session.question_text }}</b></output><br>
+<br>
 <h4>Your answer - Vastauksesi</h4>
 <form action="/game" method="POST">
 <input type="radio" name="answer" value="1" required="required"> 1 - {{ session.answer_text_1 }}<br>
