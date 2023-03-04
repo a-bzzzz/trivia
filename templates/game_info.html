@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+{% extends "layout.html" %}
+{% block content %}
+
+<h2>Game Info - Pelin tiedot</h2>
+
+<hr>
+{% if session.user_id %}
+<h6>Logged in player - Kirjautunut pelaaja <output>{{ session.user_name }}</output></h6>
+<a href="/logout">Log out - Kirjaudu ulos</a>
+{% else %}
+You have not logged in - Et ole kirjautunut sisään: <a href="/login">Log in - Kirjaudu sisään</a>
+{% endif %}
+<hr>
+<h6>Game info - Pelitiedot</h6>
+<table class="table table-success table-striped">
+<tr><td>Game id number      - Pelinumero</td>       <td><b>{{ session.game_id }}</b></td></tr>
+<tr><td>Question category   - Kysymyskategoria</td> <td><b>{{ session.game_category }}</b></td></tr>
+<tr><td>Difficulty level    - Vaikeustaso</td>      <td><b>{{ session.game_level }}</b></td></tr>
+<tr><td>Game session number - Pelikertoja</td>      <td><b>{{ session.game_sessions }}</b></td></tr>
+<tr><td>Answers             - Vastauksia</td>       <td><b>{{ session.game_answers }}</b></td></tr>
+<tr><td>Points              - Pisteitä</td>         <td><b><font color="#dc3545">{{ session.game_points }}</font></b></td></tr>
+</table>
+<br>
+<h6>Get game statistics - Hae pelitilastot</h6>
+<form action="/stats" method="GET">
+<input type="submit" value="Get - Hae">
+</form>
+<br>
+<br>
+<a href="/menu">Back - Takaisin</a>
+<br>
+<br>
+<hr>
+<label>Info:</label><alert class="alert alert-info">{{ info }}</alert>
+{% endblock %}
