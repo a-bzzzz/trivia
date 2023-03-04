@@ -209,7 +209,8 @@ th {
 
 label {
   display: inline-block;
-  margin-bottom: 0.5rem; }
+  margin-bottom: 0.5rem;
+  font-size: 1.25rem; }
 
 button {
   border-radius: 0; }
@@ -301,7 +302,10 @@ progress {
   -webkit-appearance: button; }
 
 output {
-  display: inline-block; }
+  display: inline-block;
+  font-size: 1.25rem;
+  font-weight: bold;
+  font-stretch: semi-expanded;}
 
 summary {
   display: list-item;
