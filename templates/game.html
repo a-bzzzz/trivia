@@ -6,30 +6,27 @@
 
 <hr>
 {% if session.user_id %}
-You have logged in with name - Olet kirjautunut sisään nimellä <b>{{ session.user_name }}</b><br>
-<br>
+<h6>Logged in player - Kirjautunut pelaaja <output>{{ session.user_name }}</output></h6>
 <a href="/logout">Log out - Kirjaudu ulos</a>
 {% else %}
 You have not logged in - Et ole kirjautunut sisään: <a href="/login">Log in - Kirjaudu sisään</a>
 {% endif %}
-<br>
-<br>
-Game id number      - Pelinumero:       {{ session.game_id }}<br>
-Question category   - Kysymyskategoria: {{ session.game_category }}<br>
-Difficulty level    - Vaikeustaso:      {{ session.game_level }}<br>
-Game session number - Pelikertoja:      {{ session.game_sessions }}<br>
-Answers             - Vastauksia:       {{ session.game_answers }}<br>
-Points              - Pisteitä:         {{ session.game_points }}<br>
-<br>
-<br>
-Question - Kysymys:<br>
-================<br>
-<br>
-<b>{{ session.question_text }}</b><br>
-<br>
-Your answer - Vastauksesi:<br>
-=====================<br>
-<form action="/game" method="POST"><br>
+<hr>
+<h6>Game info - Pelitiedot</h6>
+<table class="table table-success table-striped">
+<tr><td>Game id number      - Pelinumero</td>       <td><b>{{ session.game_id }}</b></td></tr>
+<tr><td>Question category   - Kysymyskategoria</td> <td><b>{{ session.game_category }}</b></td></tr>
+<tr><td>Difficulty level    - Vaikeustaso</td>      <td><b>{{ session.game_level }}</b></td></tr>
+<tr><td>Game session number - Pelikertoja</td>      <td><b>{{ session.game_sessions }}</b></td></tr>
+<tr><td>Answers             - Vastauksia</td>       <td><b>{{ session.game_answers }}</b></td></tr>
+<tr><td>Points              - Pisteitä</td>         <td><b><font color="#dc3545">{{ session.game_points }}</font></b></td></tr>
+</table>
+
+<h4>Question - Kysymys</h4>
+<output><b>{{ session.question_text }}</b></output>
+
+<h4>Your answer - Vastauksesi</h4>
+<form action="/game" method="POST">
 <input type="radio" name="answer" value="1" required="required"> 1 - {{ session.answer_text_1 }}<br>
 <input type="radio" name="answer" value="2"> 2 - {{ session.answer_text_2 }}<br>
 <input type="radio" name="answer" value="3"> 3 - {{ session.answer_text_3 }}<br>
@@ -37,7 +34,7 @@ Your answer - Vastauksesi:<br>
 <input type="hidden" name="correct" value="1" required="required">
 <input type="hidden" name="correct" value="2">
 <input type="hidden" name="correct" value="3">
-<input type="submit" value="Answer-Vastaa">
+<input type="submit" value="Answer - Vastaa">
 <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
 <br>
@@ -46,5 +43,6 @@ Your answer - Vastauksesi:<br>
 <a href="/menu">Back - Takaisin</a>
 <br>
 <br>
-Info: {{ message }}
+<hr>
+<label>Info:</label><alert class="alert alert-info">{{ info }}</alert>
 {% endblock %}

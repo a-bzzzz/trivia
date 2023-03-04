@@ -6,13 +6,13 @@
 
 <hr>
 <form action="/register" method="POST">
-Username - Tunnus: <br><input type="text" name="username" minlength="3" maxlength="20" required="required" >
+<label>Username - Tunnus</label> <br><input type="text" name="username" minlength="3" maxlength="20" required="required" >
 <br>
 <br>
-Password - Salasana: <br><input type="password" name="password1" minlength="3" maxlength="20" required="required">
+<label>Password - Salasana</label> <br><input type="password" name="password1" minlength="3" maxlength="20" required="required">
 <br>
 <br>
-Confirm passwork - Salasana uudestaan: <br><input type="password" name="password2" minlength="3" maxlength="20" required="required">
+<label>Confirm passwork - Salasana uudestaan</label> <br><input type="password" name="password2" minlength="3" maxlength="20" required="required">
 <br>
 <br>
 <input type="submit" value="Create - Luo tunnus">
@@ -20,5 +20,8 @@ Confirm passwork - Salasana uudestaan: <br><input type="password" name="password
 <br>
 <br>
 <a href="/login">Back - Takaisin</a>
-
+<br>
+<br>
+<hr>
+<label>Info:</label><alert class="alert alert-info">{{ info }}</alert>
 {% endblock %}

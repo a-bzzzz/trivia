@@ -6,21 +6,21 @@
 
 <hr>
 {% if session.user_id %}
-Logged in player - Kirjautunut pelaaja: <b>{{ session.user_name }}</b><br>
-<br>
+<h6>Logged in player - Kirjautunut pelaaja <output>{{ session.user_name }}</output></h6>
 <a href="/logout">Log out - Kirjaudu ulos</a>
 {% else %}
-You have not logged in - Et ole kirjautunut sisään: <a href="/login">Log in - Kirjaudu sisään</a><br>
+You have not logged in - Et ole kirjautunut sisään: <a href="/login">Log in - Kirjaudu sisään</a>
 {% endif %}
-<br><br><br>
-<b>Game list - Pelilista:</b><br>
-<br>
+<hr>
+<h6>Game List - Pelilista</h6>
+<table class="table table-success table-striped">
+<tr><td>Pelinumero</td> <td>Kategoria</td> <td>Taso</td> <td>Pisteitä</td></tr>
 {% for game in gamelist %}
-Pelinro: {{ game[0] }} Kategoria: {{ game[2] }} Taso: {{ game[3] }} Pisteitä: {{ game[1] }}<br>
+<tr><td><b>{{ game[0] }}</b></td> <td>{{ game[2] }}</td> <td>{{ game[3] }}</td> <td>{{ game[1] }}</td></tr>
 {% endfor %}
+</table>
 <br>
-<br>
-Choose game number - Valitse pelinumero:  
+<label>Choose game number - Valitse pelinumero</label>
 <form action="/search" method="POST">
 <select name="gid" required>
 {% for game in gamelist %}
@@ -30,12 +30,14 @@ Choose game number - Valitse pelinumero:
 <br>
 <input type="hidden" name="game_id" value={{ gid }}>
 <br>
-<br>
-Start game - Aloita peli:<br>
+<label>Start game - Aloita peli</label><br>
 <input type="submit" value="Start - Aloita">
 <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
 <br>
 <br>
 <a href="/">Back - Takaisin</a>
+<br>
+<hr>
+<label>Info:</label><alert class="alert alert-info">{{ info }}</alert>
 {% endblock %}

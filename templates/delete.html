@@ -5,10 +5,8 @@
 <h2>Deletion - Poisto</h2>
 
 <hr>
-WARNING: Confirm deletion - VAROITUS: Vahvista poistaminen<br>
-Game no - Pelinro: {{ gid }}<br>
-<br>
-<br>
+<b>WARNING</b>: Confirm deletion - <b>VAROITUS</b>: Vahvista poistaminen<br>
+<h6>Game no - Pelinro: <output>{{ gid }}</output></h6>
 <form action="/delete" method="POST">
 <input type="hidden" name="gid" value= {{ gid }}>
 <input type="submit" value="Delete - Poista">
@@ -19,5 +17,10 @@ Game no - Pelinro: {{ gid }}<br>
 <a href="/">Back - Takaisin</a>
 <br>
 <br>
-Info: {{ message }}
+<hr>
+{% if 'deleted' in info%}
+<label>Info:</label><alert class="alert alert-success">{{ info }}</alert>
+{% else %}
+<label>Info:</label><alert class="alert alert-info">{{ info }}</alert>
+{% endif %}
 {% endblock %}

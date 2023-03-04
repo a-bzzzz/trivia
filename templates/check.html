@@ -5,15 +5,24 @@
 <h2>Answer Check - Vastauksen tarkistus</h2>
 
 <hr>
-Your answer - Vastauksesi: {{ result_message }}
+{% if 'Right' in result_message %}
+<label>Your answer - Vastauksesi:</label> <alert class="alert alert-success">{{ result_message }}</alert>
+{% else %}
+<label>Your answer - Vastauksesi:</label> <alert class="alert alert-dark">{{ result_message }}</alert>
+{% endif %}
 <br>
 <br>
-Amount of questions - Kysymysmäärä: {{ question_amount }}
+<label>Amount of questions - Kysymysmäärä:</label>  {{ question_amount }}
 <br>
 {% if question_amount < 1 %}
-<form action="/menu" method="GET">
 {{ q_message }}<br>
-<input type="submit" value="New game - Uusi peli">
+<form action="/menu" method="GET">
+<br>
+<input type="submit" value="New game - Uusi peli">  
+</form>  
+<form action="/game_info" method="GET">
+<br>
+<input type="submit" value="Game result - Pelin tulos">  
 </form>
 <br>
 <br>
@@ -27,5 +36,6 @@ Amount of questions - Kysymysmäärä: {{ question_amount }}
 {% endif %}
 <br>
 <br>
-Info: {{ message }}
+<hr>
+<label>Info:</label><alert class="alert alert-info">{{ info }}</alert>
 {% endblock %}

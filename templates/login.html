@@ -6,10 +6,10 @@
 
 <hr>
 <form action="/login" method="POST">
-Username - käyttäjätunnus: <br><input type="text" name="username" minlength="3" maxlength="20" required="required">
+<label>Username - Käyttäjätunnus</label> <br><input type="text" name="username" minlength="3" maxlength="20" required="required">
 <br>
 <br>
-Password - Salasana: <br><input type="password" name="password" minlength="3" maxlength="20" required="required">
+<label>Password - Salasana</label> <br><input type="password" name="password" minlength="3" maxlength="20" required="required">
 <br>
 <br>
 <input type="submit" value="Log in - Kirjaudu">
@@ -17,14 +17,15 @@ Password - Salasana: <br><input type="password" name="password" minlength="3" ma
 <br>
 <br>
 <form action="/register" method="GET">
-Create user credentials - Luo kirjautumistiedot:
+<label>Create user credentials - Luo kirjautumistiedot</label>
 <br><input type="submit" value="Register - Luo käyttäjätili">
 </form>
-<br>
-<br>
 <br>
 <br>
 <form action="/logout" method="GET">
 <input type="submit" value="Cancel - Lopeta">
 </form>
+<br>
+<hr>
+<label>Info:</label><alert class="alert alert-info">{{ info }}</alert>
 {% endblock %}

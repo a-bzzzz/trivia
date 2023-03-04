@@ -6,17 +6,14 @@
 
 <hr>
 {% if session.user_id %}
-Logged in player - Kirjautunut pelaaja: <b>{{ session.user_name }}</b><br>
-<br>
+<h6>Logged in player - Kirjautunut pelaaja <output>{{ session.user_name }}</output></h6>
 <a href="/logout">Log out - Kirjaudu ulos</a>
 {% else %}
 You have not logged in - Et ole kirjautunut sisään: <a href="/login">Log in - Kirjaudu sisään</a>
 {% endif %}
-
-<br>
-<br>
+<hr>
 <form action="/menu" method="POST">
-Choose <b>category</b> - Valitse <b>kategoria</b>:<br>
+<label>Choose <b>category</b> - Valitse <b>kategoria</b></label><br>
 <br>
 <input type="radio" name="cat" value=1 required="required"> 1 - science/geography - tiede/maantiede<br>
 <input type="radio" name="cat" value=2> 2 - History/herstory          - Historia<br>
@@ -25,8 +22,7 @@ Choose <b>category</b> - Valitse <b>kategoria</b>:<br>
 <input type="radio" name="cat" value=5> 5 - Movies/TV/entertainment   - Elokuvat/TV/viihde<br>
 <input type="radio" name="cat" value=6> 6 - Random topic              - Satunnainen aihe<br>
 <br>
-<br>
-Choose <b>difficulty level</b> - Valitse <b>vaikeustaso</b>:<br>
+<label>Choose <b>difficulty level</b> - Valitse <b>vaikeustaso</b></label><br>
 <br>
 <input type="radio" name="lev" value=1 required="required"> 1 - Easy - Helppo<br>
 <input type="radio" name="lev" value=2> 2 - Moderate  - Keskitaso<br>
@@ -36,7 +32,9 @@ Choose <b>difficulty level</b> - Valitse <b>vaikeustaso</b>:<br>
 <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
 <br>
-<br>
 <a href="/">Back - Takaisin</a>
-
+<br>
+<br>
+<hr>
+<label>Info:</label><alert class="alert alert-info">{{ info }}</alert>
 {% endblock %}

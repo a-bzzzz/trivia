@@ -2,20 +2,18 @@
 {% extends "layout.html" %}
 {% block content %}
 
-<h2>ADD: Questions and answers - LISÄÄ: Kysymyksiä ja vastauksia</h2>
+<h2>ADD: Questions & Answers - LISÄÄ: Kysymyksiä & vastauksia</h2>
 
 <hr>
 {% if session.user_id %}
-You have logged in with name - Olet kirjautunut sisään nimellä <b>{{ session.user_name }}</b><br>
-<br>
+<h6>Logged in player - Kirjautunut pelaaja <output>{{ session.user_name }}</output></h6>
 <a href="/logout">Log out - Kirjaudu ulos</a>
 {% else %}
 You have not logged in - Et ole kirjautunut sisään: <a href="/login">Log in - Kirjaudu sisään</a>
 {% endif %}
-<br>
-<br>
-<form action="/add_questions_answers" method="POST"><br>
-Question category   - Kysymyskategoria:<br>
+<hr>
+<form action="/add_questions_answers" method="POST">
+<label>Question category   - Kysymyskategoria</label><br>
 <select name="cat" required>
 <option value=1> 1 - science/geography         - tiede/maantiede</option><br>
 <option value=2> 2 - History/herstory          - Historia</option><br>
@@ -25,28 +23,20 @@ Question category   - Kysymyskategoria:<br>
 <option value=6 selected> 6 - Random topic     - Satunnainen aihe</option><br>
 </select><br>
 <br>
-Difficulty level    - Vaikeustaso:<br>  
+<label>Difficulty level    - Vaikeustaso</label><br>  
 <select name="lev" required>
 <option value=1 selected> 1 - Easy      - Helppo</option><br>
 <option value=2> 2 - Moderate  - Keskitaso</option><br>
 <option value=3> 3 - Difficult - Vaikea</option><br>
 </select><br>
-<br>
-<br>
-Question - Kysymys:<br>
-================<br>
-<br>
+<h4>Question - Kysymys</h4>
 <input type="text" name="question" minlength="3" maxlength="150" required="required"><br>
+<h4>Answers - Vastaukset</h4>
+<label>1 - Wrong answer - Väärä vastaus </label> <input type="text" name="answer1" minlength="1" maxlength="50" required="required"><br>
 <br>
-Answers - Vastaukset:<br>
-=================<br>
+<label>2 - Wrong answer - Väärä vastaus </label> <input type="text" name="answer2" minlength="1" maxlength="50" required="required"><br>
 <br>
-#1 wrong answer - 1. väärä vastaus: <input type="text" name="answer1" minlength="1" maxlength="50" required="required"><br>
-<br>
-#2 wrong answer - 2. väärä vastaus: <input type="text" name="answer2" minlength="1" maxlength="50" required="required"><br>
-<br>
-RIGHT answer - OIKEA vastaus: <input type="text" name="answer3" minlength="1" maxlength="50" required="required"><br>
-<br>
+<label>3 - <b>Right</b> answer --- <b>Oikea</b> vastaus </label> <input type="text" name="answer3" minlength="1" maxlength="50" required="required"><br>
 <br>
 <input type="submit" value="Add - Lisää">
 <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
@@ -58,5 +48,5 @@ RIGHT answer - OIKEA vastaus: <input type="text" name="answer3" minlength="1" ma
 <br>
 <br>
 <hr>
-<b>Info:</b> {{ message }}
+<label>Info:</label><alert class="alert alert-info">{{ info }}</alert>
 {% endblock %}

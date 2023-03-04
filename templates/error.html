@@ -2,11 +2,17 @@
 {% extends "layout.html" %}
 {% block content %}
 
-Error message - Virheilmoitus</h2>
+<h2>Message - Ilmoitus</h2>
 
-Error - Virhe: {{ message }}
-
+<hr>
+<b>{{ type }}</b>:<br>
+<br>
+<alert class="alert alert-warning">{{ message }}</alert>
 <br>
 <br>
 <a href="/">Back - Takaisin</a>
+<br>
+<br>
+<hr>
+<label>Info:</label><alert class="alert alert-info">{{ info }}</alert>
 {% endblock %}
