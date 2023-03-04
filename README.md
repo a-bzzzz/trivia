@@ -20,10 +20,10 @@ Peruskäyttäjän oikeuksien lisäksi ylläpitäjä voi lisätä peliin uusia ky
 Admin-käyttäjä pääsee vaihtamaan kaikkien käyttäjien salasanoja.
 Admin voisi mahdollisesti myös muokata (lisätä/poistaa/muuttaa) käyttäjätietoja, sekä pelin tietoja, kuten kysymyksiä ja luokkia.     *(optio)* 
 Peliin luodaan (julkaistavaan sovellukseen on luotu) ensimmäisellä pelikerralla admin-käyttäjä, jolle
-...
+```
 käyttäjätunnus: **admin** 
 salasana      : **salasana**
-...
+```
 **Muista vaihtaa admin-käyttäjän salasana omaksi salasanaksesi!**
 
 #### Superuser *(optio)*
@@ -133,6 +133,8 @@ Pelin toimintojen sekä koodin laadun lisäksi myös ulkoasua on päivitetty.
 - Syötteet näytetään selaimen sivulla käyttämällä Jinja-sivupohjia (estää XSS-haavoittuvuuden)
 - CSRF-token luodaan ohjelmassa ja se tarkistetaan soveltuvissa kohdissa
 - Ympäristömuuttujat ovat käytössä (ei aitoja salasanoja GitHubissa, paitsi että admin-käyttäjän luomista varten on ns. aloitussalasana, joka tulisi vaihtaa varsinaiseen salasanaan)
+- Ulkoasun yhtenäinen tyyli on luotu muokkaamalla soveltuvasti valmista CSS-pohjaa, yhdistämällä siihen oma layout.html -tiedosto sekä rakentamalla HTML-lomakkeille elementtejä mahdollisimman yhtenäisesti
+  - static-kansiosta löytyy myös pari vaihtoehtoista CSS-tyylitiedostoa, jotka ovat harjoitelmia aiheesta
 
 **HUOMAA**: Peliä varten tarvittavat roolien (roles), kategorioiden (categories), tasojen (levels) sekä (alustavan) 16 kysymys-vastaus-setin (answers / questions / questions_answers) INSERT-komennot löytyvät ylempää kohdasta [Sovelluksen rakenne - Tietokanta - Vakioattribuutit](https://github.com/a-bzzzz/trivia/blob/main/README.md#vakioattribuutit) linkkien takaa löytyvistä tiedostoista.
 
@@ -141,7 +143,5 @@ Pelin toimintojen sekä koodin laadun lisäksi myös ulkoasua on päivitetty.
 - Sovelluksesta ei voi muuttaa tai poistaa yksittäisen pelin tietoja, vastauskategoroita tai -luokkia (pl. käyttäjä voi poistaa oman pelinsä näkyvyyden, mutta ei voi poistaa tietokannasta)
 - Sovelluksesta ei voi muuttaa tai poistaa kysymyksiä ja vastauksia
 - Saavutettavuuteen liittyviä seikkoja ei ole päästy tarkistamaan soveltuvan työkalun puuttuessa
-- Ulkoasun yhtenäistä tyyliä on määritelty vasta lyhyesti, mutta mietitty jo alustavasti lomakkeita luotaessa
-  - CSS-tiedostosta on luotu pohja, lyhyt layout.html -tiedosto on luotu, valmista ulkoasukirjastoa ei ole käytössä
   
 **MUISTUTUS**: *(optio)* -merkintä tarkoittaa sitä, että ne ominaisuudet eivät valmistu (valmistuneet) peliin ko. kurssin aikana, mutta niitä toimintoja voi halutessaan itse lisätä peliin mukaan - tai muuten jatkokehittää peliä omien mieltymysten mukaan.
