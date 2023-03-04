@@ -283,7 +283,7 @@ def add_questions_answers():
             return render_template("error.html", type=ERR2, message=message)
         add_message = f"ADDED: question {qid}, answers {a_ids[0]}, {a_ids[1]}, {a_ids[2]}"
         return render_template("add_questions_answers.html", info=add_message)
-    
+
 @app.route("/game_info", methods=["GET"])
 def game_info():
 
