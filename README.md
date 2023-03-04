@@ -15,8 +15,12 @@ Vierailijan peleistä ei tallennu pisteitä tai mitään pelaaja- tai tilastotie
 Käyttäjä voi luoda käyttäjätunnuksen ja salasanan, ns. pääsytiedot.   
 Käyttäjä voi kirjautua sisään sovellukseen voimassa olevalla käyttäjätunnuksella ja salasanalla.  
 
-#### Ylläpitäjä (admin)    *(optio)*
-Peruskäyttäjän oikeuksien lisäksi ylläpitäjä voi muokata (lisätä/poistaa/muuttaa) käyttäjätietoja ja pelin tietoja, kuten kysymyksiä ja luokkia.  
+#### Ylläpitäjä (admin)
+Peruskäyttäjän oikeuksien lisäksi ylläpitäjä voi lisätä peliin uusia kysymyksiä ja vastausvaihtoehtoja. Admin-käyttäjä pääsee vaihtamaan kaikkien käyttäjien salasanoja ilman, että tarvitsee tietää voimassaolevaa salasanaa.
+Admin voisi mahdollisesti myös muokata (lisätä/poistaa/muuttaa) käyttäjätietoja, sekä pelin tietoja, kuten kysymyksiä ja luokkia.     *(optio)* 
+
+#### Superuser
+Superkäyttäjä voisi saada peruskäyttäjän oikeuksien lisäksi joitakin erityisoikeuksia pelin kehittelyssä, mutta ei oikeuksia toisten käyttäjien tietojen käsittelyyn, kuten admin-user. Esim. kun peruskäyttäjä saa kerättyä tietyn määrän pelipisteitä, hänen käyttäjätasonsa nousee superuser-tasolle. Silloin hän saisi mahdollisuuden lisätä peliin uusia kysymyksiä ja vastauksia, sekä ansaita lisää pisteitä, jos ne lisäykset kehittävät peliä. *(optio)*
 
 ### Pelaajatoiminnot (peruskäyttäjä)
 
