@@ -50,7 +50,7 @@ Uutta peliä varten pelaaja voi valita:
 
 ## Sovelluksen rakenne
 
-### Käyttöliittymä GUI
+### Käyttöliittymä (GUI)
 
 #### Käyttöliittymän rakenne
 HTML-lomakkeet ja navigointi: [GUI-navigointi-kaavio](https://github.com/a-bzzzz/trivia/blob/main/documentation/GUI-navi_chart.png)
