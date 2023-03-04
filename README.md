@@ -21,8 +21,8 @@ Admin-käyttäjä pääsee vaihtamaan kaikkien käyttäjien salasanoja.
 Admin voisi mahdollisesti myös muokata (lisätä/poistaa/muuttaa) käyttäjätietoja, sekä pelin tietoja, kuten kysymyksiä ja luokkia.     *(optio)* 
 Peliin luodaan (julkaistavaan sovellukseen on luotu) ensimmäisellä pelikerralla admin-käyttäjä, jolle
 ```
-käyttäjätunnus: **admin** 
-salasana      : **salasana**
+käyttäjätunnus: admin 
+salasana      : salasana
 ```
 **Muista vaihtaa admin-käyttäjän salasana omaksi salasanaksesi!**
 
