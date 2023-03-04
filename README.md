@@ -24,7 +24,7 @@ Peliin luodaan (julkaistavaan sovellukseen on luotu) ensimmäisellä pelikerrall
 käyttäjätunnus: admin 
 salasana      : salasana
 ```
-**Muista vaihtaa admin-käyttäjän salasana omaksi salasanaksesi!**
+**Muista vaihtaa admin-käyttäjän salasana omaksi salasanaksesi, jos luot näistä elementeistä oman pelisi!**
 
 #### Superuser *(optio)*
 Superkäyttäjä voisi saada peruskäyttäjän oikeuksien lisäksi joitakin erityisoikeuksia pelin kehittelyssä, mutta ei oikeuksia toisten käyttäjien tietojen käsittelyyn, kuten admin-user. Esim. kun peruskäyttäjä saa kerättyä tietyn määrän pelipisteitä, hänen käyttäjätasonsa nousee superuser-tasolle. Silloin hän saisi mahdollisuuden lisätä peliin uusia kysymyksiä ja vastauksia, sekä ansaita lisää pisteitä, jos ne lisäykset kehittävät peliä.
