@@ -36,7 +36,7 @@ Sovelluksella voi pelata tietokilpailua eli vastata sovelluksen esittämiin kysy
 
 [Tilatieto ja muu info](https://github.com/a-bzzzz/trivia/blob/main/README.md#tilatieto-ja-muu-info)
 
-- [Loppupalautus](https://github.com/a-bzzzz/trivia/blob/main/README.md#kohti-loppupalautusta)
+- [Loppupalautus](https://github.com/a-bzzzz/trivia/blob/main/README.md#loppupalautus)
 
 
 ## Sovelluksen keskeiset toiminnot ja tiedot
