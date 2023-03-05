@@ -82,6 +82,8 @@ tsoha-trivia.fly.dev
 ```
 Jos saat sivulta virheilmoituksen, kokeile ladata sivu uudelleen. Huomioithan, että sovellus on ladattu ulkoisen palveluntarjoajan palvelimelle, joten mahdollinen häiriö saattaa aiheutua myös ulkoisista syistä - siis yritä myöhemmin uudelleen!
 
+Täällä tarkemmin käynnistysohjeita mm. omaksi kopioidulle sovellukselle: [Startup Guide](https://github.com/a-bzzzz/trivia/blob/main/documentation/Startup-guide.md)
+
 ### Käyttöohjeet
 
 TULOSSA
