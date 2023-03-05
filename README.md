@@ -100,9 +100,9 @@ Sovelluksen logiikka on koodattu Python-ohjelmointikielellä. Sovelluskansion ju
 
 ### Käyttöliittymä (GUI)
 
-Sovellukseen on rakennettu graafinen käyttöliittymä HTML-tiedostoista, joíssa on hyödynnetty Pythoniin kuuluvan Flask-kirjaston Jinja-sivupohjia. Lisäksi sovellus on viety Fly.io -palvelun tuotantoympäristöön. Niinpä sovelluksen voi käynnistää CLI:ssä (komentoriviltä) molemmilla tavoilla, mutta db.py -tiedostoon tarvitaan eri osoitemääritykset (kommentoi ulos tai poista väärä rivi):
+Sovellukseen on rakennettu graafinen käyttöliittymä HTML-tiedostoista, joissa on hyödynnetty Pythoniin kuuluvan Flask-kirjaston Jinja-sivupohjia. Lisäksi sovellus on viety Fly.io -palvelun tuotantoympäristöön. Niinpä sovelluksen voi käynnistää CLI:ssä (komentoriviltä) molemmilla tavoilla, mutta db.py -tiedostoon tarvitaan eri osoitemääritykset (kommentoi ulos tai poista väärä rivi):
 ```
-          komento           db.py            
+         komento     db.py:  riviteksti          
 Fly.io : fly open    ->  5:  app.config["SQLALCHEMY_DATABASE_URI"] = getenv("DATABASE_URL").replace("://", "ql://", 1)
 Flask  : flask run   ->  6:  app.config["SQLALCHEMY_DATABASE_URI"] = getenv("DATABASE_URL")
 ```
