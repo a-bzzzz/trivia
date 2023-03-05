@@ -18,7 +18,9 @@ def index():
     usernames = sorted(users.get_usernames())
     if not users.name_in_users('admin'):
         users.add_admin()
-    return render_template("index.html", count=len(usernames), users=usernames)
+    manual_link = "https://github.com/a-bzzzz/trivia/blob/main/documentation/Manual.md"
+    message = f"User Manual - Käyttöohje: "
+    return render_template("index.html", count=len(usernames), users=usernames, info=message, link=manual_link)
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
