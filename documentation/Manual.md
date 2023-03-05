@@ -9,19 +9,19 @@ Sovelluksen käyttöohjeet peruskäyttäjälle (esim. ylläpitäjän toimintojen
 
 ### 1. Aloitussivu
 
-[1_home.png]<img src="https://github.com/a-bzzzz/trivia/blob/main/documentation/GUI-pics/1_home.png">
+![1_home.png]<img src="https://github.com/a-bzzzz/trivia/blob/main/documentation/GUI-pics/1_home.png">
 
 ### 2. Sovellukseen kirjautuminen
 
 Klikkaa linkkiä ```Log in – Kirjaudu```
 
-[2_login.png]<img src="https://github.com/a-bzzzz/trivia/blob/main/documentation/GUI-pics/2_login.png">
+![2_login.png]<img src="https://github.com/a-bzzzz/trivia/blob/main/documentation/GUI-pics/2_login.png">
 
 a) Voit kokeilla seuraavia valmiita käyttäjätunnuksia peliin tutustumista varten:
 ```
-Käyttäjätaso	  Käyttäjätunnus	Salasana
-peruskäyttäjä	  hessu			      hopo
-ylläpitäjä	    admin			      salasana
+Käyttäjätaso  : Käyttäjätunnus	: Salasana
+peruskäyttäjä	: hessu			      : hopo
+ylläpitäjä	  : admin			      : salasana
 ```
 
 Kirjoita käyttäjätunnus kenttään ```Username – Käyttäjätunnus```
@@ -37,7 +37,7 @@ Klikkaa painiketta ```Register – Luo käyttäjätili```
 
 ### 3. Rekisteröityminen
 
-[3_register.png]<img src="https://github.com/a-bzzzz/trivia/blob/main/documentation/GUI-pics/3_register.png">
+![3_register.png]<img src="https://github.com/a-bzzzz/trivia/blob/main/documentation/GUI-pics/3_register.png">
 
 Kirjoita uusi käyttäjätunnuksesi kenttään ```Username – Tunnus```
 
@@ -53,7 +53,7 @@ Voit palata takaisin aloitussivulle: klikkaa linkkiä ```Back – Takaisin```
 
 Onnistuneen rekisteröitymisen tai kirjautumisen jälkeen siirryt takaisin aloitussivulle, jonne on ilmestynyt käyttäjäroolisi mukainen pelivalikko:
 
-[4_start.png]<img src="https://github.com/a-bzzzz/trivia/blob/main/documentation/GUI-pics/4_start.png">
+![4_start.png]<img src="https://github.com/a-bzzzz/trivia/blob/main/documentation/GUI-pics/4_start.png">
 
 Ylläpitäjälle näkyy valikossa lisäksi linkki, jonka kautta pääsee lisäämään peliin kysymyksiä ja vastauksia.
 
@@ -74,7 +74,7 @@ Pelitilastot saat klikkaamalla ```Get game statistics – Hae pelitilastot``` :
 
 Aloittaaksesi uuden pelin sinun täytyy siirtyä pelivalikkoon:
 
-[5_menu.png]<img src="https://github.com/a-bzzzz/trivia/blob/main/documentation/GUI-pics/5_menu.png">
+![5_menu.png]<img src="https://github.com/a-bzzzz/trivia/blob/main/documentation/GUI-pics/5_menu.png">
 
 Voit kirjautua ulos (ylin linkki) tai palata takaisin aloitussivulle (alin linkki).
 
@@ -84,7 +84,7 @@ Aloita peli klikkaamalla painiketta ```Play – Pelaa```
 
 #### 5.1. Pelaa
 
-[6_game.png]<img src="https://github.com/a-bzzzz/trivia/blob/main/documentation/GUI-pics/6_game.png">
+![6_game.png]<img src="https://github.com/a-bzzzz/trivia/blob/main/documentation/GUI-pics/6_game.png">
 
 Voit kirjautua ulos (ylin linkki) tai palata takaisin aloitussivulle (alin linkki).
 
@@ -98,7 +98,7 @@ Vastauksen jälkeen saat palautetta vastauksestasi:
 
 #### 5.2. Tarkista vastaus
 
-[7_check.png]<img src="https://github.com/a-bzzzz/trivia/blob/main/documentation/GUI-pics/7_check.png">
+![7_check.png]<img src="https://github.com/a-bzzzz/trivia/blob/main/documentation/GUI-pics/7_check.png">
 
 Tällä kertaa pelaaja onnistui valitsemaan oikean vastauksen :-)
 
@@ -114,7 +114,7 @@ Tässä tapauksessa pelissä on enää yksi kysymys vastattavana.
 
 Pelistä pääset pois aloitussivulle klikkaamalla linkkiä ```Back – Takaisin```
 
-[8_check_quit.png]<img src="https://github.com/a-bzzzz/trivia/blob/main/documentation/GUI-pics/8_check_quit.png">
+![8_check_quit.png]<img src="https://github.com/a-bzzzz/trivia/blob/main/documentation/GUI-pics/8_check_quit.png">
 
 Nyt vastaus ei osunut aivan oikeaan :-(
 
@@ -126,7 +126,7 @@ Käydään katsomassa, miten peli meni:
 
 #### 5.3. Tarkista pelin tilanne
 
-[9_game_info.png]<img src="https://github.com/a-bzzzz/trivia/blob/main/documentation/GUI-pics/9_game_info.png">
+![9_game_info.png]<img src="https://github.com/a-bzzzz/trivia/blob/main/documentation/GUI-pics/9_game_info.png">
 
 Voit kirjautua ulos (ylin linkki) tai palata takaisin aloitussivulle (alin linkki).
 
@@ -138,7 +138,7 @@ Mennään nyt vaikka aloitusvalikon kautta hakemaan jotain aiemmin pelattua peli
 
 ### 6. Hae aiempi peli
 
-[10_search.png]<img src="https://github.com/a-bzzzz/trivia/blob/main/documentation/GUI-pics/10_search.png">
+![10_search.png]<img src="https://github.com/a-bzzzz/trivia/blob/main/documentation/GUI-pics/10_search.png">
 
 Voit kirjautua ulos (ylin linkki) tai palata takaisin aloitussivulle (alin linkki).
 
@@ -148,7 +148,7 @@ Jatkettavan pelin voi hakea valitsemalla pelinumeron valikosta otsikon ```Choose
 
 Peli käynnistyy klikkaamalla painiketta ```Start – Aloita```
 
-[11_continue.png]<img src="https://github.com/a-bzzzz/trivia/blob/main/documentation/GUI-pics/11_continue.png">
+![11_continue.png]<img src="https://github.com/a-bzzzz/trivia/blob/main/documentation/GUI-pics/11_continue.png">
 
 Voit kirjautua ulos (ylin linkki) tai palata takaisin aloitussivulle (alin linkki).
 
@@ -158,7 +158,7 @@ Voit jatkaa pelaamista, kuten ohjeistettu kohdasta 5.1. Pelaa eteenpäin.
 
 Pelin voi hakea samalla tavalla kuin edellisessä kohdassa 6. Hae aiempi peli, mutta sen poistamista varten klikkaamalla aloitusvalikossa hae ja poista -linkkiä:
 
-[12_search_remove.png]<img src="https://github.com/a-bzzzz/trivia/blob/main/documentation/GUI-pics/12_search_remove.png">
+![12_search_remove.png]<img src="https://github.com/a-bzzzz/trivia/blob/main/documentation/GUI-pics/12_search_remove.png">
 
 Voit kirjautua ulos (ylin linkki) tai palata takaisin aloitussivulle (alin linkki).
 
@@ -170,13 +170,13 @@ Pelin poistaminen aloitetaan klikkaamalla painiketta ```Delete – Poista```.
 
 Sovellus varmistaa haluatko todella poistaa ko. pelin:
 
-[13_warning.png]<img src="https://github.com/a-bzzzz/trivia/blob/main/documentation/GUI-pics/13_warning.png">
+![13_warning.png]<img src="https://github.com/a-bzzzz/trivia/blob/main/documentation/GUI-pics/13_warning.png">
 
 Jos et halua poistaa, vaan palata takaisin, klikkaa linkkiä ```Back – Takaisin```.
 
 Jos haluat poistaa pelin, klikkaa painiketta ```Delete – Poista```.
 
-[14_delete_confirm.png]<img src="https://github.com/a-bzzzz/trivia/blob/main/documentation/GUI-pics/14_delete_confirm.png">
+![14_delete_confirm.png]<img src="https://github.com/a-bzzzz/trivia/blob/main/documentation/GUI-pics/14_delete_confirm.png">
 
 Sovellus vahvistaa onnistuneen pelin poistamisen. Tai vaihtoehtoisesti antaa virheilmoituksen, jos poisto ei onnistu.
 
@@ -188,7 +188,7 @@ Kaikki pelitilastot voi hakea klikkaamalla aloitusvalikon linkkiä ```Get game s
 
 Pelitilastot -sivu voi näyttää seuraavanlaiselta:
 
-[15_stats.png]<img src="https://github.com/a-bzzzz/trivia/blob/main/documentation/GUI-pics/15_stats.png">
+![15_stats.png]<img src="https://github.com/a-bzzzz/trivia/blob/main/documentation/GUI-pics/15_stats.png">
 
 Voit kirjautua ulos (ylin linkki) tai palata takaisin aloitussivulle (alin linkki).
 
@@ -208,7 +208,7 @@ Lopussa näkyy oma ranking-tuloksesi eli parhaimman pelisi sijoitus kaikkien par
 
 Voit vaihtaa oman salasanasi klikkaamalla aloitusvalikon linkkiä ```Change password – Vaihda salasana```.
 
-[16_change_password.png]<img src="https://github.com/a-bzzzz/trivia/blob/main/documentation/GUI-pics/16_change_password.png">
+![16_change_password.png]<img src="https://github.com/a-bzzzz/trivia/blob/main/documentation/GUI-pics/16_change_password.png">
 
 Voit kirjautua ulos (ylin linkki) tai palata takaisin aloitussivulle (```Back – Takaisin``` -painike).
 
@@ -222,7 +222,7 @@ Klikkaa ```Change - Vaihda``` -painiketta.
 
 Onnistunut salasanan vaihto näkyy seuraavasti:
 
-[17_pwd_change_success.png]<img src="https://github.com/a-bzzzz/trivia/blob/main/documentation/GUI-pics/17_pwd_change_success.png">
+![17_pwd_change_success.png]<img src="https://github.com/a-bzzzz/trivia/blob/main/documentation/GUI-pics/17_pwd_change_success.png">
 
 Pääset tämän jälkeen etenemään pelissä, takasin aloitusvalikkoon, klikkaamalla ```Back – Takaisin``` -painiketta.
 
@@ -230,13 +230,13 @@ Pääset tämän jälkeen etenemään pelissä, takasin aloitusvalikkoon, klikka
 
 Jos saat seuraavanlaisen ilmoituksen, lue viesti, palaa takaisin ja yritä tarvittaessa uudelleen.
 
-[18_error.png]<img src="https://github.com/a-bzzzz/trivia/blob/main/documentation/GUI-pics/18_error.png">
+![18_error.png]<img src="https://github.com/a-bzzzz/trivia/blob/main/documentation/GUI-pics/18_error.png">
 
 Virheilmoitus voi tulla myös selaimesta, esim. Internal Server Error.
 
 Mahdollisesti toiminto on onnistunut virheilmoituksesta huolimatta (sivu ei vain ole latautunut oikein palvelimelta), joten sivun uudelleen lataaminen (selaimen refresh-painike tai näppäimistön F5-näppäin, resend-painike tjs.) yleensä riittää.
 
-[19_resend.png]<img src="https://github.com/a-bzzzz/trivia/blob/main/documentation/GUI-pics/19_resend.png">
+![19_resend.png]<img src="https://github.com/a-bzzzz/trivia/blob/main/documentation/GUI-pics/19_resend.png">
 
 #### Ilmoitustyypit:
 
