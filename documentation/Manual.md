@@ -18,12 +18,11 @@ Klikkaa linkkiä ```Log in – Kirjaudu```
 <img src="https://github.com/a-bzzzz/trivia/blob/main/documentation/GUI-pics/2_login.png">
 
 a) Voit kokeilla seuraavia valmiita käyttäjätunnuksia peliin tutustumista varten:
-```
+
 | Käyttäjätaso | Käyttäjätunnus	| Salasana |
-| --------------- | --------------- | --------------- |
+| :--------------- | :--------------- | :--------------- |
 | peruskäyttäjä	| hessu | hopo |
 | ylläpitäjä | admin | salasana |
-```
 
 Kirjoita käyttäjätunnus kenttään ```Username – Käyttäjätunnus```
 
