@@ -86,7 +86,7 @@ Täällä tarkemmin käynnistysohjeita mm. omaksi kopioidulle sovellukselle: [St
 
 ### Käyttöohjeet
 
-Sovelluksen käyttöohjeet peruskäyttäjälle: [Manual]("https://github.com/a-bzzzz/trivia/blob/main/documentation/Manual.md")
+Sovelluksen käyttöohjeet peruskäyttäjälle: [Manual](https://github.com/a-bzzzz/trivia/blob/main/documentation/Manual.md)
 
 ## Sovelluksen rakenne
 
