@@ -19,9 +19,9 @@ Klikkaa linkkiä ```Log in – Kirjaudu```
 
 a) Voit kokeilla seuraavia valmiita käyttäjätunnuksia peliin tutustumista varten:
 ```
-Käyttäjätaso  | Käyttäjätunnus	| Salasana
-peruskäyttäjä	| hessu			      | hopo
-ylläpitäjä	  | admin			      | salasana
+Käyttäjätaso | Käyttäjätunnus	| Salasana
+peruskäyttäjä	| hessu | hopo
+ylläpitäjä | admin | salasana
 ```
 
 Kirjoita käyttäjätunnus kenttään ```Username – Käyttäjätunnus```
