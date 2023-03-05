@@ -52,6 +52,7 @@ Oman sovelluksen ensimmäisellä käynnistyskerralla sovellus luo tietokantaan `
 ### 2. Sovellus omalla koneella ja viety itse tuotantoon Fly.io -palvelussa
 
 Ensin suoritetaan tuotantoon vieminen (tsoha-kurssin ohjeet): [Sovellus tuotantoon](https://hy-tsoha.github.io/materiaali/osa-3/#sovellus-tuotantoon) 
+
 Fly.io -palvelu: [Fly.io](https://fly.io/)
 
 Käynnistys komentoriviltä:
