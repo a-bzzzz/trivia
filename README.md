@@ -21,8 +21,8 @@ Admin-käyttäjä pääsee vaihtamaan kaikkien käyttäjien salasanoja.
 Admin voisi mahdollisesti myös muokata (lisätä/poistaa/muuttaa) käyttäjätietoja, sekä pelin tietoja, kuten kysymyksiä ja luokkia.     *(optio)* 
 Peliin luodaan (julkaistavaan sovellukseen on luotu) ensimmäisellä pelikerralla admin-käyttäjä, jolle
 ```
-käyttäjätunnus: admin 
-salasana      : salasana
+käyttäjätunnus : admin 
+salasana       : salasana
 ```
 **Muista vaihtaa admin-käyttäjän salasana omaksi salasanaksesi, jos luot näistä elementeistä oman pelisi!**
 
@@ -72,14 +72,47 @@ Uutta peliä varten pelaaja voi valita:
   2 - keskitaso   
   3 - vaikea   
 
+## Ohjeet
+
+### Sovelluksen käynnistys
+
+Pelin voi aloittaa kopioimalla seuraavan linkin (sivuosoitteen) selaimen URL-kenttään:
+```
+tsoha-trivia.fly.dev
+```
+Jos saat sivulta virheilmoituksen, kokeile ladata sivu uudelleen. Huomioithan, että sovellus on ladattu ulkoisen palveluntarjoajan palvelimelle, joten mahdollinen häiriö saattaa aiheutua myös ulkoisista syistä - siis yritä myöhemmin uudelleen!
+
+### Käyttöohjeet
+
+TULOSSA
+
 ## Sovelluksen rakenne
 
+### Sovelluslogiikka
+
+Sovelluksen logiikka on koodattu Python-ohjelmointikielellä. Sovelluskansion juuresta löytyvät Python-tiedostot:
+- app.py                : käynnistystiedosto, jossa määritelty alustavasti Flask ja ympäristömuuttujat
+- db.py                 : tietokantayhteyden osoite sekä tarvittavat kirjastot
+- games.py              : pelitoimintojen kannalta oleelliset funktiot
+- questions_answers.py  : kysymysten ja vastausten käsittelyyn liittyvät funktiot
+- routes.py             : lomakkeiden käsittelyssä ja pelin navigoinnissa tarvittavat funktiot
+- users.py              : käyttäjätietojen käsittelyssä tarvittavat funktiot
+
 ### Käyttöliittymä (GUI)
+
+Sovellukseen on rakennettu graafinen käyttöliittymä HTML-tiedostoista, joíssa on hyödynnetty Pythoniin kuuluvan Flask-kirjaston Jinja-sivupohjia. Lisäksi sovellus on viety Fly.io -palvelun tuotantoympäristöön. Niinpä sovelluksen voi käynnistää CLI:ssä (komentoriviltä) molemmilla tavoilla, mutta db.py -tiedostoon tarvitaan eri osoitemääritykset (kommentoi ulos tai poista väärä rivi):
+```
+          komento           db.py            
+Fly.io : fly open    ->  5:  app.config["SQLALCHEMY_DATABASE_URI"] = getenv("DATABASE_URL").replace("://", "ql://", 1)
+Flask  : flask run   ->  6:  app.config["SQLALCHEMY_DATABASE_URI"] = getenv("DATABASE_URL")
+```
 
 #### Käyttöliittymän rakenne
 HTML-lomakkeet ja navigointi: [GUI-navigointi-kaavio](https://github.com/a-bzzzz/trivia/blob/main/documentation/GUI-navi_chart.png)
 
 ### Tietokanta
+
+Harjoitustyötä varten tietokanta on toteutettu Docker-containerin postgresql-kuvalla, mutta voit toki asentaa itsellesi PostgreSQL-tietokannan muillakin tavoin sovelluksen käyttöä varten. Tietokantayhteydet kuitenkin määritellään ja käynnistetään eri tavoin riippuen siitä käynnistääkö sovelluksen Flaskilla vai Fly.io:lla.
 
 #### Tietokannan rakenne
 Tietokantataulut ja niiden väliset yhteydet: [Tietokantakaavio](https://github.com/a-bzzzz/trivia/blob/main/documentation/db_structure.png)
