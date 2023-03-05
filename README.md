@@ -1,7 +1,43 @@
 # TRIVIA-tietovisa
 HY, tsoha k2023
 
-Sovelluksella voi pelata tietokilpailua eli vastata sovelluksen esittämiin kysymyksiin eri kysymysluokissa ja vaikeustasoissa.  
+Sovelluksella voi pelata tietokilpailua eli vastata sovelluksen esittämiin kysymyksiin eri kysymysluokissa ja vaikeustasoissa.
+
+## SISÄLLYS
+
+[Sovelluksen keskeiset toiminnot ja tiedot](https://github.com/a-bzzzz/trivia/blob/main/README.md#sovelluksen-keskeiset-toiminnot-ja-tiedot)
+
+- [Käyttäjätasot](https://github.com/a-bzzzz/trivia/blob/main/README.md#k%C3%A4ytt%C3%A4j%C3%A4tasot)
+
+- [Pelitoiminnot](https://github.com/a-bzzzz/trivia/blob/main/README.md#pelitoiminnot-perusk%C3%A4ytt%C3%A4j%C3%A4)
+
+- [Käyttäjätietojen hallinnointi](https://github.com/a-bzzzz/trivia/blob/main/README.md#k%C3%A4ytt%C3%A4j%C3%A4tietojen-hallinnointi)
+
+- [Pelitietojen hallinnointi](https://github.com/a-bzzzz/trivia/blob/main/README.md#pelitietojen-hallinnointi)
+
+- [Kysymysluokat ja pelitasot](https://github.com/a-bzzzz/trivia/blob/main/README.md#kysymysluokat-ja-pelitasot)
+
+
+[Ohjeet](https://github.com/a-bzzzz/trivia/blob/main/README.md#ohjeet)
+
+- [Sovelluksen käynnistys](https://github.com/a-bzzzz/trivia/blob/main/README.md#sovelluksen-k%C3%A4ynnistys)
+
+- [Käyttöohjeet](https://github.com/a-bzzzz/trivia/blob/main/README.md#k%C3%A4ytt%C3%B6ohjeet)
+
+
+[Sovelluksen rakenne](https://github.com/a-bzzzz/trivia/blob/main/README.md#sovelluksen-rakenne)
+
+- [Sovelluslogiikka](https://github.com/a-bzzzz/trivia/blob/main/README.md#sovelluslogiikka)
+
+- [Käyttöliittymä (GUI)](https://github.com/a-bzzzz/trivia/blob/main/README.md#k%C3%A4ytt%C3%B6liittym%C3%A4-gui)
+
+- [Tietokanta](https://github.com/a-bzzzz/trivia/blob/main/README.md#tietokanta)
+
+
+[Tilatieto ja muu info](https://github.com/a-bzzzz/trivia/blob/main/README.md#tilatieto-ja-muu-info)
+
+- [Loppupalautus](https://github.com/a-bzzzz/trivia/blob/main/README.md#kohti-loppupalautusta)
+
 
 ## Sovelluksen keskeiset toiminnot ja tiedot
 
@@ -129,7 +165,7 @@ Tietokannan käyttöä varten tarvittavat INSERT-kommennot löytyvät näistä t
     
 ## Tilatieto ja muu info
 
-### Kohti loppupalautusta
+### Loppupalautus
 
 Peliin on lisätty perustoiminnot sekä muutama optioksi aiottu ominaisuus.
 Pelin toimintojen sekä koodin laadun lisäksi myös ulkoasua on päivitetty. 
