@@ -20,6 +20,7 @@ Klikkaa linkkiä ```Log in – Kirjaudu```
 a) Voit kokeilla seuraavia valmiita käyttäjätunnuksia peliin tutustumista varten:
 ```
 | Käyttäjätaso | Käyttäjätunnus	| Salasana |
+| --------------- | --------------- | --------------- |
 | peruskäyttäjä	| hessu | hopo |
 | ylläpitäjä | admin | salasana |
 ```
