@@ -4,7 +4,7 @@ Trivia-pelisovelluksen käyttöohjeet **peruskäyttäjä**lle (esim. ylläpitäj
 
 ### SISÄLLYS
 
-0. [Käynnistys](https://github.com/a-bzzzz/trivia/blob/main/documentation/Manual.md#1-k%C3%A4ynnistys)
+0. [Käynnistys](https://github.com/a-bzzzz/trivia/blob/main/documentation/Manual.md#0-k%C3%A4ynnistys)
 
 1. [Aloitussivu](https://github.com/a-bzzzz/trivia/blob/main/documentation/Manual.md#1-aloitussivu)
 
