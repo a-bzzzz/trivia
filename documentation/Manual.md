@@ -1,11 +1,42 @@
 ## KÄYTTÖOHJEET
 
+Trivia-pelisovelluksen käyttöohjeet **peruskäyttäjä**lle (esim. ylläpitäjän toimintojen ohjeistus ei löydy tästä manuaalista):
+
+### SISÄLLYS
+
+0. [Käynnistys](https://github.com/a-bzzzz/trivia/blob/main/documentation/Manual.md#1-k%C3%A4ynnistys)
+
+1. [Aloitussivu](https://github.com/a-bzzzz/trivia/blob/main/documentation/Manual.md#1-aloitussivu)
+
+2. [Sovellukseen kirjautuminen](https://github.com/a-bzzzz/trivia/blob/main/documentation/Manual.md#2-sovellukseen-kirjautuminen)
+
+3. [Rekisteröityminen](https://github.com/a-bzzzz/trivia/blob/main/documentation/Manual.md#3-rekister%C3%B6ityminen)
+
+4. [Aloitusvalikko](https://github.com/a-bzzzz/trivia/blob/main/documentation/Manual.md#4-aloitusvalikko)
+
+5. [Pelivalikko](https://github.com/a-bzzzz/trivia/blob/main/documentation/Manual.md#5-pelivalikko)
+
+-	5.1. [Pelaa](https://github.com/a-bzzzz/trivia/blob/main/documentation/Manual.md#51-pelaa)
+
+-	5.2. [Tarkista vastaus](https://github.com/a-bzzzz/trivia/blob/main/documentation/Manual.md#52-tarkista-vastaus)
+
+-	5.3. [Tarkista pelin tilanne](https://github.com/a-bzzzz/trivia/blob/main/documentation/Manual.md#53-tarkista-pelin-tilanne)
+
+6. [Hae aiempi peli](https://github.com/a-bzzzz/trivia/blob/main/documentation/Manual.md#6-hae-aiempi-peli)
+
+7. [Hae ja poista peli](https://github.com/a-bzzzz/trivia/blob/main/documentation/Manual.md#7-hae-ja-poista-peli)
+
+8. [Pelitilastot](https://github.com/a-bzzzz/trivia/blob/main/documentation/Manual.md#8-pelitilastot)
+
+9. [Salasanan vaihto](https://github.com/a-bzzzz/trivia/blob/main/documentation/Manual.md#9-salasanan-vaihto)
+
+10. [TÄRKEÄÄ: Virheilmoituksista](https://github.com/a-bzzzz/trivia/blob/main/documentation/Manual.md#10-t%C3%A4rke%C3%A4%C3%A4-virheilmoituksista)
+
+### 0. Käynnistys
 
 Vaihtoehtoiset käynnistysohjeet löytyvät täältä: [Startup Guide](https://github.com/a-bzzzz/trivia/blob/main/documentation/Startup-guide.md)
 
 Sovelluksen kokeilun voit aloittaa tästä linkistä:  https://tsoha-trivia.fly.dev 
-
-Sovelluksen käyttöohjeet peruskäyttäjälle (esim. ylläpitäjän toimintojen ohjeistus ei löydy tästä manuaalista):
 
 ### 1. Aloitussivu
 
